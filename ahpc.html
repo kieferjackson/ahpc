@@ -3,83 +3,83 @@
 <head>
     <title>Advocate Hospice & Palliative Care</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="website icon" href="favicon.ico">
     <link rel="stylesheet" href="alt_style.css">
+    <link rel="stylesheet" href="kudos_style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral|Rubik">
-    <script src="nav_control.js"></script>
     <script src="kudos.js"></script>
 
     <div class="header">
         <h1 style="font-family:Georgia, serif; font-size: 50px"> Welcome! </h1>
-        <p>
-            This is a <em>work-in-progress</em> website for Advocate Hospice.
-        </p>
+        <p>This is a <em>work-in-progress</em> website for Advocate Hospice.</p>
     </div>
 </head>
 
 <body>
   
-  <!-- Navigation Bar -->
-  <div class="navbar">
-    <a href="#about_us">About Us</a>
-    <a href="#services">Services</a>
-    <a href="#contact_info">Contact Us</a>
-    <a href="#kudos">Kudos</a>
-  </div>
-  
-  <!-- The flexible grid (content) -->
-    <div class="row">
-    <div class="side">
-        <h2 id="about_us">About Us</h2>
-        <img class="img" src="images/ahpc_logo_temp.png" alt="Advocate Logo">
-        <p>We are a hospice located in Phoenix, Arizona.</p>
-        <!--<h3>More Text</h3>-->
-        <h2>Social Media</h2>
-        <a href="https://google.com">
-            <div class="link" >Google</div><br>
-        </a>
-        <a href="https://npino.com/hospice/1073199394-advocate-hospice-and-palliative-care-llc/">
-            <div class="link" >NPI Number</div><br>
-        </a>
-        <a href="https://youtube.com">
-            <div class="link" >Youtube</div>
-        </a>
+<!-- Navigation Bar with Links-->
+    <div class="navbar">
+        <a href="#about_us">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#contact_info">Contact Us</a>
+        <a href="#kudos">Kudos</a>
     </div>
-    <div class="main">
-        <h2 style="font-size: xx-large;">We advocate for your well-being.</h2>
-        <div style="text-align: center;">
-        <img class="img" src="images/group_photo_temp.jpg" alt="Group Photo" style="width:50%; height:max-content;">
+  
+<!-- The flexible grid (content) -->
+    <div class="row">
+    
+        <div class="side">
+            <!-- Basic overview of the company including iconography -->
+            <h2 id="about_us">About Us</h2>
+            <img class="img" src="images/ahpc_logo_temp.png" alt="Advocate Logo">
+            <p>We are a hospice located in Phoenix, Arizona.</p>
+    
+            <a href="mailto:jackson.a.barb@gmail.com"><div class="link">Email</div></a>
+    
+            <h2>Social Media</h2>
+            <a href="https://google.com"><div class="link" >Google</div></a> <br>
+            <a href="https://npino.com/hospice/1073199394-advocate-hospice-and-palliative-care-llc/"><div class="link" >NPI Number</div></a> <br>
+            <a href="https://youtube.com"><div class="link" >Youtube</div></a>
         </div>
+
+    <div class="main">
+
+        <h2>We advocate for your well-being.</h2>
+        <div><img class="img" id="banner" src="images/group_photo_temp.jpg" alt="Group Photo"></div>
         <p>Advocate Hospice And Palliative Care Llc (ADVOCATE HOSPICE AND PALLIATIVE CARE LLC) is a hospice in Phoenix, Arizona. Hospice Care is a type of palliative care for terminally ill patients and support for their families. 
             <br> Hospice focuses on controlling pain and symptoms and generally provided at the patient's home but it can be separate residence or part of a nursing home.</p>
         <br>
+
         <h2>Our Mission</h2>
-        <div style="text-align: center;">
-        <img class="img" src="images/nurse_visit_temp.jpg" alt="Nurse Visiting Patient" style="width:50%; height:max-content;">
-        </div>
+        <div><img class="img" id="banner" src="images/nurse_visit_temp.jpg" alt="Nurse Visiting Patient"></div>
         <p>We want to re-invent hospice care by merging [THING] and [THING]. We also practice woundcare so that patients are as comfortable as possible and recover faster.</p>
 
         <div id="services" class="tabcontent">
-        <h3>Services</h3>
-        <p>We will provide medical care, including woundcare.</p>
-    </div>
+            <h3>Services</h3>
+            <p>We will provide medical care, including woundcare.</p>
+        </div>
 
-    <div id="contact_info" class="tabcontent">
-        <h3>Contact Information</h3>
-        <p>Our office is located at: 7600 N 16th St Ste 112, Phoenix, Arizona, 85020-4446 <br>Phone: 602-505-1018 <br>Fax: 602-555-5554</p>
-    </div>
+        <div id="contact_info" class="tabcontent">
+            <h3>Contact Information</h3>
+            <p>Our office is located at: 7600 N 16th St Ste 112, Phoenix, Arizona, 85020-4446 <br>Phone: 602-505-1018 <br>Fax: 602-555-5554 <br>Email: jackson.a.barb@gmail.com</p>
+        </div>
 
-    <div id="kudos" class="tabcontent">
-        <h3>Kudos</h3>
-        <p><span id="remark"></span></p>
     </div>
+    
+    </div> <!--/div for row-->
+
+    <!-- Kudos Page for patients/clients' remarks about the business.  They are dynamically created elements using kudos.js to generate them. -->
+    <h3 id="kudos_title">Kudos</h3>
+    <p class="remarks"<div id="kudos"></div></p>
+
+    
+
+    <!-- Footer -->
+    <div class="footer">
+        <h2>7600 N 16th St Ste 112, Phoenix, Arizona, 85020</h2>
     </div>
-  </div>
-  
-  <!-- Footer -->
-  <div class="footer">
-    <h2>Footer</h2>
-  </div>
 
     
 
