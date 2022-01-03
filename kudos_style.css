@@ -5,9 +5,6 @@
     font-size: 50px;
 }
 
-.remarks {
-    text-align: center;
-    color: green;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 16px;
+.remarks, #kudos {
+    padding: 20px;
 }
