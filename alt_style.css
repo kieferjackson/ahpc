@@ -62,14 +62,30 @@ body {
 
 .header {
   padding: 50px;
+  max-height: 450px;
+
   text-align: center;
   background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
   color: #333;
 }
 
+.header img {
+  max-height: 350px;
+  max-width: 100%;
+  object-fit:scale-down; /*Would like to change this in the future */
+}
+
+@keyframes dissolve {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
 .splash > div {
   display: table-cell;
   vertical-align: top;
+
+  animation-name: dissolve;
+  animation-duration: 1s;
 }
 
 .splash img {
@@ -82,8 +98,8 @@ body {
   padding: 10px;
 
   border-radius: 10px;
-  background-color: rgba(221, 221, 221, 0.308);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: rgba(245, 245, 245, 0.308);
+  box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
 }
   
   /* Column container */
@@ -95,6 +111,8 @@ body {
   /* Main column */
   .main {
     flex: 100%;
+    margin-left: 20%;
+    margin-right: 20%;
     background-color: white;
     padding: 50px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -125,7 +143,7 @@ body {
     padding: 20px;
   }
 
-  .side {
+  .ribbon {
     text-align: center;
     position: relative;
     flex: 100%;
@@ -142,17 +160,21 @@ body {
 
   /* Links */
   .link {
+    /* Placement of the element */
     display: grid;
     margin-top: auto;
     margin-bottom: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+    /* Link Visuals */
     text-align: center;
-
     text-decoration: none;
     background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
     box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
-
     border: 1px solid silver;
 
+    /* Link Dimensions and Constraints */
     height:100px;
     width: 300px;
     max-width: 100%;
@@ -162,11 +184,8 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
-    /*box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19);*/
   }
 
-  /* Links */
   .link:hover {
     background: #eee;
     color:black;

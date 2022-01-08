@@ -10,7 +10,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    width: fit-content;
+    max-width: 50%;
     position: relative;
 
     text-align: justify;
@@ -22,13 +26,48 @@
 }
 
 .kudos_even {
+    margin-left: 25%;
+    margin-right: auto;
+
     text-align-last: left;
     background: #333;
     color: #fff; 
 }
 
 .kudos_odd {
+    margin-left: auto;
+    margin-right: 25%;
+
     text-align-last: right;
     background: #fff;
     color: #333; 
+}
+
+.affiliation {
+    background-color:#fff;
+    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+    color: #333; 
+    font-family: Noto Sans;
+    font-size: 16px;
+
+    margin-top: 5px;
+    padding: 5px;
+    width: fit-content;
+
+    border-radius: 5px;
+    display:block;
+}
+
+.kudos_even > .affiliation {
+    color: #333; 
+    background-color:#fff;
+}
+
+.kudos_odd > .affiliation {
+    color: #fff; 
+    background-color:#333;
+
+    /* Align affiliation Element to the right */
+    margin-left:auto;
+    margin-right:0;
 }
