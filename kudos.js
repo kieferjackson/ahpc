@@ -1,4 +1,3 @@
-
 let msg = [
     {
         "author": "Gladys",
@@ -22,19 +21,31 @@ let msg = [
     },
     {
         "author": "Sum Gai",
-        "remark": "",
+        "remark": "",       // This msg should not be displayed.
+        "source": "MySpace"
+    },
+    {
+        "author": "Sum Gai",
+        "remark": "test",
         "source": "MySpace"
     },
 ];
 
-let even_or_odd = [".kudos_even", ".kudos_odd"]
-
 document.addEventListener('DOMContentLoaded', () => {
+    var isEven = false;
+    var div_num = 0;
 
     for (var i = 0 ; i < msg.length ; i++) {
-        msgChecker(i); // Ensures that if a kudos message has null values or empty strings, that a valid value will replace it (e.g. if there is no author, it will be listed as 'Anonymous')
-        addElement(i);
-        addAffiliation(i, even_or_odd[i%2]); // CHANGE - This uses code from addElement, should just change addElement() so that it can accommodate both functions.
+        let remarkExists = msgChecker(i); // Ensures that if a kudos message has null values or empty strings, that a valid value will replace it (e.g. if there is no author, it will be listed as 'Anonymous'). However, if there is no remark, no kudos element will be generated and isEven will not be updated.
+
+        if (remarkExists === true) {
+            addElement(i);
+            addAffiliation(i); // CHANGE - This uses code from addElement, should just change addElement() so that it can accommodate both functions.
+
+            isEven = !isEven; // Successful addition of a div element should switch the message from even to odd, odd to even, etc.
+            div_num++;
+        }
+        
     }
 
     function addElement (i) {
@@ -47,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // add the text node to the newly created div
         newDiv.innerHTML = content;
 
-        if (i % 2 == 0) {
+        if (isEven === true) {
             newDiv.classList.add("kudos_even");
         } else {
             newDiv.classList.add("kudos_odd");
@@ -60,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
     }
 
-    function addAffiliation (i, class_name) {
+    function addAffiliation (i) {
         // create a new div element
         const newDiv = document.createElement("div");
 
@@ -71,18 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
         newDiv.classList.add("affiliation");
 
         // add the newly created element and its content into the DOM
-        const current_remark = document.querySelectorAll(class_name)[Math.floor(i/2)];
-
+        if (isEven === true) {
+            var current_remark = document.querySelectorAll(".kudos_even")[Math.floor(div_num/2)];
+        } else {
+            var current_remark = document.querySelectorAll(".kudos_odd")[Math.floor(div_num/2)];
+        }
+        
         current_remark.append(newDiv);
     }
 
     function msgChecker (i) {
-        if (!msg[i].author) {
-            msg[i].author = "Anonymous";
+        if (!msg[i].remark) {
+            return false; // There is no remark, therefore a kudos message should not be generated.
         }
 
-        if (!msg[i].remark) {
-            msg[i].remark = "[No message]";
+        if (!msg[i].author) {
+            msg[i].author = "Anonymous";
         }
 
         if (!msg[i].source) {
@@ -90,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             msg[i].source = " from " + msg[i].source;
         }
+
+        return true; // Remark, author, and source are validated. Kudos should be generated successfully.
     }
 
 })
