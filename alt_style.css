@@ -90,16 +90,26 @@ body {
 
 .splash img {
   width: 90%;
-  background-color: indigo;
 }
 
 .text {
+  font-family: "Noto Sans", sans-serif;
   width: 40%;
   padding: 10px;
 
   border-radius: 10px;
   background-color: rgba(245, 245, 245, 0.308);
   box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+}
+
+@media screen and (max-width: 1900px) {
+  .splash > div {
+    display: block;
+  }
+
+  .text, .splash img {
+    width: 100%;
+  }
 }
   
   /* Column container */
