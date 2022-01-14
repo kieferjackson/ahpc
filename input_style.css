@@ -1,0 +1,10 @@
+.input_field {
+    background-color: #eee;
+    font-family: "Noto Sans";
+    padding: 2px;
+}
+
+.input_field label {
+    font-family: "Noto Sans", sans-serif;
+}
+
