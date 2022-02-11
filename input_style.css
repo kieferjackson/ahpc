@@ -1,7 +1,9 @@
 .input_field {
-    background-color: #eee;
+    background-color: #fff;
     font-family: "Noto Sans";
     padding: 2px;
+    border: 1px solid #333;
+    margin-bottom: 10px;
 }
 
 .input_field label {
