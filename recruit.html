@@ -31,21 +31,32 @@
     <div class="row">
 
     <div class="main">
-        <label for="first_name">First Name:</label>
-        <input type="text" placeholder="First Name" class="input_field">
-        <br>
-        <label for="last_name">Last Name:</label>
-        <input type="text" placeholder="Last Name" class="input_field">
-        <br>
-        <label for="phone_number">Phone Number:</label>
-        <input type="number" placeholder="XXX-XXX-XXXX" class="input_field">
-        <br>
-        <label for="email_address">Email:</label>
-        <input type="email" class="input_field">
-        <br>
-        <label for="resume">Resume or CV</label>
-        <input type="file" class="input_field">
+        <form action="form_submit.php" method=""POST" target="_blank">
+            <label for="first_name">First Name:</label>
+            <input type="text" placeholder="First Name" class="input_field">
+            <br>
+            <label for="last_name">Last Name:</label>
+            <input type="text" placeholder="Last Name" class="input_field">
+            <br>
+            <label for="phone_number">Phone Number:</label>
+            <input type="number" placeholder="XXX-XXX-XXXX" class="input_field">
+            <br>
+            <label for="email_address">Email:</label>
+            <input type="email" class="input_field">
+            <br>
 
+            <label for="volunteer">Volunteer</label>
+            <input type="radio" name="occupation" value="Volunteer">
+            <br>
+            <label for="employee">Employee</label>
+            <input type="radio" name="occupation" value="Employee">
+            <br>
+
+            <label for="resume">Resume or CV</label>
+            <input type="file" class="input_field">
+            <br>
+            <button>Submit</button>
+        </form>
 
         <div class="splash">
             <h2>Employment</h2>
