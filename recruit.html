@@ -30,30 +30,27 @@
 <!-- The flexible grid (content) -->
     <div class="row">
 
+    <!-- Career opportunities form for employees/volunteers -->
     <div class="main">
-        <form action="form_submit.php" method=""POST" target="_blank">
-            <label for="first_name">First Name:</label>
-            <input type="text" placeholder="First Name" class="input_field">
+        <form action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data">
+            <input type="text" name="first_name" placeholder="First Name" class="input_field">
             <br>
-            <label for="last_name">Last Name:</label>
-            <input type="text" placeholder="Last Name" class="input_field">
+            <input type="text" name="last_name" placeholder="Last Name" class="input_field">
             <br>
-            <label for="phone_number">Phone Number:</label>
-            <input type="number" placeholder="XXX-XXX-XXXX" class="input_field">
+            <input type="number" name="phone_number" placeholder="###-###-####" class="input_field">
             <br>
-            <label for="email_address">Email:</label>
-            <input type="email" class="input_field">
+            <input type="email" name="email_address" class="input_field">
             <br>
 
             <label for="volunteer">Volunteer</label>
-            <input type="radio" name="occupation" value="Volunteer">
+            <input type="radio" id="volunteer" name="occupation" value="Volunteer">
             <br>
             <label for="employee">Employee</label>
-            <input type="radio" name="occupation" value="Employee">
+            <input type="radio" id="employee" name="occupation" value="Employee">
             <br>
 
-            <label for="resume">Resume or CV</label>
-            <input type="file" class="input_field">
+            Resume or CV:
+            <input type="file" name="resume" id="resume">
             <br>
             <button>Submit</button>
         </form>
