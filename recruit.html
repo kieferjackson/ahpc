@@ -32,13 +32,42 @@
 
     <!-- Career opportunities form for employees/volunteers -->
     <div class="main">
-        <form action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data">
-            <input type="text" name="first_name" placeholder="First Name" class="input_field">
+        <div class="splash">
+            <h2>Employment</h2>
+            <div><img src="images/temp.png" alt="Employment"></div>
+            <p>
+                Are you a medical professional looking to join a world-class team of like-minded individuals? If so, you can submit your resume and any additional information to the following email address:
+                <br> jackson.a.barb@gmail.com
+                <br> We offer fair pay, good benefits, and excellent training for all of our employees.
+            </p>
+            
             <br>
-            <input type="text" name="last_name" placeholder="Last Name" class="input_field">
+        </div>
+
+        <div class="splash">
+            <h2>Volunteering</h2>
+            <div><img src="images/temp.png" alt="Volunteering"></div>
+            <p>
+                We are always looking for more volunteers!
+                <br> Whether you want to read to patients, assist in the office, or offer a unique skill of yours with only the compensation of knowing you have helped someone, then consider volunteering for Advocate Hospice.
+                <br> You can send a volunteer request at the following email address:
+                <br> jackson.a.barb@gmail.com
+            </p>
+            
             <br>
-            <input type="number" name="phone_number" placeholder="###-###-####" class="input_field">
+        </div>
+
+        <form id="employee_form" action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data">
+            <label for="first_name">First Name</label><br>
+            <input type="text" name="first_name" class="input_field" required>
             <br>
+            <label for="last_name">Last Name</label><br>
+            <input type="text" name="last_name" class="input_field" required>
+            <br>
+            <label for="number">Phone Number</label><br>
+            <input type="number" name="phone_number" placeholder="###-###-####" class="input_field" required>
+            <br>
+            <label for="email">Email Address</label><br>
             <input type="email" name="email_address" class="input_field">
             <br>
 
@@ -52,33 +81,8 @@
             Resume or CV:
             <input type="file" name="resume" id="resume">
             <br>
-            <button>Submit</button>
+            <input type="submit" name="submit" id="submit" />
         </form>
-
-        <div class="splash">
-            <h2>Employment</h2>
-            <div><img src="images/temp.png" alt="Employment"></div>
-            <div class="text">
-                Are you a medical professional looking to join a world-class team of like-minded individuals? If so, you can submit your resume and any additional information to the following email address:
-                <br> jackson.a.barb@gmail.com
-                <br> We offer fair pay, good benefits, and excellent training for all of our employees.
-            </div>
-            
-            <br>
-        </div>
-
-        <div class="splash">
-            <h2>Volunteering</h2>
-            <div><img src="images/temp.png" alt="Volunteering"></div>
-            <div class="text">
-                We are always looking for more volunteers!
-                <br> Whether you want to read to patients, assist in the office, or offer a unique skill of yours with only the compensation of knowing you have helped someone, then consider volunteering for Advocate Hospice.
-                <br> You can send a volunteer request at the following email address:
-                <br> jackson.a.barb@gmail.com
-            </div>
-            
-            <br>
-        </div>
 
         <div id="contact_info" class="tabcontent">
             <h3>Contact Information</h3>
