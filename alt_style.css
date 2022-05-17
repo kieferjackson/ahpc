@@ -103,17 +103,6 @@ body {
   width: 90%;
 }
 
-.text {
-  font-family: "Noto Sans", sans-serif;
-  font-size: 16px;
-  width: 40%;
-  padding: 10px;
-
-  border-radius: 10px;
-  background-color: rgba(245, 245, 245, 0.308);
-  box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
-}
-
 @media screen and (max-width: 1900px) {
   .splash > div {
     display: block;
@@ -235,3 +224,77 @@ body {
       max-width: 100%;
     }
   }
+
+  /* Mobile styling (phones, tablets) */
+  @media screen
+    and (min-device-width: 320px)
+    and (max-device-width: 900px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+      h2 {
+        font-size: 54px;
+      }
+      
+      p {
+        font-size: 36px;
+      }
+      
+      /* Style the top navigation bar */
+      .navbar {
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 0;
+        display: flex;
+      }
+      
+      /* Style the navigation bar links */
+      .navbar a {
+        /*color: #333; */
+        color: #543d22;
+        font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+        border-right: 1px solid #ddd;
+      
+        padding: 14px 20px;
+        text-decoration: none;
+        text-align: center;
+      
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      
+      .navbar img {
+        padding: 0px;
+        height: 40px;
+        display: block;
+        margin: 6px 2px 2px 6px;
+        
+        width: fit;
+      }
+      
+      /* Change color on hover */
+      .navbar a:hover {
+        background-color: #eee;
+        box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+      }
+      
+      .navbar a > img #logo_icon {
+        height: 400px;
+        width: 400px;
+        display: block;
+        margin: 6px 2px 2px 6px;
+        
+      }
+      
+      .header {
+        all: unset;
+      }
+
+      /* Main column */
+      .main {
+        flex: 100%;
+        margin-left: 10%;
+        margin-right: 10%;
+        background-color: white;
+        padding: 0px;
+        box-shadow: unset;
+      }
+    }

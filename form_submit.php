@@ -26,7 +26,7 @@
     <h1 id="form_success_message">Your form was successfully sent.<br>We appreciate your interest in working with us! Please wait for a response from us.</h1>
 
     <?php
-    $first_name = $last_name = $phone_number = $email_address = $volunteer = $employee = "";
+    $first_name = $last_name = $phone_number = $email_address = $occupation = "";
     $timeStamp = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -51,6 +51,10 @@
         echo $email_address;
         echo "<br>";
         echo $occupation;
+
+        //ini_set("SMPT", "smtp.gmail.com");
+        //ini_set("smpt_port", 465);
+        mail("kieferleejackson@gmail.com", "This is a test", "Here is a message that I generated in PHP. Neat huh?", "From: " . $first_name);
     }
 
     // File upload handler
@@ -85,6 +89,32 @@
         }
     }
 
+    /* Mailing form data to defined email
+    if (isset($_POST['submit'])) {
+        $mailto = "kieferleejackson@gmail.com"; // TEST EMAIL ADDRESS CHANGE WHEN POSSIBLE
+
+        $advocate_subject = "New " . $occupation . " request from " . $first_name . " " . $last_name . " - " . $timeStamp;
+        $employee_subject = "Confirmation of " . $occupation . "request for Advocate Hospice";
+
+        $advocate_message = "Employee Name: " . $first_name . " " . $last_name . "\n"
+        . "Phone Number: " . $phone_number . "\n" . "Email Address: " . $email_address . "\n"
+        . "Desired Occupation: " . $occupation . "\n\n";
+
+        $employee_message = "Dear " . $first_name . " " . $last_name . ",\n\n"
+        . "Thank you for your interest in joining the Advocate Hospice team!\nOne of our 
+        company representatives will reach out to you as soon as possible.\n\nYour information
+        has been received as:\n\n" . $advocate_message . "\n\nIf there are any issues with the
+        information you have provided, please reach out to either our phone or email as soon 
+        as possible.\n\nRegards,\nAdvocate Hospice";
+
+        $advocate_header = "From: " . $email_address;
+        $employee_header = "From: " . $mailto;
+
+        // Mail occupation request out to Advocate Hospice, and Confirmation email to user
+        $ahpc_msg = mail($mailto, $advocate_subject, $advocate_message, $advocate_header);
+        $empl_msg = mail($email_address, $employee_subject, $employee_message, $employee_header);
+    }
+    */
     function dataValidator($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -92,7 +122,7 @@
 
         return $data;
     }
-
+    
     ?>
 
     <!-- Footer -->
