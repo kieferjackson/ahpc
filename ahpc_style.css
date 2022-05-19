@@ -88,6 +88,10 @@ body {
     object-fit:scale-down; /*Would like to change this in the future */
 }
 
+.tabcontent {
+    position: relative;
+}
+
 @keyframes dissolve {
     from {opacity: 0}
     to {opacity: 1}

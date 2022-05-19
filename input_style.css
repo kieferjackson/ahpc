@@ -1,13 +1,15 @@
 
 .input_field {
-    background-color: #fff;
+    /*background-color: #fff;*/
+    background-color: red;
     font-family: "Noto Sans";
     padding: 2px;
-    border: 1px solid #333;
+    border: 1px solid #543d22;
     margin-bottom: 10px;
 }
 
 .input_field label {
+    color: #543d22;
     font-family: "Noto Sans", sans-serif;
 }
 

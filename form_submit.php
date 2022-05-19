@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="website icon" href="images/icons/favicon.ico">
-        <link rel="stylesheet" href="alt_style.css">
+        <link rel="stylesheet" href="ahpc_style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral|Rubik">
     </head>
@@ -18,7 +18,6 @@
         <a href="#about_us">About Us</a>
         <a href="#services">Services</a>
         <a href="#contact_info">Contact Us</a>
-        <a href="#kudos_title">Kudos</a>
         <a href="recruit.html">Recruitment</a>
         <a href="resources.html">Resources</a>
     </div>
@@ -37,24 +36,13 @@
         
         $occupation = dataValidator($_POST["occupation"]);
 
-        date_default_timezone_set('MST'); // Default Time Zone is MST
-        $timeStamp = date("m-d-Y @ h:i:sa");
-
-        echo $timeStamp;
-        echo "<br>";
-        echo $first_name;
-        echo "<br>";
-        echo $last_name;
-        echo "<br>";
-        echo $phone_number;
-        echo "<br>";
-        echo $email_address;
-        echo "<br>";
-        echo $occupation;
+        $def_time_zone = "MST"; // Default Time Zone is MST for Arizona Time
+        date_default_timezone_set($def_time_zone);
+        $timeStamp = date("m-d-Y @ h:i:sa") . " " . $def_time_zone;
 
         //ini_set("SMPT", "smtp.gmail.com");
         //ini_set("smpt_port", 465);
-        mail("kieferleejackson@gmail.com", "This is a test", "Here is a message that I generated in PHP. Neat huh?", "From: " . $first_name);
+        //mail("kieferleejackson@gmail.com", "This is a test", "Here is a message that I generated in PHP. Neat huh?", "From: " . $first_name);
     }
 
     // File upload handler
@@ -89,23 +77,23 @@
         }
     }
 
-    /* Mailing form data to defined email
+    // Mailing form data to defined email
     if (isset($_POST['submit'])) {
-        $mailto = "kieferleejackson@gmail.com"; // TEST EMAIL ADDRESS CHANGE WHEN POSSIBLE
+        $mailto = "info@advocatehpc.com"; /* This should be the final email address */
+        //$mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
 
-        $advocate_subject = "New " . $occupation . " request from " . $first_name . " " . $last_name . " - " . $timeStamp;
-        $employee_subject = "Confirmation of " . $occupation . "request for Advocate Hospice";
+        $advocate_subject = "New " . $occupation . " application from " . $first_name . " " . $last_name . " | " . $timeStamp;
+        $employee_subject = "Confirmation of " . ucwords($occupation) . " application for Advocate Hospice";
 
         $advocate_message = "Employee Name: " . $first_name . " " . $last_name . "\n"
         . "Phone Number: " . $phone_number . "\n" . "Email Address: " . $email_address . "\n"
         . "Desired Occupation: " . $occupation . "\n\n";
 
         $employee_message = "Dear " . $first_name . " " . $last_name . ",\n\n"
-        . "Thank you for your interest in joining the Advocate Hospice team!\nOne of our 
-        company representatives will reach out to you as soon as possible.\n\nYour information
-        has been received as:\n\n" . $advocate_message . "\n\nIf there are any issues with the
-        information you have provided, please reach out to either our phone or email as soon 
-        as possible.\n\nRegards,\nAdvocate Hospice";
+        . "Thank you for your interest in joining the Advocate Hospice team!
+        One of our company representatives will reach out to you as soon as possible.
+        \nYour information has been received as:\n\n" . $advocate_message . 
+        "If there are any issues with the information you have provided, please reach out to either our phone or email as soon as possible.\n\nRegards,\nAdvocate Hospice";
 
         $advocate_header = "From: " . $email_address;
         $employee_header = "From: " . $mailto;
@@ -114,7 +102,7 @@
         $ahpc_msg = mail($mailto, $advocate_subject, $advocate_message, $advocate_header);
         $empl_msg = mail($email_address, $employee_subject, $employee_message, $employee_header);
     }
-    */
+    
     function dataValidator($data) {
         $data = trim($data);
         $data = stripslashes($data);
