@@ -24,9 +24,6 @@
     <a href="resources.html">Resources</a>
 </div>
   
-<!-- The flexible grid (content) -->
-    <div class="row">
-
     <!-- Career opportunities form for employees/volunteers -->
     <div class="main">
         <div class="splash">
@@ -65,19 +62,22 @@
             <input type="number" name="phone_number" placeholder="###-###-####" class="input_field" required>
             <br>
             <label for="email">Email Address</label><br>
-            <input type="email" name="email_address" class="input_field">
+            <input type="email" name="email_address" class="input_field" required>
             <br>
 
             <label for="volunteer">Volunteer</label>
-            <input type="radio" id="volunteer" name="occupation" value="volunteer">
+            <input type="radio" id="volunteer" name="occupation" value="volunteer" required>
             <br>
             <label for="employee">Employee</label>
             <input type="radio" id="employee" name="occupation" value="employee">
             <br>
 
             Resume or CV:
+            <br>
             <input type="file" name="resume" id="resume">
             <br>
+            <label for="comments">Comments</label>
+            <textarea name="comments" class="input_field" rows="4" cols="50" maxlength="480"></textarea>
             <input type="submit" name="submit" id="submit" />
         </form>
 
@@ -93,8 +93,6 @@
         <a href="https://npino.com/hospice/1073199394-advocate-hospice-and-palliative-care-llc/"><div class="link" >NPI Number</div></a> <br>
         <a href="https://youtube.com"><div class="link" >Youtube</div></a>
     </div>
-    
-    </div> <!--/div for row-->
 
     <!-- Footer -->
     <div class="footer">

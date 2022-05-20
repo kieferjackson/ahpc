@@ -22,10 +22,8 @@
         <a href="resources.html">Resources</a>
     </div>
 
-    <h1 id="form_success_message">Your form was successfully sent.<br>We appreciate your interest in working with us! Please wait for a response from us.</h1>
-
     <?php
-    $first_name = $last_name = $phone_number = $email_address = $occupation = "";
+    $first_name = $last_name = $phone_number = $email_address = $occupation = $comments = "";
     $timeStamp = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -33,16 +31,16 @@
         $last_name = dataValidator($_POST["last_name"]);
         $phone_number = dataValidator($_POST["phone_number"]);
         $email_address = dataValidator($_POST["email_address"]);
+        if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+            echo "The email address you have entered is invalid. Please try again.";
+        }
         
         $occupation = dataValidator($_POST["occupation"]);
+        $comments = dataValidator($_POST["comments"]);
 
         $def_time_zone = "MST"; // Default Time Zone is MST for Arizona Time
         date_default_timezone_set($def_time_zone);
         $timeStamp = date("m-d-Y @ h:i:sa") . " " . $def_time_zone;
-
-        //ini_set("SMPT", "smtp.gmail.com");
-        //ini_set("smpt_port", 465);
-        //mail("kieferleejackson@gmail.com", "This is a test", "Here is a message that I generated in PHP. Neat huh?", "From: " . $first_name);
     }
 
     // File upload handler
@@ -79,21 +77,21 @@
 
     // Mailing form data to defined email
     if (isset($_POST['submit'])) {
-        $mailto = "info@advocatehpc.com"; /* This should be the final email address */
-        //$mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
+        //$mailto = "info@advocatehpc.com"; /* This should be the final email address */
+        $mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
 
         $advocate_subject = "New " . $occupation . " application from " . $first_name . " " . $last_name . " | " . $timeStamp;
         $employee_subject = "Confirmation of " . ucwords($occupation) . " application for Advocate Hospice";
 
         $advocate_message = "Employee Name: " . $first_name . " " . $last_name . "\n"
         . "Phone Number: " . $phone_number . "\n" . "Email Address: " . $email_address . "\n"
-        . "Desired Occupation: " . $occupation . "\n\n";
+        . "Desired Occupation: " . $occupation . "\n\nComments: " . $comments;
 
         $employee_message = "Dear " . $first_name . " " . $last_name . ",\n\n"
         . "Thank you for your interest in joining the Advocate Hospice team!
         One of our company representatives will reach out to you as soon as possible.
         \nYour information has been received as:\n\n" . $advocate_message . 
-        "If there are any issues with the information you have provided, please reach out to either our phone or email as soon as possible.\n\nRegards,\nAdvocate Hospice";
+        "\n\nIf there are any issues with the information you have provided, please reach out to either our phone or email as soon as possible.\n\nRegards,\nAdvocate Hospice";
 
         $advocate_header = "From: " . $email_address;
         $employee_header = "From: " . $mailto;
@@ -101,6 +99,13 @@
         // Mail occupation request out to Advocate Hospice, and Confirmation email to user
         $ahpc_msg = mail($mailto, $advocate_subject, $advocate_message, $advocate_header);
         $empl_msg = mail($email_address, $employee_subject, $employee_message, $employee_header);
+
+        // Verify that both messages sent successfully
+        if ($ahpc_msg && $empl_msg) {
+            echo "Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us.";
+        } else {
+            echo "Sorry, but your form was not successfully submitted.\nPlease try again.";
+        }
     }
     
     function dataValidator($data) {

@@ -1,15 +1,32 @@
 
 .input_field {
-    /*background-color: #fff;*/
-    background-color: red;
+    background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
+    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.2);
+    border: 1px solid silver;
+
     font-family: "Noto Sans";
-    padding: 2px;
+
     border: 1px solid #543d22;
     margin-bottom: 10px;
+
+    max-width: 100%;
 }
 
-.input_field label {
-    color: #543d22;
+label {
+    color: #111;
     font-family: "Noto Sans", sans-serif;
+}
+
+#resume{
+    max-width: 100%;
+}
+
+textarea {
+    resize: none;
+    margin-top: 10px;
+}
+
+#submit {
+    margin-top: 10px;
 }
 
