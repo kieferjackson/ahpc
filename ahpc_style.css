@@ -75,22 +75,108 @@ body {
 
 .header {
     padding: 50px;
-    max-height: 
-    450px;
+    max-height: 450px;
   
     text-align: center;
-    background: linear-gradient(100deg, #e3ffe7 0%, #d9e7ff 100%);
+    background: linear-gradient(17deg, #f64106 0%, #f78212 10%, #d77d85 30%, #372c92 100%);
     color: #333;
 }
   
-  .header img {
+.header img {
     max-height: 350px;
     max-width: 100%;
     object-fit:scale-down; /*Would like to change this in the future */
 }
 
+.headings {
+    padding: 10px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+
+    background: linear-gradient(9deg, #f78212 0%, #d77d85 30%, #372c92 100%);
+    color: #fff;
+
+    font-family: Spectral, serif;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 2px;
+    box-shadow: inset 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+}
+
+.list_container {
+    font-weight: bold;
+}
+
+.list_item_wide {
+    font-weight: normal;
+
+    padding: 10px;
+    display: block;
+    margin: 10px auto 20px 0;
+
+    width: fit-content;
+    max-width: 100%;
+    position: relative;
+
+    border: 1px solid rgb(245, 245, 245);
+    border-left: 2px solid #e03428;
+    background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
+    box-shadow: 0px 1px 5px 0px rgba(131, 131, 131, 0.25);
+}
+
+.list_item_box {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: large;
+
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px auto 10px auto;
+
+    width: fit-content;
+    max-width: 100%;
+
+    border: 1px solid rgb(215, 215, 255);
+    border-top: 3px solid #e03428;
+    background: rgb(250, 250, 255);
+    box-shadow: 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+
+    /* Comment out the following code to return to original styling */
+    display: inline-table;
+    width: 32%;
+    background: #fff;
+    border: unset;
+    border-top: 3px solid #e03428;
+}
+
+.list_item_box_content {
+    padding: 10px;
+    margin-top: 10px;
+
+    border-left: 2px solid #ccc;
+    background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
+    color: #111;
+
+    /* Comment out the following code to return to original styling */
+    border: 1px solid #ccc;
+}
+
+.list_item_wide:hover, .list_item_box:hover {
+    box-shadow: 0px 1px 5px 0px rgba(131, 131, 131, 0.6);
+}
+
 .tabcontent {
     position: relative;
+}
+
+#contact_info {
+    text-align: center;
 }
 
 @keyframes dissolve {
