@@ -1,15 +1,22 @@
 
 .input_field {
     background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
-    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.2);
+    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.1);
     border: 1px solid silver;
-
+    border-radius: 3px;
     font-family: "Noto Sans";
 
-    border: 1px solid #543d22;
     margin-bottom: 10px;
-
     max-width: 100%;
+}
+
+input:hover, textarea:hover {
+    border: 1px solid #333;
+}
+
+input:focus, textarea:focus {
+    border: unset;
+    outline: 1px solid #e03428;
 }
 
 label {
@@ -18,6 +25,7 @@ label {
 }
 
 #resume{
+    border: unset;
     max-width: 100%;
 }
 
