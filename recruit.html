@@ -49,16 +49,16 @@
 
         <form id="employee_form" action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data">
             <label for="first_name">First Name</label><br>
-            <input type="text" name="first_name" class="input_field" required>
+            <input type="text" name="first_name" class="input_field" maxlength="128" required>
             <br>
             <label for="last_name">Last Name</label><br>
-            <input type="text" name="last_name" class="input_field" required>
+            <input type="text" name="last_name" class="input_field" maxlength="128" required>
             <br>
             <label for="number">Phone Number</label><br>
-            <input type="number" name="phone_number" placeholder="###-###-####" class="input_field" required>
+            <input type="number" name="phone_number" placeholder="###-###-####" maxlength="16" class="input_field" required>
             <br>
             <label for="email">Email Address</label><br>
-            <input type="email" name="email_address" class="input_field" required>
+            <input type="email" name="email_address" class="input_field" maxlength="256" required>
             <br>
 
             <label for="volunteer">Volunteer</label>
@@ -74,6 +74,7 @@
             <br>
             <label for="comments">Comments</label>
             <textarea name="comments" class="input_field" rows="4" cols="50" maxlength="480"></textarea>
+            <br>
             <input type="submit" name="submit" id="submit" />
         </form>
 

@@ -44,11 +44,11 @@
     }
 
     // File upload handler
-    if(!empty($_POST["resume"])) { // Checks if a resume has been submitted, if there is, then the file will be processed.
+    if(!empty($_FILES['resume']['name'])) { // Checks if a resume has been submitted, if there is, then the file will be processed.
         $target_dir = "uploads/";
-        $target_file = $target_dir . basename($FILES["resume"]["name"]);
+        $target_file = basename($_FILES['resume']['name']);
         $uploadOK = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
         // Check whether uploaded file is .pdf, .doc, or .docx
         if (isset($_POST["submit"])) {
@@ -78,7 +78,7 @@
     // Mailing form data to defined email
     if (isset($_POST['submit'])) {
         //$mailto = "info@advocatehpc.com"; /* This should be the final email address */
-        $mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
+        //$mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
 
         $advocate_subject = "New " . $occupation . " application from " . $first_name . " " . $last_name . " | " . $timeStamp;
         $employee_subject = "Confirmation of " . ucwords($occupation) . " application for Advocate Hospice";
@@ -94,18 +94,20 @@
         "\n\nIf there are any issues with the information you have provided, please reach out to either our phone or email as soon as possible.\n\nRegards,\nAdvocate Hospice";
 
         $advocate_header = "From: " . $email_address;
-        $employee_header = "From: " . $mailto;
+        //$employee_header = "From: " . $mailto;
 
         // Mail occupation request out to Advocate Hospice, and Confirmation email to user
-        $ahpc_msg = mail($mailto, $advocate_subject, $advocate_message, $advocate_header);
+        /*$ahpc_msg = mail($mailto, $advocate_subject, $advocate_message, $advocate_header);
         $empl_msg = mail($email_address, $employee_subject, $employee_message, $employee_header);
-
+        */
+        echo $advocate_message;
         // Verify that both messages sent successfully
+        /*
         if ($ahpc_msg && $empl_msg) {
             echo "Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us.";
         } else {
             echo "Sorry, but your form was not successfully submitted.\nPlease try again.";
-        }
+        } */
     }
     
     function dataValidator($data) {
