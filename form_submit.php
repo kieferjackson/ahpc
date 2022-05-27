@@ -7,8 +7,6 @@
 
         <link rel="website icon" href="images/icons/favicon.ico">
         <link rel="stylesheet" href="ahpc_style.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral|Rubik">
     </head>
     <body>
 
@@ -25,6 +23,7 @@
     <?php
     $first_name = $last_name = $phone_number = $email_address = $occupation = $comments = "";
     $timeStamp = "";
+    $uploadOK = false; // Initializes to false until it has been validated
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $first_name = dataValidator($_POST["first_name"]);
@@ -45,33 +44,34 @@
 
     // File upload handler
     if(!empty($_FILES['resume']['name'])) { // Checks if a resume has been submitted, if there is, then the file will be processed.
-        $target_dir = "uploads/";
-        $target_file = basename($_FILES['resume']['name']);
-        $uploadOK = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $user_file = basename($_FILES['resume']['name']);
+
+        $imageFileType = strtolower(pathinfo($user_file, PATHINFO_EXTENSION));
+        echo "File Type: " . $imageFileType;
 
         // Check whether uploaded file is .pdf, .doc, or .docx
         if (isset($_POST["submit"])) {
-            $isCorrectFileType = $imageFileType == ("pdf" || "doc" || "docx");
+            // Compare file type of submitted file
+            $isCorrectFileType = strcmp($imageFileType, "pdf") === 0 || strcmp($imageFileType, "doc") === 0 || strcmp($imageFileType, "docx") === 0;
+            var_dump($isCorrectFileType);
 
             if (!$isCorrectFileType) {
                 echo "Only PDF, DOC, and DOCX files are acceptable.";
-                $uploadOK = 0;
+            } else {
+                $uploadOK = true;
             }
         }
         // Check file size
-        if ($_FILES["resume"]["size"] > 1000000) {
+        if ($_FILES["resume"]["size"] > 5000000) { // Reject file upload if it exceeds approximately 5 MB
             echo "Your file is too large to upload.";
-            $uploadOK = 0;
+            $uploadOK = false;
         }
 
         // Upload checker looking at $uploadOK
-        if ($uploadOK == 0) {
-            echo "Sorry, your file failed to upload. Try again.";
+        if ($uploadOK) {
+            echo "The file: " . htmlspecialchars(basename($_FILES["resume"]["name"])) . " has been successfully uploaded.";
         } else {
-            if(move_uploaded_file($_FILES["resume"]["name"], $target_file)) {
-                echo "The file " . htmlspecialchars(basename($_FILES["resume"]["name"])) . " has been uploaded.";
-            }
+            echo "Sorry, your file failed to upload. Try again.";
         }
     }
 
@@ -92,6 +92,32 @@
         One of our company representatives will reach out to you as soon as possible.
         \nYour information has been received as:\n\n" . $advocate_message . 
         "\n\nIf there are any issues with the information you have provided, please reach out to either our phone or email as soon as possible.\n\nRegards,\nAdvocate Hospice";
+
+        // Attach user submitted file
+        if (isset($_FILES['resume']) and $uploadOK) {
+            // Define file parameters
+            $file_name = $_FILES['resume']['name'];
+            $file_tmp_name = $_FILES['resume']['tmp_name'];
+            $file_size = $_FILES['resume']['size'];
+            
+            // Read uploaded file & base64_encode content
+            $resume_handle = fopen($file_tmp_name, "r");  // set the file handle only for reading the file
+            $resume_content = fread($handle, $file_size); // reading the file
+            fclose($resume_handle);
+
+            $encoded_content = chunk_split(base64_encode($resume_content));
+
+            $attachment = "--$boundary\r\n";
+            $attachment .="Content-Type: $type; name=".$file_name."\r\n";
+            $attachment .="Content-Disposition: attachment; filename=".$file_name."\r\n";
+            $attachment .="Content-Transfer-Encoding: base64\r\n";
+            $attachment .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
+            $attachment .= $encoded_content;
+
+            // Attach Files to Emails
+            $advocate_message .= $attachment;
+            $employee_message .= $attachment;
+        }
 
         $advocate_header = "From: " . $email_address;
         //$employee_header = "From: " . $mailto;
