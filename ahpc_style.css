@@ -130,6 +130,7 @@ body {
 .list_item_box {
     font-family: Helvetica, Arial, sans-serif;
     font-size: x-large;
+    font-weight: bold;
     text-align: center;
     
     padding: 30px 10px 30px 10px;
@@ -145,6 +146,8 @@ body {
 }
 
 .list_item_box_content {
+    font-size: medium;
+    font-weight: normal;
     text-align: left;
 
     padding: 20px;
@@ -253,13 +256,14 @@ body {
 /* Footer */
 .footer h2 {
     padding: 20px;
-    background: #fff;
 
-    color: #111;
     text-align: center;
-    font-family: Helvetica, Arial, sans-serif, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: x-small;
+    color: #fff;
     
+    background: linear-gradient(9deg, #f78212 0%, #d77d85 30%, #372c92 100%);
+    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
 }
 
 /* Mobile styling (phones, tablets) */
