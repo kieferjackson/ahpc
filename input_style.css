@@ -1,10 +1,19 @@
 
+.form_heading, label {
+    color: #111;
+    font-family: Helvetica, Arial, sans-serif, sans-serif;
+}
+
+#top_heading {
+    font-weight: bold;
+}
+
 .input_field {
     background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
     box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.1);
     border: 1px solid silver;
     border-radius: 3px;
-    font-family: "Noto Sans";
+    font-family: Helvetica, Arial, sans-serif, sans-serif;
 
     margin-bottom: 10px;
     max-width: 100%;
@@ -17,11 +26,6 @@ input:hover, textarea:hover {
 input:focus, textarea:focus {
     border: unset;
     outline: 1px solid #e03428;
-}
-
-label {
-    color: #111;
-    font-family: "Noto Sans", sans-serif;
 }
 
 #resume{
@@ -38,3 +42,11 @@ textarea {
     margin-top: 10px;
 }
 
+.form_result_message {
+    color: #fff;
+    background: #111;
+}
+
+.form_error_message {
+    color: red;
+}

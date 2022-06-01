@@ -21,13 +21,21 @@
     </div>
 
     <?php
+    // HTML Elements
+    $footer = 
+    "<!-- Footer -->
+    <div class='footer'>
+        <h2>7600 N 16th St Ste 112, Phoenix, Arizona, 85020</h2>
+    </div>";
+
+    $br = "<br>";
+
     // Initializing user info array
     $user_info = array(
         "first_name" => "",
         "last_name" => "",
         "phone_number" => "",
         "email_address" => "",
-        "occupation" => "",
         "comments" => "",
     );
     $timeStamp = "";
@@ -49,18 +57,16 @@
         $post_char_max = [128, 128, 16, 256, 480];
         $post_response_required = [true, true, true, true, false];
 
+        // Check character length of form data
         for ($i = 0 ; $i < count($post_names) ; $i++) {
             $dataOK = checkStringLength($user_info[$post_names[$i]], $post_char_max[$i], $post_response_required[$i]);
-            echo $post_names[$i] . ": ";
-            var_dump($dataOK);
-            echo "<br>";
+            
             if ($dataOK === false) {
                 formErrorHandler("EXCESS_CHAR");
             }
         }
         
         $occupation = dataValidator($_POST["occupation"]);
-        $comments = dataValidator($_POST["comments"]);
 
         $def_time_zone = "MST"; // Default Time Zone is MST for Arizona Time
         date_default_timezone_set($def_time_zone);
@@ -71,24 +77,27 @@
     if(!empty($_FILES['resume']['name'])) { // Checks if a resume has been submitted, if there is, then the file will be processed.
         $user_file = basename($_FILES['resume']['name']);
 
+        // Check whether uploaded file is .pdf, .doc, or .docx
         $imageFileType = strtolower(pathinfo($user_file, PATHINFO_EXTENSION));
         echo "File Type: " . $imageFileType;
 
-        // Check whether uploaded file is .pdf, .doc, or .docx
-        if (isset($_POST["submit"])) {
-            // Compare file type of submitted file
-            $isCorrectFileType = strcmp($imageFileType, "pdf") === 0 || strcmp($imageFileType, "doc") === 0 || strcmp($imageFileType, "docx") === 0;
-            var_dump($isCorrectFileType);
+        $isCorrectFileType = strcmp($imageFileType, "pdf") === 0 || strcmp($imageFileType, "doc") === 0 || strcmp($imageFileType, "docx") === 0;
+        var_dump($isCorrectFileType);
 
-            if (!$isCorrectFileType) {
-                formErrorHandler("INVALID_FILE_TYPE");
-            } else {
-                $uploadOK = true;
-            }
+        if (!$isCorrectFileType) {
+            formErrorHandler("INVALID_FILE_TYPE");
+        } else {
+            $uploadOK = true;
         }
+
         // Check file size
-        if ($_FILES["resume"]["size"] > 5000000) { // Reject file upload if it exceeds approximately 5 MB
+        define('MB', 1048576);
+
+        if ($_FILES["resume"]["size"] > 5 * MB) { // Reject file upload if it exceeds 5 MB or is empty (0 bytes)
             formErrorHandler("EXCESS_FILE_SIZE");
+            $uploadOK = false;
+        } elseif ($_FILES["resume"]["size"] == 0) {
+            formErrorHandler("INSUFFICIENT_FILE_SIZE");
             $uploadOK = false;
         }
 
@@ -127,15 +136,14 @@
         $advocate_msg_body .= "Content-Transfer-Encoding: base64\r\n\r\n";
         $applicant_msg_body = $advocate_msg_body;
 
-        $advocate_message = "Applicant Name: " . $user_info['first_name'] . " " . $user_info['last_name'] . "\n"
-        . "Phone Number: " . $user_info['phone_number'] . "\n" . "Email Address: " . $user_info['email_address'] . "\n"
-        . "Desired Occupation: " . ucwords($occupation) . "\n\nComments: " . $user_info['comments'];
+        $advocate_message = "Applicant Name: " . $user_info['first_name'] . " " . $user_info['last_name'] . "\r\n"
+        . "Phone Number: " . $user_info['phone_number'] . "\r\n" . "Email Address: " . $user_info['email_address'] . "\r\n"
+        . "Desired Occupation: " . ucwords($occupation) . "\r\n\r\nComments: " . $user_info['comments'];
 
-        $applicant_message = "Dear " . $user_info['first_name'] . " " . $user_info['last_name'] . ",\n\n"
-        . "Thank you for your interest in joining the Advocate Hospice team!
-        One of our company representatives will reach out to you as soon as possible.
-        \nYour information has been received as:\n\n" . $advocate_message . 
-        "\n\nIf there are any issues with the information you have provided, please reach out to either our phone or email as soon as possible.\n\nRegards,\nAdvocate Hospice";
+        $applicant_message = "Dear " . $user_info['first_name'] . " " . $user_info['last_name'] . ",\r\n\r\n"
+        . "Thank you for your interest in joining the Advocate Hospice team!\r\nOne of our company representatives will reach out to you as soon as possible.
+        \r\nYour information has been received as:\r\n\r\n" . $advocate_message . 
+        "\r\n\r\nIf there are any issues with the information you have provided, please reach out to either our phone number (602-830-0605) or reply to this email with the correct information as soon as possible.\r\n\r\nRegards,\nAdvocate Hospice";
 
         $advocate_msg_body .= chunk_split(base64_encode($advocate_message));
         $applicant_msg_body .= chunk_split(base64_encode($applicant_message));
@@ -147,6 +155,8 @@
             $file_tmp_name = $_FILES['resume']['tmp_name'];
             $file_size = $_FILES['resume']['size'];
             $file_type = $_FILES['resume']['type'];
+            echo "The uploaded file type is: " . $br;
+            var_dump($file_type);
             
             // Read uploaded file & base64_encode content
             $resume_handle = fopen($file_tmp_name, "r");  // set the file handle only for reading the file
@@ -162,25 +172,29 @@
             $attachment .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
             $attachment .= $encoded_content;
 
-            // Attach Files to Advocate Application Request
-            $advocate_message .= $attachment;
+            // Attach File to Advocate Application Request
+            $advocate_msg_body .= $attachment;
         }
 
-        // Mail occupation request out to Advocate Hospice, and Confirmation email to user
-        //$ahpc_msg = mail($mailto, $advocate_subject, $advocate_message, $advocate_header);
-        //$appl_msg = mail($user_info['email_address'], $applicant_subject, $applicant_message, $applicant_header);
+        // Mail Confirmation email to user
+        $appl_msg = mail($user_info['email_address'], $applicant_subject, $applicant_msg_body, $applicant_header);
         
-        echo $advocate_message;
-        echo "<br>";
-        echo $applicant_message;
-        // Verify that both messages sent successfully
-        /*
-        if ($ahpc_msg && $appl_msg) {
-            echo "Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us.";
+        // Mail Occupation request out to Advocate Hospice if Confimation Email successfully sent
+        if ($appl_msg) {
+            $ahpc_msg = mail($mailto, $advocate_subject, $advocate_msg_body, $advocate_header);
         } else {
-            echo "Sorry, but your form was not successfully submitted.\nPlease try again.";
-        } */
+            echo "Sorry, a confirmation email was unable to be sent to the email address you provided and your form was not successfully submitted.\nPlease try again.";
+        }
+
+        // Verify that both messages sent successfully
+        if ($ahpc_msg && $appl_msg) {
+            echo "<div class='form_result_message'>Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us.</div>";
+        } else {
+            echo "<div class='form_result_message'>Sorry, but your form was not successfully submitted.\nPlease try again.</div>";
+        }
     }
+
+    echo $footer;
     
     function dataValidator($data) {
         $data = trim($data);
@@ -191,7 +205,9 @@
     }
 
     function checkStringLength (string $data, int $char_max, bool $response_required) {
+        $data = preg_replace("#[[:punct:]]#", "", $data);    // Strip punctuation from string to obtain raw character count
         $char_count = strlen($data);
+        echo var_dump($char_count);
         if ($response_required) {
             // The number of characters should be less than or equal to the maximum characters, and there should be at least 1 character
             return $char_count <= $char_max && $char_count > 0;
@@ -202,20 +218,28 @@
     }
 
     function formErrorHandler (string $error_type) {
-        /*
-            Insert code here to change HTML content of webpage.
-        */
+        global $footer, $br;
+        echo 
+        "<div class='form_error_message'>There was an issue validating your form information</div>" . $br . $footer;
+
         switch($error_type) {
             case "INVALID_EMAIL":
                 exit("The email address you have entered is invalid. Please try again.");
                 break;
 
             case "INVALID_FILE_TYPE":
+                $file_type = $_FILES['resume']['type'];
+                echo "The uploaded file type is: " . $br;
+                var_dump($file_type);
                 exit("Only PDF, DOC, and DOCX files are acceptable.");
                 break;
 
             case "EXCESS_FILE_SIZE":
                 exit("Your file is too large to upload.");
+                break;
+
+            case "INSUFFICIENT_FILE_SIZE":
+                exit("The file you uploaded contains no data.");
                 break;
 
             case "EXCESS_CHAR":
@@ -225,11 +249,6 @@
     }
     
     ?>
-
-    <!-- Footer -->
-    <div class="footer">
-        <h2>7600 N 16th St Ste 112, Phoenix, Arizona, 85020</h2>
-    </div>
 
     </body>
     <!-- This website was created by Kiefer L. Jackson -->
