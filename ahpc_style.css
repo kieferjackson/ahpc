@@ -254,6 +254,20 @@ body {
     color:black;
 }
 
+.form_result_message, .form_error_message {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+
+    margin: 20px auto 100px auto;
+    padding: 10px;
+    min-height: 200px;
+}
+
+.form_error_message {
+    color: red;
+}
+
 /* Footer */
 .footer h2 {
     padding: 20px;

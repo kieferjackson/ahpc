@@ -21,6 +21,8 @@
     </div>
 
     <?php
+    if (!empty($_POST['email'])) die();
+
     // HTML Elements
     $footer = 
     "<!-- Footer -->
@@ -112,10 +114,11 @@
     // Mailing form data to defined email
     if (isset($_POST['submit'])) {
         //$mailto = "info@advocatehpc.com"; /* This should be the final email address */
-        $mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
+        //$mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
+        $mailto = "";
 
-        $advocate_subject = "New " . ucwords($occupation) . " application from " . $user_info['first_name'] . " " . $user_info['last_name'] . " | " . $timeStamp;
-        $applicant_subject = "Confirmation of " . ucwords($occupation) . " application for Advocate Hospice";
+        $advocate_subject = "New " . ucwords($occupation) . " Application from " . $user_info['first_name'] . " " . $user_info['last_name'] . " | " . $timeStamp;
+        $applicant_subject = "Confirmation of " . ucwords($occupation) . " Application for Advocate Hospice";
 
         $boundary = md5("random"); // Defining email boundary
 
@@ -138,7 +141,7 @@
 
         $advocate_message = "Applicant Name: " . $user_info['first_name'] . " " . $user_info['last_name'] . "\r\n"
         . "Phone Number: " . $user_info['phone_number'] . "\r\n" . "Email Address: " . $user_info['email_address'] . "\r\n"
-        . "Desired Occupation: " . ucwords($occupation) . "\r\n\r\nComments: " . $user_info['comments'];
+        . "Desired Occupation: " . ucwords($occupation) . "\r\n\r\nComments: " . htmlspecialchars_decode($user_info['comments']);
 
         $applicant_message = "Dear " . $user_info['first_name'] . " " . $user_info['last_name'] . ",\r\n\r\n"
         . "Thank you for your interest in joining the Advocate Hospice team!\r\nOne of our company representatives will reach out to you as soon as possible.
@@ -175,7 +178,7 @@
             // Attach File to Advocate Application Request
             $advocate_msg_body .= $attachment;
         }
-
+        
         // Mail Confirmation email to user
         $appl_msg = mail($user_info['email_address'], $applicant_subject, $applicant_msg_body, $applicant_header);
         
@@ -183,14 +186,38 @@
         if ($appl_msg) {
             $ahpc_msg = mail($mailto, $advocate_subject, $advocate_msg_body, $advocate_header);
         } else {
-            echo "Sorry, a confirmation email was unable to be sent to the email address you provided and your form was not successfully submitted.\nPlease try again.";
+            $doc = new DOMDocument;
+
+            $container = $doc -> createElement("div");
+            $container -> setAttribute('class', 'form_result_container');
+            $attach_element = $doc -> appendChild($container);
+
+            $result_msg = $doc -> createElement("div", "form_result_message");
+            $result_msg -> setAttribute('class', 'form_result_container');
+            $attach_element -> appendChild($result_msg);
+            
+            echo $doc->saveXML();
+
+            echo createElement(
+                "div",
+                "form_result_message",
+                "Sorry, a confirmation email was unable to be sent to the email address you provided and your form was not successfully submitted.<br>Please try again."
+            );
         }
 
         // Verify that both messages sent successfully
         if ($ahpc_msg && $appl_msg) {
-            echo "<div class='form_result_message'>Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us.</div>";
+            echo createElement(
+                "div",
+                "form_result_message",
+                "Your form was successfully sent.<br>We appreciate your interest in working with us! Please wait for a response from us."
+            );
         } else {
-            echo "<div class='form_result_message'>Sorry, but your form was not successfully submitted.\nPlease try again.</div>";
+            echo createElement(
+                "div",
+                "form_result_message",
+                "Sorry, but your form was not successfully submitted.<br>Please try again."
+            );
         }
     }
 
@@ -205,9 +232,9 @@
     }
 
     function checkStringLength (string $data, int $char_max, bool $response_required) {
-        $data = preg_replace("#[[:punct:]]#", "", $data);    // Strip punctuation from string to obtain raw character count
-        $char_count = strlen($data);
-        echo var_dump($char_count);
+        $char_count = strlen(htmlspecialchars_decode($data));
+        var_dump($char_count);
+
         if ($response_required) {
             // The number of characters should be less than or equal to the maximum characters, and there should be at least 1 character
             return $char_count <= $char_max && $char_count > 0;
@@ -216,11 +243,24 @@
             return $char_count <= $char_max;
         }
     }
+    
+    function createElement (string $tag, string $class, string $content) {
+        $element = "<".$tag; if (!empty($class)) {$element .= " class='".$class."'";} $element .= ">";
+        $element .= $content;
+        $element .= "</".$tag.">";
+
+        return $element;
+    }
 
     function formErrorHandler (string $error_type) {
         global $footer, $br;
-        echo 
-        "<div class='form_error_message'>There was an issue validating your form information</div>" . $br . $footer;
+        echo createElement(
+            "div",
+            "form_error_message",
+            "There was an issue validating your form information"
+        );
+        
+        echo $br . $footer;
 
         switch($error_type) {
             case "INVALID_EMAIL":

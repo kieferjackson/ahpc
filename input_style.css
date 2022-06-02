@@ -28,6 +28,10 @@ input:focus, textarea:focus {
     outline: 1px solid #e03428;
 }
 
+#email_f {
+    display: none;
+}
+
 #resume{
     border: unset;
     max-width: 100%;
@@ -40,13 +44,4 @@ textarea {
 
 #submit {
     margin-top: 10px;
-}
-
-.form_result_message {
-    color: #fff;
-    background: #111;
-}
-
-.form_error_message {
-    color: red;
 }
