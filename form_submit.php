@@ -20,8 +20,10 @@
         <a href="resources.html">Resources</a>
     </div>
 
+    <div class="main">
     <?php
     if (!empty($_POST['email'])) die();
+    if ($_POST['email'] != "volunteer" || $_POST['email'] != "employee") die();
 
     // HTML Elements
     $footer = 
@@ -186,42 +188,29 @@
         if ($appl_msg) {
             $ahpc_msg = mail($mailto, $advocate_subject, $advocate_msg_body, $advocate_header);
         } else {
-            $doc = new DOMDocument;
-
-            $container = $doc -> createElement("div");
-            $container -> setAttribute('class', 'form_result_container');
-            $attach_element = $doc -> appendChild($container);
-
-            $result_msg = $doc -> createElement("div", "form_result_message");
-            $result_msg -> setAttribute('class', 'form_result_container');
-            $attach_element -> appendChild($result_msg);
-            
-            echo $doc->saveXML();
-
-            echo createElement(
-                "div",
+            generateElement(
+                "form_result_message_container",
                 "form_result_message",
-                "Sorry, a confirmation email was unable to be sent to the email address you provided and your form was not successfully submitted.<br>Please try again."
+                "Sorry, a confirmation email was unable to be sent to the email address you provided and your form was not successfully submitted.
+                Please try again."
             );
         }
 
         // Verify that both messages sent successfully
         if ($ahpc_msg && $appl_msg) {
-            echo createElement(
-                "div",
+            generateElement(
+                "form_result_message_container",
                 "form_result_message",
-                "Your form was successfully sent.<br>We appreciate your interest in working with us! Please wait for a response from us."
+                "Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us."
             );
         } else {
-            echo createElement(
-                "div",
+            generateElement(
+                "form_result_message_container",
                 "form_result_message",
-                "Sorry, but your form was not successfully submitted.<br>Please try again."
+                "Sorry, but your form was not successfully submitted.\nPlease try again."
             );
         }
     }
-
-    echo $footer;
     
     function dataValidator($data) {
         $data = trim($data);
@@ -244,51 +233,64 @@
         }
     }
     
-    function createElement (string $tag, string $class, string $content) {
-        $element = "<".$tag; if (!empty($class)) {$element .= " class='".$class."'";} $element .= ">";
-        $element .= $content;
-        $element .= "</".$tag.">";
+    function generateElement (string $container_class_name, string $class_name, string $content) {
+        $doc = new DOMDocument;
 
-        return $element;
+        $container = $doc -> createElement("div");
+        $container -> setAttribute('class', $container_class_name);
+        $doc -> appendChild($container);
+
+        $result_msg = $doc->createElement("div", $content);
+        $result_msg -> setAttribute('class', $class_name);
+        $container -> appendChild($result_msg);
+
+        echo $doc -> saveXML();
     }
 
     function formErrorHandler (string $error_type) {
         global $footer, $br;
-        echo createElement(
-            "div",
+        generateElement(
+            "form_error_message_container",
             "form_error_message",
-            "There was an issue validating your form information"
+            "There was an issue validating your form information",
         );
-        
-        echo $br . $footer;
 
         switch($error_type) {
             case "INVALID_EMAIL":
-                exit("The email address you have entered is invalid. Please try again.");
+                exit("The email address you have entered is invalid. Please try again." . $br . $footer);
                 break;
 
             case "INVALID_FILE_TYPE":
                 $file_type = $_FILES['resume']['type'];
                 echo "The uploaded file type is: " . $br;
-                var_dump($file_type);
-                exit("Only PDF, DOC, and DOCX files are acceptable.");
+                echo $file_type . $br;
+                exit("Only PDF, DOC, and DOCX files are acceptable." . $br . $footer);
                 break;
 
             case "EXCESS_FILE_SIZE":
-                exit("Your file is too large to upload.");
+                $file_size = $_FILES['resume']['size'];
+                echo "The uploaded file size is: " . $br;
+                echo (string) ($file_size / MB) . " MB" . $br;
+                exit("Your file is too large to upload." . $br . $footer);
                 break;
 
             case "INSUFFICIENT_FILE_SIZE":
-                exit("The file you uploaded contains no data.");
+                exit("The file you uploaded contains no data." . $br . $footer);
                 break;
 
             case "EXCESS_CHAR":
-                exit("Your form input has exceeded the maximum character limit. Please submit a new application or contact us directly with info@advocatehpc.com if you require accomodations.");
+                exit("Your form input has exceeded the maximum character limit. Please submit a new application or contact us directly with info@advocatehpc.com if you require accomodations." . $br . $footer);
                 break;
         }
     }
     
     ?>
+    </div>
+
+    <!-- Footer -->
+    <div class='footer'>
+        <h2>7600 N 16th St Ste 112, Phoenix, Arizona, 85020</h2>
+    </div>
 
     </body>
     <!-- This website was created by Kiefer L. Jackson -->

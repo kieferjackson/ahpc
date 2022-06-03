@@ -254,14 +254,23 @@ body {
     color:black;
 }
 
+.form_result_message_container, .form_error_message_container {
+    margin: 20px auto 20px auto;
+    padding: 10px;
+    min-height: 200px;
+    width: 80%;
+
+    background-color: #f1f1f1;
+    border: 1px solid silver;
+    border-radius: 10px;
+}
+
 .form_result_message, .form_error_message {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     text-align: center;
 
-    margin: 20px auto 100px auto;
-    padding: 10px;
-    min-height: 200px;
+    margin: 10% auto 10% auto;
 }
 
 .form_error_message {

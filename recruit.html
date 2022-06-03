@@ -7,8 +7,7 @@
     <link rel="website icon" href="images/icons/favicon.ico">
     <link rel="stylesheet" href="ahpc_style.css">
     <link rel="stylesheet" href="input_style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral|Rubik">
+    <script src="form_feedback.js"></script>
 
 </head>
 
@@ -50,18 +49,18 @@
         <form id="employee_form" action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data">
             <div class="form_heading" id="top_heading">All fields marked with * are required</div>
             <br>
-            <label for="first_name">First Name *</label><br>
-            <input type="text" name="first_name" class="input_field" maxlength="128" required>
+            <div id="first_name_anchor"><label for="first_name">First Name *</label><br>
+            <input type="text" name="first_name" class="input_field" maxlength="128" required></div>
             <br>
-            <label for="last_name">Last Name *</label><br>
-            <input type="text" name="last_name" class="input_field" maxlength="128" required>
+            <div id="last_name_anchor"><label for="last_name">Last Name *</label><br>
+            <input type="text" name="last_name" class="input_field" maxlength="128" required></div>
             <br>
-            <label for="number">Phone Number *</label><br>
-            <input type="number" name="phone_number" placeholder="###-###-####" maxlength="16" class="input_field" required>
+            <div id="phone_number_anchor"><label for="number">Phone Number *</label><br>
+            <input type="number" name="phone_number" placeholder="###-###-####" maxlength="16" class="input_field" required></div>
             <br>
             <input type="email" name="email" class="input_field" maxlength="256" id="email_f" autocomplete="off">
-            <label for="email">Email Address *</label><br>
-            <input type="email" name="email_address" class="input_field" maxlength="256" required>
+            <div id="email_address_anchor"><label for="email">Email Address *</label><br>
+            <input type="email" name="email_address" class="input_field" maxlength="256" required></div>
             <br>
 
             <div class="form_heading">Desired Occupation *</div>

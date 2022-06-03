@@ -28,6 +28,22 @@ input:focus, textarea:focus {
     outline: 1px solid #e03428;
 }
 
+.input_feedback_box {
+    display: block;
+    width:fit-content;
+    max-width: 100%;
+    padding: 5px;
+
+    background-color: rgb(255, 245, 155);
+    border: 1px solid rgb(255, 187, 128);
+    border-radius: 5px;
+}
+
+.input_feedback_msg {
+    font-style: italic;
+    color: red;
+}
+
 #email_f {
     display: none;
 }
