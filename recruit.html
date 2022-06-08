@@ -46,7 +46,7 @@
         
         <br>
 
-        <form id="employee_form" action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data">
+        <form id="employee_form" action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data" onsubmit="return checkFormSubmission()">
             <div class="form_heading" id="top_heading">All fields marked with * are required</div>
             <br>
             <div id="first_name_anchor"><label for="first_name">First Name *</label><br>
@@ -63,12 +63,12 @@
             <input type="email" name="email_address" class="input_field" maxlength="256" required></div>
             <br>
 
-            <div class="form_heading">Desired Occupation *</div>
+            <div id="occupation_anchor"><div class="form_heading">Desired Occupation *</div>
             <label for="volunteer">Volunteer</label>
             <input type="radio" id="volunteer" name="occupation" value="volunteer" required>
             <br>
             <label for="employee">Employee</label>
-            <input type="radio" id="employee" name="occupation" value="employee">
+            <input type="radio" id="employee" name="occupation" value="employee"></div>
             <br>
             <br>
 
@@ -76,8 +76,8 @@
             <br>
             <input type="file" name="resume" id="resume">
             <br>
-            <label for="comments">Comments</label>
-            <textarea name="comments" class="input_field" rows="4" cols="50" maxlength="480"></textarea>
+            <div id="comments_anchor"><label for="comments">Comments</label>
+            <textarea name="comments" class="input_field" rows="4" cols="50" maxlength="480"></textarea></div>
             <br>
             <input type="submit" name="submit" id="submit" />
         </form>
