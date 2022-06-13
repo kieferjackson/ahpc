@@ -23,7 +23,7 @@
     <div class="main">
     <?php
     if (!empty($_POST['email'])) die();
-    if ($_POST['email'] != "volunteer" || $_POST['email'] != "employee") die();
+    if (($_POST['occupation'] != "volunteer") && ($_POST['occupation'] != "employee")) die();
 
     // HTML Elements
     $footer = 
@@ -116,8 +116,8 @@
     // Mailing form data to defined email
     if (isset($_POST['submit'])) {
         //$mailto = "info@advocatehpc.com"; /* This should be the final email address */
-        //$mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
-        $mailto = "";
+        $mailto = "kieferleejackson@gmail.com"; /* This email is only for testing purposes */
+        //$mailto = "";
 
         $advocate_subject = "New " . ucwords($occupation) . " Application from " . $user_info['first_name'] . " " . $user_info['last_name'] . " | " . $timeStamp;
         $applicant_subject = "Confirmation of " . ucwords($occupation) . " Application for Advocate Hospice";
@@ -187,6 +187,21 @@
         // Mail Occupation request out to Advocate Hospice if Confimation Email successfully sent
         if ($appl_msg) {
             $ahpc_msg = mail($mailto, $advocate_subject, $advocate_msg_body, $advocate_header);
+
+            // Verify that both messages sent successfully
+            if ($ahpc_msg && $appl_msg) {
+                generateElement(
+                    "form_result_message_container",
+                    "form_result_message",
+                    "Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us."
+                );
+            } else {
+                generateElement(
+                    "form_result_message_container",
+                    "form_result_message",
+                    "Sorry, but your form was not successfully submitted.\nPlease try again."
+                );
+            }
         } else {
             generateElement(
                 "form_result_message_container",
@@ -196,20 +211,6 @@
             );
         }
 
-        // Verify that both messages sent successfully
-        if ($ahpc_msg && $appl_msg) {
-            generateElement(
-                "form_result_message_container",
-                "form_result_message",
-                "Your form was successfully sent.\nWe appreciate your interest in working with us! Please wait for a response from us."
-            );
-        } else {
-            generateElement(
-                "form_result_message_container",
-                "form_result_message",
-                "Sorry, but your form was not successfully submitted.\nPlease try again."
-            );
-        }
     }
     
     function dataValidator($data) {
@@ -257,29 +258,54 @@
 
         switch($error_type) {
             case "INVALID_EMAIL":
-                exit("The email address you have entered is invalid. Please try again." . $br . $footer);
+                generateElement(
+                    "feedback_message_container",
+                    "feedback_message",
+                    "The email address you have entered is invalid. Please try again." . $br . $footer,
+                );
+
+                exit();
                 break;
 
             case "INVALID_FILE_TYPE":
                 $file_type = $_FILES['resume']['type'];
-                echo "The uploaded file type is: " . $br;
-                echo $file_type . $br;
-                exit("Only PDF, DOC, and DOCX files are acceptable." . $br . $footer);
+                generateElement(
+                    "feedback_message_container",
+                    "feedback_message",
+                    "The uploaded file type is: " . $br . $file_type . $br . "Only PDF, DOC, and DOCX files are acceptable." . $br . $footer,
+                );
+
+                exit();
                 break;
 
             case "EXCESS_FILE_SIZE":
                 $file_size = $_FILES['resume']['size'];
-                echo "The uploaded file size is: " . $br;
-                echo (string) ($file_size / MB) . " MB" . $br;
-                exit("Your file is too large to upload." . $br . $footer);
+                generateElement(
+                    "feedback_message_container",
+                    "feedback_message",
+                    "The uploaded file size is: " . $br . (string) ($file_size / MB) . " MB" . $br . "Your file is too large to upload." . $br . $footer,
+                );
+
+                exit();
                 break;
 
             case "INSUFFICIENT_FILE_SIZE":
-                exit("The file you uploaded contains no data." . $br . $footer);
+                generateElement(
+                    "feedback_message_container",
+                    "feedback_message",
+                    "The file you uploaded contains no data." . $br . $footer,
+                );
+
+                exit();
                 break;
 
             case "EXCESS_CHAR":
-                exit("Your form input has exceeded the maximum character limit. Please submit a new application or contact us directly with info@advocatehpc.com if you require accomodations." . $br . $footer);
+                generateElement(
+                    "feedback_message_container",
+                    "feedback_message",
+                    "Your form input has exceeded the maximum character limit. Please submit a new application or contact us directly with info@advocatehpc.com if you require accomodations." . $br . $footer,
+                );
+                exit();
                 break;
         }
     }

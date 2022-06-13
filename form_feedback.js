@@ -1,5 +1,17 @@
 
 function checkFormSubmission() {
+    // Record how many error messages are currently displayed on the webpage
+    let error_msg_count = document.getElementsByClassName("input_feedback_box").length;
+    
+    // Check if there are existing error messages generated, and remove them if so
+    if (error_msg_count > 0) {
+        let msgs_to_remove = document.querySelectorAll(".input_feedback_box");
+        // Remove every error message previously displayed
+        msgs_to_remove.forEach(input_feedback_box => {
+            input_feedback_box.remove();
+        })
+    }
+
     class Field {
         constructor(name, element, max_char) {
             this.name = name;
@@ -15,8 +27,8 @@ function checkFormSubmission() {
             return this.element.value == "";
         }
     }
-
-    const user_info = [
+    
+    field_names = [
         "first_name",
         "last_name",
         "phone_number",
@@ -27,59 +39,97 @@ function checkFormSubmission() {
     let input_fields = document.getElementsByClassName("input_field");
     
     const field_elements = {
-        "first_name"    : new Field("first_name", input_fields[0], input_fields[0].getAttribute("maxlength")),
-        "last_name"     : new Field("last_name", input_fields[1], input_fields[1].getAttribute("maxlength")),
-        "phone_number"  : new Field("phone_number", input_fields[2], input_fields[2].getAttribute("maxlength")),
-        "email_address" : new Field("email_address", input_fields[4], input_fields[4].getAttribute("maxlength")),
-        "comments"      : new Field("comments", input_fields[5], input_fields[5].getAttribute("maxlength"))
+        "first_name"    : new Field("first_name", input_fields[0], parseInt(input_fields[0].getAttribute("maxlength"))),
+        "last_name"     : new Field("last_name", input_fields[1], parseInt(input_fields[1].getAttribute("maxlength"))),
+        "phone_number"  : new Field("phone_number", input_fields[2], parseInt(input_fields[2].getAttribute("maxlength"))),
+        "email_address" : new Field("email_address", input_fields[4], parseInt(input_fields[4].getAttribute("maxlength"))),
+        "comments"      : new Field("comments", input_fields[5], parseInt(input_fields[5].getAttribute("maxlength")))
     }
 
-    var submitOK = false;
+    var submitOK = true;
 
     for (var i = 0 ; i < Object.keys(field_elements).length ; i++) {
-        field_elements[user_info[i]];
-
-        if (field_elements[user_info[i]].is_empty) {
-            generateFeedback("Nothing here!", 
-            "Please enter a value into this field", 
-            user_info[i]);
-        } else {
-            let form_field = field_elements[user_info[i]];
-            checkFormValue(form_field)
+        /* 
+        Check that a form field is empty or not, if it is and it is not the comment section (which is optional)
+        then an error message should be displayed 
+        */
+        field_type = field_names[i];
+        
+        if (field_type != "comments") {
+            if (field_elements[field_type].is_empty) {
+                generateFeedback (
+                    "Nothing here!", 
+                    "Please enter a value into this field", 
+                    field_type
+                );
+            }
+        }
+        
+        // If a field has been entered, then the value should be validated
+        if (!field_elements[field_type].is_empty) {
+            
+            let form_field = field_elements[field_type];
+            
+            submitOK = checkFormValue(form_field);
+            
+            if (!submitOK) {
+                return false;
+            }
         }
 
     }
 
-    console.log("testing form submission button");
-    return false;
+    if (submitOK) {
+        console.log("Input looks good. Form should be ready to be submitted");
+    } else {
+        console.log("Something is wrong with the form's input");
+    }
+    //return submitOK;
+    return submitOK;
 }
 
 function checkFormValue (form_field) {
     let form_value = form_field.element.value;
 
+    // Check character count of input
     if (form_value.length > form_field.max_char) {
         
-        generateFeedback(
+        generateFeedback (
             "Too many characters", 
             `You entered too many characters (${form_field.element.value.length}).\nThe maximum characters allowed is ${form_field.max_char}`, 
-            user_info[i]);
+            form_field.name
+        );
     }
     
     switch (form_field.name) {
         case 'first_name':
-            onlyAlphaChars = /^[a-zA-Z]+$/.test(form_value);
-            break;
+            // This case also applies to last_name
+            
         case 'last_name':
             onlyAlphaChars = /^[a-zA-Z]+$/.test(form_value);
-            break;
+            if (!onlyAlphaChars) {
+                generateFeedback (
+                    "Invalid input", 
+                    "Only upper-case and lower-case characters are allowed.\nPlease enter a valid input and try again.", 
+                    form_field.name
+                );
+
+                return false; 
+            } else {
+                return true;
+            }
+        
         case 'phone_number':
             // This should check that the string only contains numbers or standard notation (e.g. (505)-456-7890)
-            break;
+            return true;
+
         case 'email_address':
             // This should check that the string would be a valid email address
-            break;
+            return true;
+
         case 'comments':
-            break;
+            return true;
+
     }
 }
 

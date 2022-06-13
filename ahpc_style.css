@@ -293,7 +293,7 @@ body {
 /* Mobile styling (phones, tablets) */
 @media screen
 and (min-device-width: 320px)
-and (max-device-width: 900px)
+and (max-device-width: 960px)
 and (-webkit-min-device-pixel-ratio: 2) {
     h2 {font-size: 24px;}
 
