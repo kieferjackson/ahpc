@@ -22,6 +22,15 @@
 
     <div class="main">
     <?php
+
+    class Field {
+        public function __construct($name, $char_max, $required) {
+            $this -> name       = (string) $name;
+            $this -> char_max   = (int) $char_max;
+            $this -> required   = (bool) $required;
+        }
+    }
+
     if (!empty($_POST['email'])) die();
     if (($_POST['occupation'] != "volunteer") && ($_POST['occupation'] != "employee")) die();
 
@@ -56,10 +65,20 @@
             formErrorHandler("INVALID_EMAIL");
         }
         $user_info['comments'] = dataValidator($_POST["comments"]);
+        
+        $posts = [
+            new Field('first_name', 128, true),
+            new Field('last_name', 128, true),
+            new Field('phone_number', 16, true),
+            new Field('email_address', 256, true),
+            new Field('comments', 480, false)
+        ];
 
+        /* Delete the following section when the Field class is fully implemented */
         $post_names = ["first_name", "last_name", "phone_number", "email_address", "comments"];
         $post_char_max = [128, 128, 16, 256, 480];
         $post_response_required = [true, true, true, true, false];
+        /* Delete this section when the Field class is fully implemented */
 
         // Check character length of form data
         for ($i = 0 ; $i < count($post_names) ; $i++) {

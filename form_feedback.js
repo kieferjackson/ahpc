@@ -46,6 +46,7 @@ function checkFormSubmission() {
         "comments"      : new Field("comments", input_fields[5], parseInt(input_fields[5].getAttribute("maxlength")))
     }
 
+    // submitOK initializes to true and only changes to false if a submitted value is determined to be invalid.
     var submitOK = true;
 
     for (var i = 0 ; i < Object.keys(field_elements).length ; i++) {
@@ -62,6 +63,8 @@ function checkFormSubmission() {
                     "Please enter a value into this field", 
                     field_type
                 );
+
+                submitOK = false;
             }
         }
         
@@ -70,13 +73,30 @@ function checkFormSubmission() {
             
             let form_field = field_elements[field_type];
             
-            submitOK = checkFormValue(form_field);
-            
-            if (!submitOK) {
-                return false;
+            // Validate form field and set submitOK to false if the input is invalid
+            if (!checkFormValue(form_field)) {
+                submitOK = false;
             }
         }
 
+    }
+
+    // Validating uploaded file type
+    var file_path = document.getElementById("resume").value;
+
+    if (file_path != "") {
+        // Obtain the file name and file extension
+        file_name       = file_path.split("\\").pop();
+        file_extension  = file_name.split(".").pop();
+        
+        if (file_extension != ('pdf' || 'docx' || 'doc')) {
+            generateFeedback (
+                "Invalid file type", 
+                "Only .pdf, .doc, and .docx file types are allowed to be uploaded.", 
+                "file_upload"
+            );
+            submitOK = false;
+        }
     }
 
     if (submitOK) {
@@ -84,8 +104,8 @@ function checkFormSubmission() {
     } else {
         console.log("Something is wrong with the form's input");
     }
+    return false;
     //return submitOK;
-    return submitOK;
 }
 
 function checkFormValue (form_field) {
@@ -96,9 +116,11 @@ function checkFormValue (form_field) {
         
         generateFeedback (
             "Too many characters", 
-            `You entered too many characters (${form_field.element.value.length}).\nThe maximum characters allowed is ${form_field.max_char}`, 
+            `You entered too many characters (${form_field.element.value.length}).\nThe maximum characters allowed is ${form_field.max_char}.`, 
             form_field.name
         );
+
+        return false;
     }
     
     switch (form_field.name) {
@@ -120,11 +142,46 @@ function checkFormValue (form_field) {
             }
         
         case 'phone_number':
-            // This should check that the string only contains numbers or standard notation (e.g. (505)-456-7890)
-            return true;
+            // Check that the string only contains numbers
+            contains_only_num = form_value.match(/\d+/) != null;
+            console.log(contains_only_num);
+
+            if (contains_only_num) {
+                // Verify that there are at least eight digits in the phone number
+                num_digits = form_field.element.value.length;
+
+                if (num_digits >= 8) {
+                    // Phone number is valid if it only contains integers and is at least 8 digits.
+                    return true;
+
+                } else {
+                    generateFeedback (
+                        "Invalid phone number", 
+                        "Your phone number must be at least 8 digits long.\nPlease enter a valid input and try again.", 
+                        form_field.name
+                    );
+
+                    return false
+                }
+            } else {
+                generateFeedback (
+                    "Invalid input", 
+                    "Only integers and simple digits are allowed.\nPlease enter a valid input and try again.", 
+                    form_field.name
+                );
+
+                return false;
+            }
 
         case 'email_address':
             // This should check that the string would be a valid email address
+            email_address = form_field.element.value;
+
+            email_username = email_address.slice(0, email_address.indexOf('@'));
+            email_domain = email_address.split("@").pop();
+            console.log(email_address);
+            console.log(email_username);
+            console.log(email_domain);
             return true;
 
         case 'comments':
