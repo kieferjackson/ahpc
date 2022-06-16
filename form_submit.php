@@ -23,16 +23,17 @@
     <div class="main">
     <?php
 
+    if (!empty($_POST['email'])) die();
+    if (($_POST['occupation'] != "volunteer") && ($_POST['occupation'] != "employee")) die();
+
     class Field {
-        public function __construct($name, $char_max, $required) {
+        public function __construct($name, $char_max, $char_min, $required) {
             $this -> name       = (string) $name;
             $this -> char_max   = (int) $char_max;
+            $this -> char_min   = (int) $char_min;
             $this -> required   = (bool) $required;
         }
     }
-
-    if (!empty($_POST['email'])) die();
-    if (($_POST['occupation'] != "volunteer") && ($_POST['occupation'] != "employee")) die();
 
     // HTML Elements
     $footer = 
@@ -61,35 +62,23 @@
         $user_info['last_name'] = dataValidator($_POST["last_name"]);
         $user_info['phone_number'] = dataValidator($_POST["phone_number"]);
         $user_info['email_address'] = dataValidator($_POST["email_address"]);
-        if (!filter_var($user_info['email_address'], FILTER_VALIDATE_EMAIL)) {
-            formErrorHandler("INVALID_EMAIL");
-        }
         $user_info['comments'] = dataValidator($_POST["comments"]);
+
+        $occupation = dataValidator($_POST["occupation"]);
         
         $posts = [
-            new Field('first_name', 128, true),
-            new Field('last_name', 128, true),
-            new Field('phone_number', 16, true),
-            new Field('email_address', 256, true),
-            new Field('comments', 480, false)
+            new Field('first_name', 128, 1, true),
+            new Field('last_name', 128, 1, true),
+            new Field('phone_number', 16, 8, true),
+            new Field('email_address', 256, 3, true)
         ];
 
-        /* Delete the following section when the Field class is fully implemented */
-        $post_names = ["first_name", "last_name", "phone_number", "email_address", "comments"];
-        $post_char_max = [128, 128, 16, 256, 480];
-        $post_response_required = [true, true, true, true, false];
-        /* Delete this section when the Field class is fully implemented */
-
-        // Check character length of form data
-        for ($i = 0 ; $i < count($post_names) ; $i++) {
-            $dataOK = checkStringLength($user_info[$post_names[$i]], $post_char_max[$i], $post_response_required[$i]);
-            
-            if ($dataOK === false) {
-                formErrorHandler("EXCESS_CHAR");
-            }
+        // Check character length and content of form data
+        for ($i = 0 ; $i < count($posts) ; $i++) {
+            echo("The script is currently testing the " . $posts[$i]->name . " field" . $br);
+            checkStringLength($user_info[$posts[$i]->name], $posts[$i]);
+            checkData($user_info[$posts[$i]->name], $posts[$i]);
         }
-        
-        $occupation = dataValidator($_POST["occupation"]);
 
         $def_time_zone = "MST"; // Default Time Zone is MST for Arizona Time
         date_default_timezone_set($def_time_zone);
@@ -105,7 +94,6 @@
         echo "File Type: " . $imageFileType;
 
         $isCorrectFileType = strcmp($imageFileType, "pdf") === 0 || strcmp($imageFileType, "doc") === 0 || strcmp($imageFileType, "docx") === 0;
-        var_dump($isCorrectFileType);
 
         if (!$isCorrectFileType) {
             formErrorHandler("INVALID_FILE_TYPE");
@@ -179,8 +167,6 @@
             $file_tmp_name = $_FILES['resume']['tmp_name'];
             $file_size = $_FILES['resume']['size'];
             $file_type = $_FILES['resume']['type'];
-            echo "The uploaded file type is: " . $br;
-            var_dump($file_type);
             
             // Read uploaded file & base64_encode content
             $resume_handle = fopen($file_tmp_name, "r");  // set the file handle only for reading the file
@@ -240,16 +226,48 @@
         return $data;
     }
 
-    function checkStringLength (string $data, int $char_max, bool $response_required) {
-        $char_count = strlen(htmlspecialchars_decode($data));
-        var_dump($char_count);
+    function checkData ($data, $input_field) {
+        
+        switch($input_field->name) {
+            case 'first_name':
+                // This case also applies to last_name
+            case 'last_name':
+                // ctype_alpha() checks that the string only contains alphabetical characters, and generates an error if it does not.
+                if (!ctype_alpha($data)) {
+                    formErrorHandler("INVALID_INPUT");
+                }
+                break;
+            case 'phone_number':
+                $onlyNumbers = is_numeric($data);
+                if(!$onlyNumbers) {
+                    formErrorHandler("INVALID_INPUT");
+                }
+               break;
+            case 'email_address':
+                if (!filter_var($data, FILTER_VALIDATE_EMAIL)) {
+                    formErrorHandler("INVALID_EMAIL");
+                } else {
+                    return true;
+                }
+                
+        }
+    }
 
-        if ($response_required) {
+    function checkStringLength (string $data, $input_field) {
+        $char_count = strlen(htmlspecialchars_decode($data));
+
+        if ($input_field->required) {
             // The number of characters should be less than or equal to the maximum characters, and there should be at least 1 character
-            return $char_count <= $char_max && $char_count > 0;
+            if ($char_count > $input_field->char_max) {
+                formErrorHandler("EXCESS_CHAR");
+            } elseif ($char_count < $input_field->char_min) {
+                formErrorHandler("EXCESS_CHAR");
+            }
         } else {
             // Only checks that inputted characters are less than set maximum. Because response is optional, it does not check if characters are greater than zero.
-            return $char_count <= $char_max;
+            if ($char_count > $input_field->char_max) {
+                formErrorHandler("INSUFFICIENT_CHAR");
+            }
         }
     }
     
@@ -281,6 +299,16 @@
                     "feedback_message_container",
                     "feedback_message",
                     "The email address you have entered is invalid. Please try again." . $br . $footer,
+                );
+
+                exit();
+                break;
+
+            case "INVALID_INPUT":
+                generateElement(
+                    "feedback_message_container",
+                    "feedback_message",
+                    "There was an issue with your form input. Please submit a new form and try again." . $br . $footer,
                 );
 
                 exit();
@@ -322,7 +350,16 @@
                 generateElement(
                     "feedback_message_container",
                     "feedback_message",
-                    "Your form input has exceeded the maximum character limit. Please submit a new application or contact us directly with info@advocatehpc.com if you require accomodations." . $br . $footer,
+                    "Your form input has exceeded the maximum character limit. Please submit a new application or contact us directly with info@advocatehpc.com if you require accommodations." . $br . $footer,
+                );
+                exit();
+                break;
+
+            case "INSUFFICIENT_CHAR":
+                generateElement(
+                    "feedback_message_container",
+                    "feedback_message",
+                    "Your form input failed to exceed the minimum character limit. Please submit a new application or contact us directly with info@advocatehpc.com if you require accommodations." . $br . $footer,
                 );
                 exit();
                 break;

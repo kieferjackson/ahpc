@@ -32,8 +32,7 @@ function checkFormSubmission() {
         "first_name",
         "last_name",
         "phone_number",
-        "email_address",
-        "comments"
+        "email_address"
     ];
 
     let input_fields = document.getElementsByClassName("input_field");
@@ -42,8 +41,7 @@ function checkFormSubmission() {
         "first_name"    : new Field("first_name", input_fields[0], parseInt(input_fields[0].getAttribute("maxlength"))),
         "last_name"     : new Field("last_name", input_fields[1], parseInt(input_fields[1].getAttribute("maxlength"))),
         "phone_number"  : new Field("phone_number", input_fields[2], parseInt(input_fields[2].getAttribute("maxlength"))),
-        "email_address" : new Field("email_address", input_fields[4], parseInt(input_fields[4].getAttribute("maxlength"))),
-        "comments"      : new Field("comments", input_fields[5], parseInt(input_fields[5].getAttribute("maxlength")))
+        "email_address" : new Field("email_address", input_fields[4], parseInt(input_fields[4].getAttribute("maxlength")))
     }
 
     // submitOK initializes to true and only changes to false if a submitted value is determined to be invalid.
@@ -56,17 +54,16 @@ function checkFormSubmission() {
         */
         field_type = field_names[i];
         
-        if (field_type != "comments") {
-            if (field_elements[field_type].is_empty) {
-                generateFeedback (
-                    "Nothing here!", 
-                    "Please enter a value into this field", 
-                    field_type
-                );
+        if (field_elements[field_type].is_empty) {
+            generateFeedback (
+                "Nothing here!", 
+                "Please enter a value into this field", 
+                field_type
+            );
 
-                submitOK = false;
-            }
+            submitOK = false;
         }
+
         
         // If a field has been entered, then the value should be validated
         if (!field_elements[field_type].is_empty) {
@@ -104,8 +101,8 @@ function checkFormSubmission() {
     } else {
         console.log("Something is wrong with the form's input");
     }
-    return false;
-    //return submitOK;
+    
+    return submitOK;
 }
 
 function checkFormValue (form_field) {
@@ -129,7 +126,9 @@ function checkFormValue (form_field) {
             
         case 'last_name':
             onlyAlphaChars = /^[a-zA-Z]+$/.test(form_value);
-            if (!onlyAlphaChars) {
+            if (onlyAlphaChars) {
+                return true;
+            } else {
                 generateFeedback (
                     "Invalid input", 
                     "Only upper-case and lower-case characters are allowed.\nPlease enter a valid input and try again.", 
@@ -137,8 +136,7 @@ function checkFormValue (form_field) {
                 );
 
                 return false; 
-            } else {
-                return true;
+                
             }
         
         case 'phone_number':
@@ -182,9 +180,6 @@ function checkFormValue (form_field) {
             console.log(email_address);
             console.log(email_username);
             console.log(email_domain);
-            return true;
-
-        case 'comments':
             return true;
 
     }
