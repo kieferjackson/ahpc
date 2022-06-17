@@ -195,6 +195,11 @@ body {
     width: 60%;
 }
 
+#form_page {
+    margin: 0;
+    background: #fff;
+}
+
 /* Images */
 .header_img {
     display: block;

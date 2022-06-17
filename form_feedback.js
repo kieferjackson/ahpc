@@ -172,15 +172,24 @@ function checkFormValue (form_field) {
             }
 
         case 'email_address':
-            // This should check that the string would be a valid email address
+            // Set the email address
             email_address = form_field.element.value;
 
-            email_username = email_address.slice(0, email_address.indexOf('@'));
-            email_domain = email_address.split("@").pop();
-            console.log(email_address);
-            console.log(email_username);
-            console.log(email_domain);
-            return true;
+            // Verify the email address
+            email_is_valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_address);
+            console.log("email is valid: ", email_is_valid);
+            
+            if (email_is_valid) {
+                return true;
+            } else {
+                generateFeedback (
+                    "Invalid email", 
+                    "The email address you have entered is invalid.\nPlease enter a valid input and try again.", 
+                    form_field.name
+                );
+
+                return false;
+            }
 
     }
 }
