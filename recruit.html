@@ -4,10 +4,8 @@
     <title>Advocate Hospice & Palliative Care</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="website icon" href="images/icons/favicon.ico">
-    <link rel="stylesheet" href="ahpc_style.css">
-    <link rel="stylesheet" href="input_style.css">
-    <script src="form_feedback.js"></script>
+    <link rel="website icon" href="./assets/images/icons/favicon.ico">
+    <link rel="stylesheet" href="./assets/css/ahpc_style.css">
 
 </head>
 
@@ -15,7 +13,7 @@
 
 <!-- Navigation Bar with Links-->
 <div class="navbar">
-    <a href="ahpc.html" title="Advocate Homepage"><img src="images/ahpc_logo_temp.png" id="logo_icon"></a>
+    <a href="ahpc.html" title="Advocate Homepage"><img src="./assets/images/ahpc_logo_temp.png" id="logo_icon"></a>
     <a href="http://localhost/AHPC/ahpc.html#about_us">About Us</a>
     <a href="http://localhost/AHPC/ahpc.html#services">Services</a>
     <a href="#contact_info">Contact Us</a>
@@ -26,7 +24,7 @@
     <!-- Career opportunities form for employees/volunteers -->
     <div class="main">
         <div class="headings">Employment</div>
-        <div class="splash"><img src="images/temp.png" alt="Employment"></div>
+        <div class="splash"><img src="./assets/images/temp.png" alt="Employment"></div>
         <p>
             Are you a medical professional looking to join a world-class team of like-minded individuals? If so, you can submit your resume and any additional information to the following email address:
             <br> info@advocatehpc.com
@@ -36,7 +34,7 @@
         <br>
 
         <div class="headings">Volunteering</div>
-        <div class="splash"><img src="images/temp.png" alt="Volunteering"></div>
+        <div class="splash"><img src="./assets/images/temp.png" alt="Volunteering"></div>
         <p>
             We are always looking for more volunteers!
             <br> Whether you want to read to patients, assist in the office, or offer a unique skill of yours with only the compensation of knowing you have helped someone, then consider volunteering for Advocate Hospice.
@@ -45,42 +43,6 @@
         </p>
         
         <br>
-
-        <form id="employee_form" action="form_submit.php" method="POST" target="_blank" enctype="multipart/form-data" onsubmit="return checkFormSubmission()">
-            <div class="form_heading" id="top_heading">All fields marked with * are required</div>
-            <br>
-            <div id="first_name_anchor"><label for="first_name">First Name *</label><br>
-            <input type="text" name="first_name" class="input_field" maxlength="128" required></div>
-            <br>
-            <div id="last_name_anchor"><label for="last_name">Last Name *</label><br>
-            <input type="text" name="last_name" class="input_field" maxlength="128" required></div>
-            <br>
-            <div id="phone_number_anchor"><label for="number">Phone Number *</label><br>
-            <input type="number" name="phone_number" placeholder="###-###-####" maxlength="16" class="input_field" required></div>
-            <br>
-            <input type="email" name="email" class="input_field" maxlength="256" id="email_f" autocomplete="off">
-            <div id="email_address_anchor"><label for="email">Email Address *</label><br>
-            <input type="email" name="email_address" class="input_field" maxlength="256" required></div>
-            <br>
-
-            <div id="occupation_anchor"><div class="form_heading">Desired Occupation *</div>
-            <label for="volunteer">Volunteer</label>
-            <input type="radio" id="volunteer" name="occupation" value="volunteer" required>
-            <br>
-            <label for="employee">Employee</label>
-            <input type="radio" id="employee" name="occupation" value="employee"></div>
-            <br>
-            <br>
-
-            Resume or CV:
-            <br>
-            <div id="file_upload_anchor"><input type="file" name="resume" id="resume" accept=".pdf, .doc, .docx"></div>
-            <br>
-            <div id="comments_anchor"><label for="comments">Comments</label>
-            <textarea name="comments" class="input_field" rows="4" cols="50" maxlength="480"></textarea></div>
-            <br>
-            <input type="submit" name="submit" id="submit" />
-        </form>
 
         <div id="contact_info" class="tabcontent">
             <h3>Contact Information</h3>
