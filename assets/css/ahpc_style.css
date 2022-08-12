@@ -1,3 +1,12 @@
+
+:root
+{
+    --ahpc-solid: #e03428;
+    --standard-inset: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+    --small-gradient: linear-gradient(9deg, #f78212 0%, #d77d85 30%, #372c92 100%);
+    --large-gradient: linear-gradient(17deg, #f64106 0%, #f78212 10%, #d77d85 30%, #372c92 100%);
+}
+
 * {
     box-sizing: border-box;
     font-family: Helvetica, sans-serif;
@@ -21,11 +30,11 @@ body {
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
-    display: flex; /* Used to be flex */
+    display: flex;
   
     background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
-    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
-    border-top: 3px solid #e03428;
+    box-shadow: var(--standard-inset);
+    border-top: 3px solid var(--ahpc-solid);
     
     z-index: 1;
 }
@@ -57,7 +66,7 @@ body {
   /* Change color on hover */
   .navbar a:hover {
     background-color: #eee;
-    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+    box-shadow: var(--standard-inset);
 }
   
   .navbar a > img #logo_icon {
@@ -73,7 +82,7 @@ body {
     max-height: 450px;
   
     text-align: center;
-    background: linear-gradient(17deg, #f64106 0%, #f78212 10%, #d77d85 30%, #372c92 100%);
+    background: var(--large-gradient);
     color: #333;
 }
   
@@ -93,7 +102,7 @@ body {
     max-width: 100%;
     position: relative;
 
-    background: linear-gradient(9deg, #f78212 0%, #d77d85 30%, #372c92 100%);
+    background: var(--small-gradient);
     color: #fff;
 
     font-family: Helvetica, Arial, sans-serif;
@@ -113,7 +122,7 @@ body {
     max-width: 100%;
     position: relative;
 
-    border-left: 3px solid #e03428;
+    border-left: 3px solid var(--ahpc-solid);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     background: rgb(250, 250, 250);
@@ -139,7 +148,7 @@ body {
     margin: 10px 0 10px 0;
     height: 100%;
     
-    border-top: 3px solid #e03428;
+    border-top: 3px solid var(--ahpc-solid);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background: rgb(250, 250, 250);
@@ -195,11 +204,6 @@ body {
     width: 60%;
 }
 
-#form_page {
-    margin: 0;
-    background: #fff;
-}
-
 /* Images */
 .header_img {
     display: block;
@@ -239,7 +243,7 @@ body {
     text-align: center;
     text-decoration: none;
     background: linear-gradient(0deg, rgb(250, 250, 250) 0%, #fff);
-    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+    box-shadow: var(--standard-inset);
     border: 1px solid silver;
 
     /* Link Dimensions and Constraints */
@@ -259,29 +263,6 @@ body {
     color:black;
 }
 
-.form_result_message_container, .form_error_message_container {
-    margin: 20px auto 20px auto;
-    padding: 10px;
-    min-height: 200px;
-    width: 80%;
-
-    background-color: #f1f1f1;
-    border: 1px solid silver;
-    border-radius: 10px;
-}
-
-.form_result_message, .form_error_message {
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    text-align: center;
-
-    margin: 10% auto 10% auto;
-}
-
-.form_error_message {
-    color: red;
-}
-
 /* Footer */
 .footer h2 {
     padding: 20px;
@@ -291,8 +272,8 @@ body {
     font-size: x-small;
     color: #fff;
     
-    background: linear-gradient(9deg, #f78212 0%, #d77d85 30%, #372c92 100%);
-    box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+    background: var(--small-gradient);
+    box-shadow: var(--standard-inset);
 }
 
 /* Mobile styling (phones, tablets) */
