@@ -24,7 +24,7 @@ body {
 }
 
 /* Style the top navigation bar */
-.navbar {
+nav {
     overflow: auto;
 
     position: -webkit-sticky; /* Safari */
@@ -40,7 +40,7 @@ body {
 }
 
 /* Style the navigation bar links */
-.navbar a {
+nav a {
     /*color: #333; */
     color: #543d22;
     font-family: Helvetica, Arial, sans-serif;
@@ -54,7 +54,7 @@ body {
     margin-bottom: auto;
 }
   
-  .navbar img {
+nav img {
     padding: 0px;
     height: 40px;
     display: block;
@@ -64,12 +64,12 @@ body {
 }
   
   /* Change color on hover */
-  .navbar a:hover {
+nav a:hover {
     background-color: #eee;
     box-shadow: var(--standard-inset);
 }
   
-  .navbar a > img #logo_icon {
+nav a > img #logo_icon {
     height: 400px;
     width: 400px;
     display: block;
@@ -77,7 +77,7 @@ body {
     
 }
 
-.header {
+header {
     padding: 50px;
     max-height: 450px;
   
@@ -86,7 +86,7 @@ body {
     color: #333;
 }
   
-.header img {
+header img {
     max-height: 350px;
     max-width: 100%;
     object-fit:scale-down; /*Would like to change this in the future */
@@ -193,7 +193,7 @@ body {
 }
 
 /* Main column */
-.main {
+main {
     flex: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -264,7 +264,7 @@ body {
 }
 
 /* Footer */
-.footer h2 {
+footer h2 {
     padding: 20px;
 
     text-align: center;
@@ -303,7 +303,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     /* Main column */
-    .main {
+    main {
         margin-left: auto;
         margin-right: auto;
         width: 80%;
