@@ -1,10 +1,11 @@
 
 :root
 {
-    --ahpc-solid: #e03428;
+    --ahpc-solid: #28baec;
+    --ahpc-dark: #254186;
     --standard-inset: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
-    --small-gradient: linear-gradient(9deg, #f78212 0%, #d77d85 30%, #372c92 100%);
-    --large-gradient: linear-gradient(17deg, #f64106 0%, #f78212 10%, #d77d85 30%, #372c92 100%);
+    --small-gradient: linear-gradient(9deg, #28baec 0%, #254186 100%);
+    --large-gradient: linear-gradient(315deg, #28baec 0%, #254186 100%);
 }
 
 * {
@@ -111,14 +112,6 @@ header img {
     border-radius: 3px;
 }
 
-.grid_list_container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    grid-auto-rows: minmax(200px, auto);
-    margin-bottom: 50px;
-}
-
 .list_item_box {
     font-family: Helvetica, Arial, sans-serif;
     font-size: x-large;
@@ -137,11 +130,19 @@ header img {
     box-shadow: 0px 1px 5px 0px rgba(131, 131, 131, 0.6);
 }
 
+.list_item_box:hover 
+{
+    border-top: 3px solid var(--ahpc-dark);
+    box-shadow: 0px 1px 5px 0px rgba(131, 131, 131, 0.9);
+    transition: 0.3s;
+}
+
 .list_item_box_content {
     font-size: medium;
     font-weight: normal;
     text-align: left;
 
+    border-radius: 4px;
     padding: 20px;
     margin-top: 10px;
 
@@ -149,8 +150,6 @@ header img {
     box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.6);
     color: #111;
 }
-
-.list_item_wide:hover, .list_item_box:hover {box-shadow: 0px 1px 5px 0px rgba(131, 131, 131, 0.9);}
 
 .tabcontent {position: relative;}
 
