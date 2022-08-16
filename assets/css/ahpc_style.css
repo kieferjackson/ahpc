@@ -10,12 +10,11 @@
 
 * {
     box-sizing: border-box;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px;
 }
   
 p h1 h3 {
-    font-family: Helvetica, Arial, sans-serif, sans-serif;
     font-size: 16px;
 }
 
@@ -44,7 +43,6 @@ nav {
 nav a {
     /*color: #333; */
     color: #543d22;
-    font-family: Helvetica, Arial, sans-serif;
     border-right: 1px solid #ddd;
   
     padding: 14px 20px;
@@ -106,14 +104,12 @@ header img {
     background: var(--small-gradient);
     color: #fff;
 
-    font-family: Helvetica, Arial, sans-serif;
     font-size: 32px;
     font-weight: bold;
     border-radius: 3px;
 }
 
 .list_item_box {
-    font-family: Helvetica, Arial, sans-serif;
     font-size: x-large;
     font-weight: bold;
     text-align: center;
@@ -249,7 +245,6 @@ footer h2 {
     padding: 20px;
 
     text-align: center;
-    font-family: Helvetica, Arial, sans-serif;
     font-size: x-small;
     color: #fff;
     
