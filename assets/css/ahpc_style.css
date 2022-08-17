@@ -4,6 +4,7 @@
     --ahpc-solid: #28baec;
     --ahpc-dark: #254186;
     --standard-inset: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
+    --standard-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     --small-gradient: linear-gradient(9deg, #28baec 0%, #254186 100%);
     --large-gradient: linear-gradient(315deg, #28baec 0%, #254186 100%);
 }
@@ -88,7 +89,9 @@ header {
 header img {
     max-height: 350px;
     max-width: 100%;
-    object-fit:scale-down; /*Would like to change this in the future */
+    object-fit: scale-down; /*Would like to change this in the future */
+    border-radius: 10px;
+    box-shadow: var(--standard-box-shadow);
 }
 
 .headings {
@@ -130,6 +133,7 @@ header img {
 {
     border-top: 3px solid var(--ahpc-dark);
     box-shadow: 0px 1px 5px 0px rgba(131, 131, 131, 0.9);
+    transform: scale(1.006);
     transition: 0.3s;
 }
 
@@ -165,8 +169,7 @@ header img {
     display: block;
     width: 100%;
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
 }
 
 /* Main column */
@@ -176,7 +179,7 @@ main {
     margin-right: auto;
     background-color: white;
     padding: 50px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: var(--standard-box-shadow);
 
     width: 60%;
 }
@@ -204,7 +207,7 @@ main {
 
     background-color: #f1f1f1;
     padding: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: var(--standard-box-shadow);
 }
 
 /* Links */
@@ -245,10 +248,11 @@ footer h2 {
     padding: 20px;
 
     text-align: center;
+    font-weight: bold;
     font-size: x-small;
     color: #fff;
     
-    background: var(--small-gradient);
+    background: var(--large-gradient);
     box-shadow: var(--standard-inset);
 }
 
