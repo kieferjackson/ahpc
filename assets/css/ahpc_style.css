@@ -167,8 +167,8 @@ header img {
   
 .splash img {
     display: block;
-    width: 100%;
-    max-width: 1000px;
+    max-width: 100%;
+    max-height: 400px;
     margin: 10px auto;
 }
 
