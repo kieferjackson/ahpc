@@ -1,0 +1,24 @@
+
+@import './ahpc_style.css';
+
+main { min-height: 50vh; }
+
+.testimonial
+{
+    padding: 20px;
+    border-radius: 4px;
+    background-color: rgb(246, 251, 255);
+    box-shadow: var(--standard-inset);
+}
+
+.testimonial p
+{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.testimonial cite
+{
+    color: var(--ahpc-solid);
+    margin-top: 0 10px;
+}
