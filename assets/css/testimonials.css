@@ -1,20 +1,40 @@
 
 @import './ahpc_style.css';
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap');
 
 main { min-height: 50vh; }
 
 .testimonial
 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     padding: 20px;
     border-radius: 4px;
     background-color: rgb(246, 251, 255);
     box-shadow: var(--standard-inset);
+    margin-bottom: 10px;
+}
+
+.testimonial_title
+{
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', Times, serif;
+    font-size: larger;
+    margin: 15px 0;
 }
 
 .testimonial p
 {
     margin: 0;
     margin-bottom: 10px;
+}
+
+.testimonial_citation
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .testimonial cite
