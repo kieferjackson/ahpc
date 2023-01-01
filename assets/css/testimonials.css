@@ -2,7 +2,7 @@
 @import './ahpc_style.css';
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap');
 
-main { min-height: 50vh; }
+main { min-height: 90vh; }
 
 .testimonial
 {

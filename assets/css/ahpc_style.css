@@ -172,6 +172,22 @@ header img {
     margin: 10px auto;
 }
 
+.vertical_splash {
+    display: flex;
+    justify-content: space-around;
+}
+
+.vertical_splash img {
+    border-radius: 10px;
+    max-width: 47.5%;
+    max-height: 500px;
+}
+
+.vertical_splash p {
+    width: 47.5%;
+    font-size: 24px;
+}
+
 /* Main column */
 main {
     flex: 100%;
