@@ -172,20 +172,25 @@ header img {
     margin: 10px auto;
 }
 
-.vertical_splash {
-    display: flex;
-    justify-content: space-around;
+.tribute_section {
+    background: linear-gradient(315deg, #919191 0%, #101b36 100%);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
 }
 
-.vertical_splash img {
-    border-radius: 10px;
-    max-width: 47.5%;
-    max-height: 500px;
+.tribute_section img {
+    padding: 0;
+    box-shadow: var(--standard-box-shadow);
+    object-fit: cover; 
+    max-width: 300px;
 }
 
-.vertical_splash p {
-    width: 47.5%;
-    font-size: 24px;
+.tribute_section p, .tribute_section em { font-size: 24px }
+
+.tribute_section em { 
+    color: var(--ahpc-solid);
+    font-style: normal;
 }
 
 /* Main column */
