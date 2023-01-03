@@ -172,6 +172,27 @@ header img {
     margin: 10px auto;
 }
 
+.tribute_section {
+    background: linear-gradient(315deg, #919191 0%, #101b36 100%);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+}
+
+.tribute_section img {
+    padding: 0;
+    box-shadow: var(--standard-box-shadow);
+    object-fit: cover; 
+    max-width: 300px;
+}
+
+.tribute_section p, .tribute_section em { font-size: 24px }
+
+.tribute_section em { 
+    color: var(--ahpc-solid);
+    font-style: normal;
+}
+
 /* Main column */
 main {
     flex: 100%;
@@ -198,6 +219,7 @@ main {
 /* Footer */
 footer h2 {
     padding: 20px;
+    margin: 0;
 
     text-align: center;
     font-weight: bold;
