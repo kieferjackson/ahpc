@@ -220,9 +220,6 @@ main {
 
 /* Footer */
 footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
     font-size: 5px !important;
 
     padding: 20px;
@@ -230,6 +227,12 @@ footer {
     color: #000;
     background: var(--large-gradient);
     box-shadow: var(--standard-inset);
+}
+
+.footer_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .footer_column {
@@ -249,6 +252,16 @@ footer {
 
 footer h3 {
     color: var(--ahpc-dark);
+    font-size: 20px;
+}
+
+/* Overriding Bootstrap styling for given elements */
+ul.footer_list > li > a,
+.half_column address,
+.half_column address > ul.footer_list > li,
+.footer_center p,
+.footer_center p > a {
+    font-size: 15px;
 }
 
 footer .homepage_link,
@@ -289,6 +302,12 @@ ul.footer_list {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.footer_center {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 /* Mobile styling (phones, tablets) */
