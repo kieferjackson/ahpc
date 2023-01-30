@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create question prompt container, containing its number and prompt text
         const question_prompt = createDivClass('question_prompt');
-        const question_number = createDivClass('question_prompt');
+        const question_number = createDivClass('question_number');
         question_number.innerText = `Question ${QUESTION_NUMBER}`;
         const question_text = createParagraphClass('question_text');
         question_text.innerText = `${question.prompt}`;
@@ -73,4 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         eligibility_assessment_form.appendChild(question_container);
     });
+
+    // Create and append submit button to form
+    const submit_button = document.createElement('button');
+    submit_button.className = 'submit_button';
+    submit_button.innerText = 'Submit';
+    submit_button.disabled = true;
+
+    eligibility_assessment_form.appendChild(submit_button);
 })
