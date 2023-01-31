@@ -24,8 +24,8 @@ class Question
     constructor(prompt, terms = [], responses = DEFAULT_RESPONSES)
     {
         this.prompt = prompt;
-        this.responses = responses;
         this.terms = terms;
+        this.responses = responses;
     }
 }
 

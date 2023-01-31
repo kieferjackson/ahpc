@@ -41,6 +41,59 @@ document.addEventListener('DOMContentLoaded', () => {
         return label;
     }
 
+    function generateQuestionText(question_data)
+    {
+        const { prompt, terms } = question_data;
+
+        const base_container = createParagraphClass('question_text');
+        // Stores the `innerHTML` fragments so that they can later be combined
+        let prompt_fragments = [];
+
+        // Check if there are any terms to define, and generate their tooltip if so
+        if (terms.length > 0)
+        {
+            // Tracks where the start of the prompt to overwrite for the term definitions
+            let promptStart = 0;
+
+            terms.forEach(({ term, definition }, term_index, term_list) => {
+                const term_loc = prompt.search(term);
+                const prior_text = prompt.slice(promptStart, term_loc);
+                promptStart = term_loc + term.length;
+                
+                const term_tooltip = 
+                `
+                    <span aria-describedby="${term}-definition" aria-label="${term}" class="term_tooltip">
+                        ${term}
+                        <span id="${term}-definition" class="tooltip_text">
+                            ${definition}
+                        </span>
+                    </span>
+                `;
+
+                // Check if there are no more terms; if there are none left, return the remaining prompt string
+                const endString = term_index === term_list.length - 1 
+                    ? prompt.slice(promptStart, prompt.length)
+                    : '';
+
+                // Add this fragment to the list
+                prompt_fragments.push(prior_text + term_tooltip + endString);
+            });
+
+            const term_tooltipsInnerHTML = prompt_fragments.reduce((termInnerHTML, prompt_fragment) => {
+                return termInnerHTML += prompt_fragment;
+            }, '');
+            
+            base_container.innerHTML = term_tooltipsInnerHTML;
+            return base_container;
+        }
+        else
+        {
+            // There are no terms to define, therefore the prompt is sufficient
+            base_container.innerText = prompt;
+            return base_container;
+        }
+    }
+
     assessment_questions.forEach((question, q_index) => {
         const QUESTION_NUMBER = q_index + 1;
         const question_container = createDivClass('question_container');
@@ -49,8 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const question_prompt = createDivClass('question_prompt');
         const question_number = createDivClass('question_number');
         question_number.innerText = `Question ${QUESTION_NUMBER}`;
-        const question_text = createParagraphClass('question_text');
-        question_text.innerText = `${question.prompt}`;
+        
+        // Generate question text, including term definitions if applicable
+        const question_text = generateQuestionText(question);
+        
         // Append question number and text to prompt container
         question_prompt.append(question_number, question_text);
 
