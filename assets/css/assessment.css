@@ -1,5 +1,7 @@
 
 @import './ahpc_style.css';
+/* Importing the Quicksand font thought the Google Font API */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 :root {
     --small-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -45,24 +47,51 @@
     color: var(--ahpc-solid);
 }
 
+.term_tooltip:after {
+    content: '*';
+    margin-left: -0.1em
+}
+
+.tooltip_text:before {
+    content: 'Definition';
+
+    display: block;
+    width: fit-content;
+    margin-bottom: 0.3em;
+
+    font-weight: bold;
+    color: var(--ahpc-dark);
+    border-bottom: 1px solid var(--ahpc-dark);
+}
+
 .term_tooltip .tooltip_text {
     --tooltip-width: 24ch;
     --tooltip-midpoint: calc(var(--tooltip-width) / 2);
     --tooltip-spacing: 0.5em;
 
+    visibility: hidden;
+
+    /* Text Styling */
     text-align: justify;
     font-size: 15px;
+    font-family: 'Quicksand', "Montserrat", sans-serif;
+    font-style: normal;
+    font-weight: normal;
 
-    visibility: hidden;
+    /* Ornamental Styling */
     background-color: #fff;
     color: #000;
     box-shadow: var(--small-box-shadow);
-    padding: var(--tooltip-spacing) calc(var(--tooltip-spacing) * 2);
+    padding: var(--tooltip-spacing) calc(var(--tooltip-spacing) * 2) calc(var(--tooltip-spacing) * 2);
     margin-bottom: var(--tooltip-spacing);
-    border: 1px solid #f1f1f1;
-    border-radius: var(--tooltip-spacing);
+    --default-border: 1px solid #f1f1f1;
+    border-top: var(--default-border);
+    border-left: var(--default-border);
+    border-right: var(--default-border);
+    border-radius: var(--tooltip-spacing) var(--tooltip-spacing) 0 0;
+    border-bottom: 2px solid var(--ahpc-solid);
 
-    /* Positioning */
+    /* Positioning & Sizing */
     width: var(--tooltip-width);
     bottom: 100%;
     left: calc(50% - var(--tooltip-midpoint));

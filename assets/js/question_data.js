@@ -15,7 +15,7 @@ const term_definitions = {}
 // Set terms and their definitions, where key value is the term itself
 term_definitions['aspiration'] = new Term('aspiration', 'Commonly, when food, drink, or any foreign object are accidentally inhaled into the lungs.');
 term_definitions['abdomen'] = new Term('abdomen', 'The belly region, including: the stomach, intestines, liver, and pancreas.');
-term_definitions['weakness'] = new Term('weakness', 'The sensation of physical weakness, often expressed by a loss of strength, mental and/or physical exhaustion.');
+term_definitions['weakness'] = new Term('weakness', 'The sensation of physical weakness, often expressed by a loss of strength; mental and/or physical exhaustion.');
 term_definitions['fatigue'] = new Term('fatigue', 'Result of physical or mental exertion, where symptoms do not fully improve with rest.');
 term_definitions['unsteady gait'] = new Term('unsteady gait', 'Uncoordinated, unsteady, or abnormal movement while walking.');
 
