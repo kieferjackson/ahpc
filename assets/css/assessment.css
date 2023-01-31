@@ -1,6 +1,10 @@
 
 @import './ahpc_style.css';
 
+:root {
+    --small-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
 .question_container {
     margin-bottom: 20px;
 }
@@ -32,5 +36,38 @@
 }
 
 .submit_button:hover {
-    box-shadow: var(--standard-box-shadow);
+    box-shadow: var(--small-box-shadow);
 }
+
+/* Term Tooltip Styling */
+.term_tooltip {
+    position: relative;
+    color: var(--ahpc-solid);
+}
+
+.term_tooltip .tooltip_text {
+    --tooltip-width: 24ch;
+    --tooltip-midpoint: calc(var(--tooltip-width) / 2);
+    --tooltip-spacing: 0.5em;
+
+    text-align: justify;
+    font-size: 15px;
+
+    visibility: hidden;
+    background-color: #fff;
+    color: #000;
+    box-shadow: var(--small-box-shadow);
+    padding: var(--tooltip-spacing) calc(var(--tooltip-spacing) * 2);
+    margin-bottom: var(--tooltip-spacing);
+    border: 1px solid #f1f1f1;
+    border-radius: var(--tooltip-spacing);
+
+    /* Positioning */
+    width: var(--tooltip-width);
+    bottom: 100%;
+    left: calc(50% - var(--tooltip-midpoint));
+    position: absolute;
+    z-index: 1;
+}
+
+.term_tooltip:hover .tooltip_text { visibility: visible }
