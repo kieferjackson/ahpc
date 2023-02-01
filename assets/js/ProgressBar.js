@@ -43,7 +43,22 @@ class ProgressBar
     updateProgressBar(num_complete_responses, num_total_responses)
     {
         const PERCENTAGE_COMPLETE = (num_complete_responses / num_total_responses) * 100;
-        this.progress_bar.setAttribute('width', `${PERCENTAGE_COMPLETE}%`)
+        const starting_scale = (num_complete_responses - 1) / num_complete_responses
+
+        const progressBarExpanding =
+        [
+            { transform: `scale(${starting_scale}, 1)` },
+            { transform: `scale(1, 1)` }
+        ];
+
+        const progressBarTiming =
+        {
+            duration: 128,
+            iterations: 1
+        };
+        
+        this.progress_bar.setAttribute('width', `${PERCENTAGE_COMPLETE}%`);
+        this.progress_bar.animate(progressBarExpanding, progressBarTiming);
     }
 }
 
