@@ -7,6 +7,7 @@
 
     <!-- JavaScript Files -->
     <script type="text/javascript" src="./assets/js/question_data.js"></script>
+    <script type="text/javascript" src="./assets/js/ProgressBar.js"></script>
     <script type="text/javascript" src="./assets/js/assessment.js"></script>
     <!-- Bootstrap v5.2.0 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -90,6 +91,14 @@
             <button type="submit" class="submit_button" disabled>Submit</button>
             <!-- ^^^ This static form is only for testing ^^^ -->
         </form>
+
+        <!-- Assessment Progress Display -->
+        <div id="progress_display_container">
+            <!-- Displays progress bar rendered through JavaScript -->
+            <div id="progress_bar_container"></div>
+            <!-- Displays progress out of total questions (e.g. '3/11') -->
+            <div id="progress_count_container"></div>
+        </div>
     </main>
 
     <footer>

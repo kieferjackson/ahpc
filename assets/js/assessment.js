@@ -1,6 +1,22 @@
 
+// Progress Bar ID Attributes
+const PROGRESS_BAR_IDS = 
+{ 
+    container: 'progress_bar_container',
+    svg: 'progress_bar_svg',
+    rect: 'progress_bar'
+};
+
+// Holds the Progress Bar Element generated with the ProgressBar class
+let PROGRESS_BAR;
+
 document.addEventListener('DOMContentLoaded', () => {
     const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
+
+    // Generate Progress Bar to indicate responses given
+    const { container, svg, rect } = PROGRESS_BAR_IDS;
+    PROGRESS_BAR = new ProgressBar(container, svg, rect);
+
     function createDivClass(class_name) 
     {
         const div = document.createElement('div');
@@ -82,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const term_tooltipsInnerHTML = prompt_fragments.reduce((termInnerHTML, prompt_fragment) => {
                 return termInnerHTML += prompt_fragment;
             }, '');
-            
+
             base_container.innerHTML = term_tooltipsInnerHTML;
             return base_container;
         }
@@ -136,4 +152,17 @@ document.addEventListener('DOMContentLoaded', () => {
     submit_button.disabled = true;
 
     eligibility_assessment_form.appendChild(submit_button);
-})
+});
+
+// Check for input fields selected, and update Progress Bar if necessary
+document.addEventListener('change', () => {
+    // Select assessment input fields by class name
+    const ASSESSMENT_FIELDS = document.querySelectorAll('.option_input');
+    const response_inputs = Array.from(ASSESSMENT_FIELDS);
+    
+    const CHECKED_RESPONSES = response_inputs.filter(response_input => response_input.checked);
+    const num_complete_responses = CHECKED_RESPONSES.length;
+    const num_total_responses = assessment_questions.length;
+    
+    PROGRESS_BAR.updateProgressBar(num_complete_responses, num_total_responses);
+});

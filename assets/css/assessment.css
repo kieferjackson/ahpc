@@ -65,14 +65,14 @@
 }
 
 .term_tooltip .tooltip_text {
-    --tooltip-width: 24ch;
+    --tooltip-width: 32ch;
     --tooltip-midpoint: calc(var(--tooltip-width) / 2);
     --tooltip-spacing: 0.5em;
 
     visibility: hidden;
 
     /* Text Styling */
-    text-align: justify;
+    text-align: left;
     font-size: 15px;
     font-family: 'Quicksand', "Montserrat", sans-serif;
     font-style: normal;
@@ -92,6 +92,7 @@
     border-bottom: 2px solid var(--ahpc-solid);
 
     /* Positioning & Sizing */
+    min-width: fit-content;
     width: var(--tooltip-width);
     bottom: 100%;
     left: calc(50% - var(--tooltip-midpoint));
@@ -100,3 +101,16 @@
 }
 
 .term_tooltip:hover .tooltip_text { visibility: visible }
+
+/* Progress Display Styling */
+#progress_display_container {
+    background-color: yellowgreen;
+}
+
+#progress_bar_svg {
+    background-color: var(--ahpc-dark);
+}
+
+#progress_bar {
+    fill: var(--ahpc-solid);
+}
