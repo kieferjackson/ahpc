@@ -7,22 +7,49 @@ const PROGRESS_BAR_IDS =
     rect: 'progress_bar'
 };
 
-// Holds the Progress Bar Element generated with the ProgressBar class
-let PROGRESS_BAR;
-// Holds the Progress Count Element once all DOM content is loaded
-let PROGRESS_COUNT;
 // Tracks how many fields have been filled, starting from 0
 var fields_filled = 0;
 
+// Tracks and updates Progress Display as needed; initial values set upon 'DOMContentLoaded'
+const PROGRESS_DISPLAY = {};
+
 document.addEventListener('DOMContentLoaded', () => {
     const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
+    generateProgressDisplay('progress_display_container');
 
-    // Generate Progress Bar to indicate responses given
-    const { container, svg, rect } = PROGRESS_BAR_IDS;
-    PROGRESS_BAR = new ProgressBar(container, svg, rect);
+    function generateProgressDisplay(progress_display_container_id)
+    {
+        const progress_display_container = document.querySelector(`#${progress_display_container_id}`);
 
-    // Select Progress Count container to display number completed out of total (e.g. 3/11)
-    PROGRESS_COUNT = document.querySelector('#progress_count_container');
+        // Generate Progress Heading
+        const progress_heading = document.createElement('h4');
+        progress_heading.setAttribute('class', 'progress_heading');
+        progress_heading.innerText = 'Assessment Progress';
+
+        // Generate Progress Bar to visually indicate percentage of responses given
+        const { container, svg, rect } = PROGRESS_BAR_IDS;
+        PROGRESS_DISPLAY.bar = new ProgressBar(container, svg, rect);
+
+        // Generate Progress Count to show number completed out of total
+        const PROGRESS_COUNT = createDivClass('progress_count_container');
+        PROGRESS_COUNT.innerText = `0/${assessment_questions.length}`;
+        PROGRESS_DISPLAY.count = PROGRESS_COUNT;
+
+        // Generate Progress Indicators Container to hold Progress Bar and Progress Count
+        const progress_indicators_container = createDivClass('progress_indicators_container');
+        progress_indicators_container.append(PROGRESS_DISPLAY.bar.container, PROGRESS_DISPLAY.count);
+
+        // Generate Tooltip Notice
+        const tooltip_notice = document.createElement('small');
+        tooltip_notice.setAttribute('class', 'tooltip_notice');
+        tooltip_notice.innerHTML = `Hover or tap on <em class="tooltip_notice highlight">blue text</em> for definitions of the word or phrase highlighted.`;
+
+        progress_display_container.append(
+            progress_heading, 
+            progress_indicators_container,
+            tooltip_notice
+        );
+    }
 
     function createDivClass(class_name) 
     {
@@ -168,19 +195,19 @@ document.addEventListener('change', () => {
     {
         fields_filled = num_complete_responses;
 
-        PROGRESS_BAR.updateProgressBar(num_complete_responses, num_total_responses);
-        PROGRESS_COUNT.innerText = `${num_complete_responses}/${num_total_responses}`;
+        PROGRESS_DISPLAY.bar.updateProgressBar(num_complete_responses, num_total_responses);
+        PROGRESS_DISPLAY.count.innerText = `${num_complete_responses}/${num_total_responses}`;
     }
     
     // Check if all fields have been filled
     if (fields_filled === num_total_responses)
     {
         // Get Progress Display Container before removing its children
-        const progress_display_container = PROGRESS_BAR.container.parentElement;
+        const progress_display_container = PROGRESS_DISPLAY.bar.container.parentElement;
 
         // Remove Progress Bar and Progress Count
-        PROGRESS_BAR.container.remove();
-        PROGRESS_COUNT.remove();
+        PROGRESS_DISPLAY.bar.container.remove();
+        PROGRESS_DISPLAY.count.remove();
 
         // Create and append submit button to Progress Display Container
         const submit_button = document.createElement('button')

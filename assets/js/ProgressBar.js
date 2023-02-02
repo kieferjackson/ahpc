@@ -10,14 +10,8 @@ class ProgressBar
         checkIDsType(IDs);
         
         // Check if container with given container id exists
-        try {
-            this.container = document.querySelector(`#${container_id}`);
-            if (!this.container)
-                throw new Error(`No container with id (${container_id}) exists.`);
-        }
-        catch (error) {
-            console.error(error);
-        }
+        this.container = document.createElement('div');
+        this.container.setAttribute('id', container_id);
         
         const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
         this.svg = document.createElementNS(SVG_NAMESPACE, 'svg');
