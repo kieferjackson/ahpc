@@ -14,6 +14,15 @@ var fields_filled = 0;
 const PROGRESS_DISPLAY = {};
 
 document.addEventListener('DOMContentLoaded', () => {
+    const start_button = document.querySelector('#eligibility_start_button');
+    start_button.addEventListener('click', (event) => {
+        // Remove Start Button from DOM, then generate form fields
+        event.target.remove();
+        generateEligibilityAssessment(event);
+    });
+});
+
+function generateEligibilityAssessment() {
     const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
     generateProgressDisplay('progress_display_container');
 
@@ -178,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         eligibility_assessment_form.appendChild(question_container);
     });
-});
+}
 
 // Check for input fields selected, and update Progress Bar if necessary
 document.addEventListener('change', () => {

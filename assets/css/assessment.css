@@ -6,12 +6,69 @@
 :root {
     --small-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
     --max-form-width: 1024px;
+    --start-button-scale: 0.0075;
 }
 
 /* Form Styling */
 #eligibility_assessment_form {
     max-width: calc(var(--max-form-width) * 0.8);
     margin: 0 auto 20px;
+}
+
+.start_button {
+    --sb-color: var(--ahpc-solid);
+
+    display: block;
+    padding: 0.5em 1em;
+    margin: 0 auto;
+
+    color: var(--sb-color);
+    font-weight: bold;
+    font-size: xx-large;
+    -webkit-text-stroke: 0.1px rgba(0, 0, 0, 0.562);
+    -webkit-text-fill-color: var(--sb-color);
+    text-shadow: -1px 1px rgba(0, 0, 0, 0.377);
+
+    box-shadow: var(--small-box-shadow);
+    background-color: #fff;
+    border-radius: 0.35em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--sb-color);
+}
+
+.start_button:hover, 
+.start_button:focus {
+    --sbhf-color: var(--ahpc-dark);
+
+    color: var(--sbhf-color);
+    -webkit-text-stroke: 0.1px rgba(0, 0, 0, 0.562);
+    -webkit-text-fill-color: var(--sbhf-color);
+    text-shadow: -1px 1px rgba(0, 0, 0, 0.377);
+
+    --hover-focus-scale: calc(1 + var(--start-button-scale));
+    transform: scale(var(--hover-focus-scale));
+    box-shadow: var(--standard-box-shadow);
+    border-color: var(--sbhf-color);
+    
+    transition: 300ms ease-in;
+}
+
+.start_button:active {
+    --sba-color: #333;
+
+    color: var(--sba-color);
+    -webkit-text-stroke: 0.1px rgba(0, 0, 0, 0.562);
+    -webkit-text-fill-color: var(--sba-color);
+    text-shadow: -1px 1px rgba(0, 0, 0, 0.377);
+
+    --active-scale-offset: calc(var(--start-button-scale) * 2);
+    --active-scale: calc(1 - var(--active-scale-offset));
+    transform: scale(var(--active-scale));
+    box-shadow: var(--standard-inset);
+    border-color: var(--sba-color);
+
+    transition: none;
 }
 
 .question_container {
@@ -78,7 +135,6 @@
     color: #000;
     box-shadow: var(--small-box-shadow);
     padding: var(--tooltip-spacing) calc(var(--tooltip-spacing) * 2) calc(var(--tooltip-spacing) * 2);
-    margin-bottom: var(--tooltip-spacing);
 
     /* Border Styling */
     --default-border: 1px solid #f1f1f1;
@@ -97,6 +153,7 @@
     z-index: 1;
 }
 
+.term_tooltip .tooltip_text:hover { visibility: visible }
 .term_tooltip:hover .tooltip_text { visibility: visible }
 
 /* Progress Display Styling */
