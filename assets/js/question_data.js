@@ -31,15 +31,7 @@ class Question
 
 const assessment_questions = 
 [
-    new Question(`Have you recently suffered from infection requiring antibiotics or resulting in hospitalization?`,
-        [],
-        [
-            'Yes, within the last month',
-            'Yes, within the last three months',
-            'No',
-            `I don't know`
-        ]
-    ),
+    new Question(`Have you recently suffered from infection requiring antibiotics or resulting in hospitalization within the last three months?`),
     new Question(`Have you suffered unintentional weight loss within the last six months to a year?`),
     new Question(`Do you have trouble swallowing, causing aspiration or decreased food intake?`, [term_definitions['aspiration']]),
     new Question(`Are you experiencing swelling of the abdomen or limbs?`, [term_definitions['abdomen']]),

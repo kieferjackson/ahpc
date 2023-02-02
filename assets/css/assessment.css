@@ -5,11 +5,17 @@
 
 :root {
     --small-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    --max-form-width: 1024px;
 }
 
 /* Form Styling */
+#eligibility_assessment_form {
+    max-width: calc(var(--max-form-width) * 0.8);
+    margin: 0 auto 20px;
+}
+
 .question_container {
-    margin-bottom: 20px;
+    margin-bottom: 2.2em;
 }
 
 .question_number {
@@ -35,12 +41,13 @@
     color: var(--ahpc-solid);
 }
 
-.term_tooltip:after {
+.term_tooltip::after,
+.tooltip_notice.highlight::after {
     content: '*';
     margin-left: -0.1em
 }
 
-.tooltip_text:before {
+.tooltip_text::before {
     content: 'Definition';
 
     display: block;
@@ -100,21 +107,47 @@
     position: sticky;
     bottom: 1em;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
   
     background-color: var(--white-transparent);
     box-shadow: var(--standard-inset);
     padding: 1em;
     border-radius: 1em;
 
-    max-width: 1024px;
+    max-width: var(--max-form-width);
     margin: 0 auto;
     
     z-index: 1;
 }
 
+.progress_heading {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--ahpc-dark);
+
+    padding: 0.2em;
+    width: fit-content;
+    border-bottom: 2px solid var(--ahpc-dark);
+    margin-bottom: 0.2em;
+}
+
+.tooltip_notice {
+    font-size: 16px;
+    margin-top: 0.3em;
+}
+
+.tooltip_notice.highlight {
+    color: var(--ahpc-solid);
+    margin: 0 0.1em;
+}
+
+.progress_indicators_container {
+    display: flex;
+    justify-content: space-between;
+}
+
 #progress_bar_container {
-    width: 80%;
+    width: 90%;
     height: 1em;
 }
 
@@ -126,6 +159,10 @@
 
 #progress_bar {
     fill: var(--ahpc-solid);
+}
+
+#progress_count_container {
+    align-self: center;
 }
 
 /* Submit Button */
