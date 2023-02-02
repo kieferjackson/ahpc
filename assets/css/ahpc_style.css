@@ -3,6 +3,7 @@
 {
     --ahpc-solid: #28baec;
     --ahpc-dark: #254186;
+    --white-transparent: rgba(255, 255, 255, 0.87);
     --standard-inset: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
     --standard-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     --small-gradient: linear-gradient(9deg, #28baec 0%, #254186 100%);
@@ -239,7 +240,7 @@ footer {
     align-items: stretch;
     padding: 15px;
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.87);
+    background-color: var(--white-transparent);
     box-shadow: var(--standard-inset);
 }
 

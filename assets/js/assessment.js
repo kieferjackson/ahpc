@@ -9,6 +9,10 @@ const PROGRESS_BAR_IDS =
 
 // Holds the Progress Bar Element generated with the ProgressBar class
 let PROGRESS_BAR;
+// Holds the Progress Count Element once all DOM content is loaded
+let PROGRESS_COUNT;
+// Tracks how many fields have been filled, starting from 0
+var fields_filled = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
@@ -16,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generate Progress Bar to indicate responses given
     const { container, svg, rect } = PROGRESS_BAR_IDS;
     PROGRESS_BAR = new ProgressBar(container, svg, rect);
+
+    // Select Progress Count container to display number completed out of total (e.g. 3/11)
+    PROGRESS_COUNT = document.querySelector('#progress_count_container');
 
     function createDivClass(class_name) 
     {
@@ -144,14 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         eligibility_assessment_form.appendChild(question_container);
     });
-
-    // Create and append submit button to form
-    const submit_button = document.createElement('button');
-    submit_button.className = 'submit_button';
-    submit_button.innerText = 'Submit';
-    submit_button.disabled = true;
-
-    eligibility_assessment_form.appendChild(submit_button);
 });
 
 // Check for input fields selected, and update Progress Bar if necessary
@@ -163,6 +162,32 @@ document.addEventListener('change', () => {
     const CHECKED_RESPONSES = response_inputs.filter(response_input => response_input.checked);
     const num_complete_responses = CHECKED_RESPONSES.length;
     const num_total_responses = assessment_questions.length;
+
+    // Check if a new field has been selected, and update Progress Display if so
+    if (fields_filled < num_complete_responses)
+    {
+        fields_filled = num_complete_responses;
+
+        PROGRESS_BAR.updateProgressBar(num_complete_responses, num_total_responses);
+        PROGRESS_COUNT.innerText = `${num_complete_responses}/${num_total_responses}`;
+    }
     
-    PROGRESS_BAR.updateProgressBar(num_complete_responses, num_total_responses);
+    // Check if all fields have been filled
+    if (fields_filled === num_total_responses)
+    {
+        // Get Progress Display Container before removing its children
+        const progress_display_container = PROGRESS_BAR.container.parentElement;
+
+        // Remove Progress Bar and Progress Count
+        PROGRESS_BAR.container.remove();
+        PROGRESS_COUNT.remove();
+
+        // Create and append submit button to Progress Display Container
+        const submit_button = document.createElement('button')
+        submit_button.setAttribute('type', 'button');
+        submit_button.setAttribute('class', 'submit_button')
+        submit_button.innerText = 'Submit';
+        
+        progress_display_container.appendChild(submit_button);
+    }
 });

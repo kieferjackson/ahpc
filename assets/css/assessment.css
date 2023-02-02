@@ -7,6 +7,7 @@
     --small-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
+/* Form Styling */
 .question_container {
     margin-bottom: 20px;
 }
@@ -26,19 +27,6 @@
 
 .option_label {
     color: #333;
-}
-
-.submit_button {
-    background: var(--ahpc-solid);
-    color: #fff;
-    font-weight: bold;
-    padding: 0.3em 1em;
-    border: 1px solid var(--ahpc-dark);
-    border-radius: .2em;
-}
-
-.submit_button:hover {
-    box-shadow: var(--small-box-shadow);
 }
 
 /* Term Tooltip Styling */
@@ -84,6 +72,8 @@
     box-shadow: var(--small-box-shadow);
     padding: var(--tooltip-spacing) calc(var(--tooltip-spacing) * 2) calc(var(--tooltip-spacing) * 2);
     margin-bottom: var(--tooltip-spacing);
+
+    /* Border Styling */
     --default-border: 1px solid #f1f1f1;
     border-top: var(--default-border);
     border-left: var(--default-border);
@@ -104,13 +94,61 @@
 
 /* Progress Display Styling */
 #progress_display_container {
-    background-color: yellowgreen;
+    overflow: auto;
+
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    bottom: 1em;
+    display: flex;
+    justify-content: space-evenly;
+  
+    background-color: var(--white-transparent);
+    box-shadow: var(--standard-inset);
+    padding: 1em;
+    border-radius: 1em;
+
+    max-width: 1024px;
+    margin: 0 auto;
+    
+    z-index: 1;
+}
+
+#progress_bar_container {
+    width: 80%;
+    height: 1em;
 }
 
 #progress_bar_svg {
-    background-color: var(--ahpc-dark);
+    background: var(--large-gradient);
+    box-shadow: inset 0px 1px 5px 0px rgba(221, 221, 221, 0.4);
+    border-radius: 0.5em;
 }
 
 #progress_bar {
     fill: var(--ahpc-solid);
+}
+
+/* Submit Button */
+.submit_button {
+    background: var(--ahpc-solid);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.3em 1em;
+    border: 1px solid var(--ahpc-dark);
+    border-radius: .2em;
+}
+
+.submit_button:hover {
+    box-shadow: var(--small-box-shadow);
+}
+
+/* Mobile styling (phones, tablets) */
+@media screen
+and (min-device-width: 320px)
+and (max-device-width: 960px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .term_tooltip .tooltip_text {
+        left: calc(50%);
+        width: 16ch;
+    }
 }
