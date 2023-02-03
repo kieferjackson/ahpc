@@ -209,9 +209,10 @@
 }
 
 #progress_bar_svg {
-    background: var(--large-gradient);
-    box-shadow: inset 0px 1px 5px 0px rgba(221, 221, 221, 0.4);
+    background: #f1f1f1;
+    box-shadow: inset 0px 3px 7px 0px rgba(221, 221, 221, 0.7);
     border-radius: 0.5em;
+    border: 1px solid #e0e0e0;
 }
 
 #progress_bar {
@@ -242,7 +243,8 @@ and (min-device-width: 320px)
 and (max-device-width: 960px)
 and (-webkit-min-device-pixel-ratio: 2) {
     .term_tooltip .tooltip_text {
-        left: calc(50%);
-        width: 16ch;
+        left: -16%;
+        width: fit-content;
+        max-width: 16ch;
     }
 }

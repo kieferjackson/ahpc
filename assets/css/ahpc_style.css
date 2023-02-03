@@ -3,6 +3,7 @@
 {
     --ahpc-solid: #28baec;
     --ahpc-dark: #254186;
+    --ahpc-indigo: #2a58ca;
     --white-transparent: rgba(255, 255, 255, 0.87);
     --standard-inset: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.4);
     --standard-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -18,8 +19,12 @@
     font-size: 20px;
 }
   
-p h1 h3 {
-    font-size: 16px;
+a {
+    color: var(--ahpc-dark);
+}
+
+a:hover {
+    color: var(--ahpc-indigo);
 }
 
 body {
@@ -160,8 +165,22 @@ header img {
     top: -90px;
 }
 
-.contact_section {text-align: center;}
+/* Contact Section */
+.contact_section { text-align: center }
 
+.address_contact, .phone_contact { 
+    text-decoration: none;
+    color: #000;
+}
+
+.map_view {
+    width: 100%;
+    height: 450px;
+    border: 0;
+    border-radius: 10px;
+}
+
+/* Splash Section */
 .splash {
     background: #f1f1f1;
     box-shadow: inset 0px 1px 5px 0px rgba(131, 131, 131, 0.6);
@@ -221,8 +240,6 @@ main {
 
 /* Footer */
 footer {
-    font-size: 5px !important;
-
     padding: 20px;
     margin: 0;
     color: #000;
@@ -257,11 +274,11 @@ footer h3 {
 }
 
 /* Overriding Bootstrap styling for given elements */
-ul.footer_list > li > a,
-.half_column address,
-.half_column address > ul.footer_list > li,
-.footer_center p,
-.footer_center p > a {
+.footer_list > li > a,
+.half_column > address,
+.half_column > address > ul > li,
+.footer_center > p,
+.footer_center > p > a {
     font-size: 15px;
 }
 

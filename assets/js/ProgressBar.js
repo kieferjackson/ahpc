@@ -41,8 +41,8 @@ class ProgressBar
 
         const progressBarExpanding =
         [
-            { transform: `scale(${starting_scale}, 1)` },
-            { transform: `scale(1, 1)` }
+            { transform: `scaleX(${starting_scale})` },
+            { transform: `scaleX(1)` }
         ];
 
         const progressBarTiming =
