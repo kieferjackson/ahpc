@@ -15,13 +15,31 @@ const PROGRESS_DISPLAY = {};
 
 document.addEventListener('DOMContentLoaded', () => {
     const start_button = document.querySelector('#eligibility_start_button');
-    start_button.addEventListener('click', (event) => {
-        // Remove Start Button from DOM, then generate form fields
-        event.target.remove();
-        generateEligibilityAssessment(event);
+    start_button.addEventListener('click', () => {
+        // Select and remove Form Start Container: Privacy disclosure, start button, and Terms and Conditions Checkbox
+        const form_start_container = document.querySelector('#form_start_container');
+        form_start_container.remove();
+
+        // Generate Eligibility Assessment
+        generateEligibilityAssessment();
 
         // TESTING: (debugger) Checks all fields
         //Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
+    });
+
+    // Listen for terms checkbox to be checked to enable start button
+    const terms_checkbox = document.querySelector('#terms_checkbox');
+    terms_checkbox.addEventListener('click', (event) => {
+        const agreementChecked = event.target.checked;
+        
+        if (agreementChecked) {
+            start_button.disabled = false;
+            start_button.setAttribute('title', '');
+        }
+        else {
+            start_button.disabled = true;
+            start_button.setAttribute('title', 'You must agree to the terms and conditions to begin the assessment');
+        }
     });
 });
 
@@ -179,6 +197,7 @@ function generateEligibilityAssessment() {
             const RESPONSE_NUMBER = r_index + 1;
             const input_block = createDivClass('form-check input_block');
             const response_input = createResponseInput(QUESTION_NUMBER, RESPONSE_NUMBER, response);
+            response_input.addEventListener('change', updateProgressBarFromChange);
             const response_label = createResponseLabel(QUESTION_NUMBER, RESPONSE_NUMBER, response);
             
             // Append radio input and its label to the input block container
@@ -195,7 +214,8 @@ function generateEligibilityAssessment() {
 }
 
 // Check for input fields selected, and update Progress Bar if necessary
-document.addEventListener('change', () => {
+function updateProgressBarFromChange() 
+{
     // Select assessment input fields by class name
     const ASSESSMENT_FIELDS = document.querySelectorAll('.option_input');
     const response_inputs = Array.from(ASSESSMENT_FIELDS);
@@ -315,4 +335,4 @@ document.addEventListener('change', () => {
         submit_button.animate(fadeIn, fadeInTiming);
         submit_button.animate(pulseEffect, pulseEffectTiming);
     }
-});
+}
