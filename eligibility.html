@@ -54,6 +54,19 @@
             To find out whether you or someone you know may qualify for hospice, answer the following eligibility assessment.
         </p>
 
+        <noscript>
+            <section class="noscript_error">
+                <p class="noscript_error_message">
+                    JavaScript is <em>required</em> to take the Eligibility Assessment.<br>
+                    Either enable JavaScript in your web browser, or use a web browser that supports JavaScript.
+                </p>
+                <p class="noscript_resource_direct">
+                    If you are looking for hospice eligibility information, you can visit our <a href="resources.html">
+                    resources page</a> for more information related to hospice eligibility.
+                </p>
+            </section>
+        </noscript>
+
         <form id="eligibility_assessment_form">
             <div id="form_start_container">
                 <div class="privacy_disclosure">
@@ -71,7 +84,7 @@
                     </ul>
                 </div>
                 <div class="form_start_block">
-                    <button type="button" id="eligibility_start_button" class="start_button" disabled>Begin Assessment</button>
+                    <strong class="terms_heading">Terms & Conditions</strong>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="terms_checkbox">
                         <label class="form-check-label" for="terms_checkbox">
@@ -82,6 +95,14 @@
                         </label>
                     </div>
                 </div>
+                <button 
+                    type="button" 
+                    id="eligibility_start_button" 
+                    class="start_button" 
+                    title="You must agree to the terms and conditions to begin the assessment" 
+                    disabled>
+                    Begin Assessment
+                </button>
             </div>
         </form>
 
