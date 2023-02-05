@@ -10,6 +10,7 @@
     --small-gradient: linear-gradient(9deg, #28baec 0%, #254186 100%);
     --large-gradient: linear-gradient(315deg, #28baec 0%, #254186 100%);
     
+    --mobile-main-width: 80%;
     --main-padding: 50px;
 }
 
@@ -358,7 +359,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     main {
         margin-left: auto;
         margin-right: auto;
-        width: 80%;
+        width: var(--mobile-main-width);
         padding: 0;
         padding-bottom: var(--main-padding);
         box-shadow: unset;

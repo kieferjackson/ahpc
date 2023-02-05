@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove Start Button from DOM, then generate form fields
         event.target.remove();
         generateEligibilityAssessment(event);
+
+        // TESTING: (debugger) Checks all fields
+        //Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
     });
 });
 
@@ -29,10 +32,12 @@ function generateEligibilityAssessment() {
     function generateProgressDisplay(progress_display_container_id)
     {
         const progress_display_container = document.querySelector(`#${progress_display_container_id}`);
+        // Remove Progress Display's style attribute (only contains `display: none` rule)
+        progress_display_container.removeAttribute('style');
 
         // Generate Progress Heading
         const progress_heading = document.createElement('h4');
-        progress_heading.setAttribute('class', 'progress_heading');
+        progress_heading.setAttribute('id', 'progress_heading');
         progress_heading.innerText = 'Assessment Progress';
 
         // Generate Progress Bar to visually indicate percentage of responses given
@@ -207,16 +212,20 @@ document.addEventListener('change', () => {
         PROGRESS_DISPLAY.bar.updateProgressBar(num_complete_responses, num_total_responses);
         PROGRESS_DISPLAY.count.innerText = `${num_complete_responses}/${num_total_responses}`;
     }
-    
-    // Check if all fields have been filled
-    if (fields_filled === num_total_responses)
-    {
-        // Get Progress Display Container before removing its children
-        const progress_display_container = PROGRESS_DISPLAY.bar.container.parentElement;
 
+    // Get Progress Indicators Container
+    const progress_indicators_container = PROGRESS_DISPLAY.bar.container.parentElement;
+    
+    // Check if all fields have been filled and Progress Indicators Container Exists
+    if (fields_filled === num_total_responses && progress_indicators_container)
+    {
         // Remove Progress Bar and Progress Count
         PROGRESS_DISPLAY.bar.container.remove();
         PROGRESS_DISPLAY.count.remove();
+
+        // Select and update Progress Display Heading to indicate completion
+        const progress_heading = document.querySelector('#progress_heading');
+        progress_heading.innerText = 'Assessment Complete';
 
         // Create and append submit button to Progress Display Container
         const submit_button = document.createElement('button')
@@ -224,6 +233,86 @@ document.addEventListener('change', () => {
         submit_button.setAttribute('class', 'submit_button')
         submit_button.innerText = 'Submit';
         
-        progress_display_container.appendChild(submit_button);
+        progress_indicators_container.appendChild(submit_button);
+        // Center the submit button within the Progress Indicators Container
+        progress_indicators_container.style.justifyContent = 'center';
+
+        const popIn =
+        [
+            { 
+                opacity: 0,
+                filter: `blur(0.25ch)`,
+                transform: `translateX(-${progress_heading.innerText.length}ch)` 
+            },
+            { 
+                opacity: 1,
+                filter: `blur(0)`,
+                transform: `translateX(2.5ch)` 
+            },
+            { 
+                opacity: 1,
+                filter: `blur(0.1ch)`,
+                transform: `translateX(0.1ch)` 
+            },
+            { 
+                opacity: 1,
+                filter: `blur(0)`,
+                transform: `translateX(0.5ch)` 
+            },
+            { 
+                opacity: 1,
+                transform: `translateX(${0})` 
+            }
+        ];
+
+        const fadeIn =
+        [
+            { 
+                opacity: 0,
+                filter: `blur(0.1ch)`,
+                transform: `scale(0)` 
+            },
+            { 
+                filter: `blur(0)`,
+                transform: `scale(0.7)` 
+            },
+            { 
+                opacity: 1,
+                filter: `blur(0)`,
+                transform: `scale(1)` 
+            }
+        ];
+
+        const pulseEffect =
+        { 
+            boxShadow: 
+            [
+                `0 0 2px 3px rgba(25, 203, 248, 0.11), 0 0 6px 12px rgba(25, 203, 248, 0.1)`,
+                `0 0 3px 6px rgba(25, 203, 248, 0.13), 0 0 8px 15px rgba(25, 203, 248, 0.12)`,
+                `0 0 2px 3px rgba(25, 203, 248, 0.11), 0 0 6px 12px rgba(25, 203, 248, 0.1)`
+            ]
+        }
+
+        const popInTiming = 
+        {
+            duration: 800,
+            iterations: 1
+        }
+
+        const fadeInTiming =
+        {
+            duration: 500,
+            iterations: 1
+        }
+
+        const pulseEffectTiming =
+        {
+            duration: 2000,
+            iterations: Infinity
+        }
+
+        progress_heading.animate(popIn, popInTiming);
+        submit_button.animate(fadeIn, fadeInTiming);
+        submit_button.animate(pulseEffect, pulseEffectTiming);
     }
 });

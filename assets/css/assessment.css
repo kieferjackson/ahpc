@@ -47,7 +47,7 @@
     text-shadow: -1px 1px rgba(0, 0, 0, 0.377);
 
     --hover-focus-scale: calc(1 + var(--start-button-scale));
-    transform: scale(var(--hover-focus-scale));
+    /* transform: scale(var(--hover-focus-scale)); */
     box-shadow: var(--standard-box-shadow);
     border-color: var(--sbhf-color);
     
@@ -86,6 +86,11 @@
 
 .input_block {
     margin-left: 20px;
+}
+
+.option_input:checked {
+    background-color: var(--ahpc-solid);
+    border-color: var(--ahpc-solid);
 }
 
 .option_label {
@@ -177,7 +182,7 @@
     z-index: 1;
 }
 
-.progress_heading {
+#progress_heading {
     font-size: 20px;
     font-weight: bold;
     color: var(--ahpc-dark);
@@ -225,16 +230,36 @@
 
 /* Submit Button */
 .submit_button {
-    background: var(--ahpc-solid);
-    color: #fff;
+    display: block;
+    padding: 0.5em 1em;
+    margin: 0.5em auto;
+    width: 100%;
+
+    color: var(--ahpc-solid);
+    font-weight: bold;
+    font-size: xx-large;
+
+    background: #fff;
     font-weight: bold;
     padding: 0.3em 1em;
-    border: 1px solid var(--ahpc-dark);
+    border: 1px solid #f1f1f1;
     border-radius: .2em;
 }
 
 .submit_button:hover {
-    box-shadow: var(--small-box-shadow);
+    border: 1px solid #e0e0e0;
+    /* background-color: #fdfdfd; */
+    color: var(--ahpc-dark);
+
+    transition: 200ms ease-in;
+}
+
+.submit_button:active {
+    /* border: 1px solid #333; */
+    color: #333;
+    transform: scale(0.99);
+
+    transition: none;
 }
 
 /* Mobile styling (phones, tablets) */
@@ -243,8 +268,8 @@ and (min-device-width: 320px)
 and (max-device-width: 960px)
 and (-webkit-min-device-pixel-ratio: 2) {
     .term_tooltip .tooltip_text {
-        left: -16%;
-        width: fit-content;
-        max-width: 16ch;
+        left: calc(var(--mobile-main-width) - 100%);
+        width: 100%;
+        max-width: fit-content;
     }
 }
