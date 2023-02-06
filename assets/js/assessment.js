@@ -1,3 +1,8 @@
+// Make a media query for whether the user prefers reduced motion
+const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+// Set whether animations should be disabled based on media query
+const ANIMATION_DISABLED = !mediaQuery || mediaQuery.matches;
 
 // Progress Bar ID Attributes
 const PROGRESS_BAR_IDS = 
@@ -257,82 +262,96 @@ function updateProgressBarFromChange()
         // Center the submit button within the Progress Indicators Container
         progress_indicators_container.style.justifyContent = 'center';
 
-        const popIn =
-        [
-            { 
-                opacity: 0,
-                filter: `blur(0.25ch)`,
-                transform: `translateX(-${progress_heading.innerText.length}ch)` 
-            },
-            { 
-                opacity: 1,
-                filter: `blur(0)`,
-                transform: `translateX(2.5ch)` 
-            },
-            { 
-                opacity: 1,
-                filter: `blur(0.1ch)`,
-                transform: `translateX(0.1ch)` 
-            },
-            { 
-                opacity: 1,
-                filter: `blur(0)`,
-                transform: `translateX(0.5ch)` 
-            },
-            { 
-                opacity: 1,
-                transform: `translateX(${0})` 
-            }
-        ];
-
-        const fadeIn =
-        [
-            { 
-                opacity: 0,
-                filter: `blur(0.1ch)`,
-                transform: `scale(0)` 
-            },
-            { 
-                filter: `blur(0)`,
-                transform: `scale(0.7)` 
-            },
-            { 
-                opacity: 1,
-                filter: `blur(0)`,
-                transform: `scale(1)` 
-            }
-        ];
-
-        const pulseEffect =
-        { 
-            boxShadow: 
-            [
-                `0 0 2px 3px rgba(25, 203, 248, 0.11), 0 0 6px 12px rgba(25, 203, 248, 0.1)`,
-                `0 0 3px 6px rgba(25, 203, 248, 0.13), 0 0 8px 15px rgba(25, 203, 248, 0.12)`,
-                `0 0 2px 3px rgba(25, 203, 248, 0.11), 0 0 6px 12px rgba(25, 203, 248, 0.1)`
-            ]
-        }
-
-        const popInTiming = 
+        // Play animations for Progress Heading and Submit button if animations are enabled
+        if(!ANIMATION_DISABLED)
         {
-            duration: 800,
-            iterations: 1
+            popInText(progress_heading, progress_heading.innerText.length);
+            fadeInPulse(submit_button);
         }
-
-        const fadeInTiming =
-        {
-            duration: 500,
-            iterations: 1
-        }
-
-        const pulseEffectTiming =
-        {
-            duration: 2000,
-            iterations: Infinity
-        }
-
-        progress_heading.animate(popIn, popInTiming);
-        submit_button.animate(fadeIn, fadeInTiming);
-        submit_button.animate(pulseEffect, pulseEffectTiming);
     }
+}
+
+function popInText(element, textOffset)
+{
+    const popIn =
+    [
+        { 
+            opacity: 0,
+            filter: `blur(0.25ch)`,
+            transform: `translateX(-${textOffset}ch)` 
+        },
+        { 
+            opacity: 1,
+            filter: `blur(0)`,
+            transform: `translateX(2.5ch)` 
+        },
+        { 
+            opacity: 1,
+            filter: `blur(0.1ch)`,
+            transform: `translateX(0.1ch)` 
+        },
+        { 
+            opacity: 1,
+            filter: `blur(0)`,
+            transform: `translateX(0.5ch)` 
+        },
+        { 
+            opacity: 1,
+            transform: `translateX(0)` 
+        }
+    ];
+
+    const popInTiming = 
+    {
+        duration: 800,
+        iterations: 1
+    }
+
+    element.animate(popIn, popInTiming);
+}
+
+function fadeInPulse(element)
+{
+    const fadeIn =
+    [
+        { 
+            opacity: 0,
+            filter: `blur(0.1ch)`,
+            transform: `scale(0)` 
+        },
+        { 
+            filter: `blur(0)`,
+            transform: `scale(0.7)` 
+        },
+        { 
+            opacity: 1,
+            filter: `blur(0)`,
+            transform: `scale(1)` 
+        }
+    ];
+
+    const pulseEffect =
+    { 
+        boxShadow: 
+        [
+            `0 0 2px 3px rgba(25, 203, 248, 0.11), 0 0 6px 12px rgba(25, 203, 248, 0.1)`,
+            `0 0 3px 6px rgba(25, 203, 248, 0.13), 0 0 8px 15px rgba(25, 203, 248, 0.12)`,
+            `0 0 2px 3px rgba(25, 203, 248, 0.11), 0 0 6px 12px rgba(25, 203, 248, 0.1)`
+        ]
+    }
+
+    const fadeInTiming =
+    {
+        duration: 500,
+        iterations: 1
+    }
+
+    const pulseEffectTiming =
+    {
+        duration: 2000,
+        iterations: Infinity
+    }
+
+    element.animate(fadeIn, fadeInTiming);
+    element.animate(pulseEffect, pulseEffectTiming);
 }
