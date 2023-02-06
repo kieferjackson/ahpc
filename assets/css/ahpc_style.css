@@ -1,3 +1,5 @@
+/* Importing Montserrat (400, 600) and Quicksand (400, 700) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Quicksand:wght@400;700&display=swap');
 
 :root
 {
@@ -16,7 +18,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', Verdana, sans-serif;
     font-size: 20px;
 }
   

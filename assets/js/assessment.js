@@ -146,7 +146,7 @@ function generateEligibilityAssessment() {
                 `
                     <span aria-describedby="${term}-definition" aria-label="${term}" class="term_tooltip">
                         ${term}
-                        <span id="${term}-definition" class="tooltip_text">
+                        <span role="tooltip" id="${term}-definition" class="tooltip_text">
                             ${definition}
                         </span>
                     </span>
