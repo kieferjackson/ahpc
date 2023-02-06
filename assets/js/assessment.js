@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         generateEligibilityAssessment();
 
         // TESTING: (debugger) Checks all fields
-        //Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
+        // Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
     });
 
     // Listen for terms checkbox to be checked to enable start button
@@ -257,6 +257,7 @@ function updateProgressBarFromChange()
         submit_button.setAttribute('type', 'button');
         submit_button.setAttribute('class', 'submit_button')
         submit_button.innerText = 'Submit';
+        submit_button.addEventListener('click', generateAssessmentResults);
         
         progress_indicators_container.appendChild(submit_button);
         // Center the submit button within the Progress Indicators Container
@@ -269,6 +270,44 @@ function updateProgressBarFromChange()
             fadeInPulse(submit_button);
         }
     }
+}
+
+function generateAssessmentResults()
+{
+    // Select all option inputs, and filter to get only the checked responses
+    const option_inputs = document.querySelectorAll('.option_input');
+    const checked_responses = Array.from(option_inputs).filter(response_input => response_input.checked);
+    
+    // Select question containers and remove each one
+    const question_containers = document.querySelectorAll('.question_container');
+    Array.from(question_containers).forEach(question_container => question_container.remove());
+    
+    // Clear Progress Display of all contained elements
+    const progress_display_container = document.querySelector('#progress_display_container');
+    Array.from(progress_display_container.children).forEach(progress_display_el => progress_display_el.remove());
+    
+    const num_yes_responses = checked_responses.reduce((num_yes, response) => {
+        if (response.value === 'Yes')
+            num_yes++;
+        
+        return num_yes;
+    }, 0);
+
+    const generateResultMsg = (msg) => {
+        const result_msg = document.createElement('p');
+        result_msg.setAttribute('class', 'result_msg');
+        result_msg.innerText = msg;
+
+        return result_msg;
+    }
+
+    let results;
+
+    if (num_yes_responses <= 1) results = generateResultMsg('You might not qualify for hospice, but...maybe you do?');
+    else if (num_yes_responses > 1) results = generateResultMsg('You probably qualify for hospice but perhaps not.');
+
+    // Append Result Message to Progress Display Container
+    progress_display_container.appendChild(results);
 }
 
 function popInText(element, textOffset)
