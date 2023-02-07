@@ -39,6 +39,7 @@ main { min-height: 90vh; }
 
 .testimonial cite
 {
-    color: var(--ahpc-solid);
+    color: var(--ahpc-dark);
     margin-top: 0 10px;
+    padding-bottom: 0.2em;
 }
