@@ -53,57 +53,59 @@
             To find out whether you or someone you know may qualify for hospice, answer the following eligibility assessment.
         </p>
 
-        <noscript>
-            <section class="noscript_error">
-                <p class="noscript_error_message">
-                    JavaScript is <em>required</em> to take the Eligibility Assessment.<br>
-                    Either enable JavaScript in your web browser, or use a web browser that supports JavaScript.
-                </p>
-                <p class="noscript_resource_direct">
-                    If you are looking for hospice eligibility information, you can visit our <a href="resources.html">
-                    resources page</a> for more information related to hospice eligibility.
-                </p>
-            </section>
-        </noscript>
-
-        <form id="eligibility_assessment_form">
-            <div id="form_start_container">
-                <div class="privacy_disclosure">
-                    <p class="privacy_disclosure_text">
-                        <strong>Privacy Disclosure:</strong>
-                        None of the information (personal or otherwise) provided for this assessment will be permanently saved to 
-                        an external server or to your local device. However, given that the information required for this assessment 
-                        is personal and protected by <abbr>HIPAA</abbr> (Health Insurance Portability and Accountability Act), all 
-                        responses provided are voluntary and done at one's own risk. If you are not comfortable with sharing your
-                        medical information or have any questions about this assessment, you can contact us:
+        <section id="eligibility_assessment_container">
+            <noscript>
+                <section class="noscript_error">
+                    <p class="noscript_error_message">
+                        JavaScript is <em>required</em> to take the Eligibility Assessment.<br>
+                        Either enable JavaScript in your web browser, or use a web browser that supports JavaScript.
                     </p>
-                    <ul class="privacy_disclosure_contacts">
-                        <li>By email: info@advocatehpc.com</li>
-                        <li>By phone number: 602-830-0605</li>
-                    </ul>
-                </div>
-                <div class="form_start_block">
-                    <strong class="terms_heading">Terms & Conditions</strong>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="terms_checkbox">
-                        <label class="form-check-label" for="terms_checkbox">
-                            I understand that the results of this assessment <strong>do not override or substitute for the assessment 
-                            of a medical doctor</strong>. As such, the results of this assessment are <strong>not medical advice nor a guarantee 
-                            of hospice eligibility</strong>. Rather, the assessment is used to indicate general indicators for hospice 
-                            eligibility and provide resources for learning more about hospice.
-                        </label>
+                    <p class="noscript_resource_direct">
+                        If you are looking for hospice eligibility information, you can visit our <a href="resources.html">
+                        resources page</a> for more information related to hospice eligibility.
+                    </p>
+                </section>
+            </noscript>
+    
+            <form id="eligibility_assessment_form">
+                <div id="form_start_container">
+                    <div class="privacy_disclosure">
+                        <p class="privacy_disclosure_text">
+                            <strong>Privacy Disclosure:</strong>
+                            None of the information (personal or otherwise) provided for this assessment will be permanently saved to 
+                            an external server or to your local device. However, given that the information required for this assessment 
+                            is personal and protected by <abbr>HIPAA</abbr> (Health Insurance Portability and Accountability Act), all 
+                            responses provided are voluntary and done at one's own risk. If you are not comfortable with sharing your
+                            medical information or have any questions about this assessment, you can contact us:
+                        </p>
+                        <ul class="privacy_disclosure_contacts">
+                            <li>By email: info@advocatehpc.com</li>
+                            <li>By phone number: 602-830-0605</li>
+                        </ul>
                     </div>
+                    <div class="form_start_block">
+                        <strong class="terms_heading">Terms & Conditions</strong>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="terms_checkbox">
+                            <label class="form-check-label" for="terms_checkbox">
+                                I understand that the results of this assessment <strong>do not override or substitute for the assessment 
+                                of a medical doctor</strong>. As such, the results of this assessment are <strong>not medical advice nor a guarantee 
+                                of hospice eligibility</strong>. Rather, the assessment is used to indicate general indicators for hospice 
+                                eligibility and provide resources for learning more about hospice.
+                            </label>
+                        </div>
+                    </div>
+                    <button 
+                        type="button" 
+                        id="eligibility_start_button" 
+                        class="start_button" 
+                        title="You must agree to the terms and conditions to begin the assessment" 
+                        disabled>
+                        Begin Assessment
+                    </button>
                 </div>
-                <button 
-                    type="button" 
-                    id="eligibility_start_button" 
-                    class="start_button" 
-                    title="You must agree to the terms and conditions to begin the assessment" 
-                    disabled>
-                    Begin Assessment
-                </button>
-            </div>
-        </form>
+            </form>
+        </section>
 
         <!-- Assessment Progress Display - Rendered Through JavaScript -->
         <div style="display: none;" id="progress_display_container"></div>

@@ -360,6 +360,12 @@
     transition: none;
 }
 
+/* Results Screen */
+.result_msg {
+    background-color: aquamarine;
+    text-align: center;
+}
+
 /* Mobile styling (phones, tablets) */
 @media screen
 and (min-device-width: 320px)

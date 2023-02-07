@@ -294,11 +294,24 @@ function generateAssessmentResults()
     }, 0);
 
     const generateResultMsg = (msg) => {
+        // Create Results Container to hold result message and button to start a new assessment
+        const results_container = document.createElement('section');
+        results_container.setAttribute('id', 'eligibility_results_container');
+        results_container.setAttribute('class', 'results_container');
+
         const result_msg = document.createElement('p');
         result_msg.setAttribute('class', 'result_msg');
         result_msg.innerText = msg;
 
-        return result_msg;
+        const start_new_assessment = document.createElement('button');
+        start_new_assessment.setAttribute('type', 'button');
+        start_new_assessment.setAttribute('class', 'start_new_assessment')
+        start_new_assessment.innerText = 'Start New Assessment';
+        start_new_assessment.addEventListener('click', () => '');   // ADD FUNCTION FOR GENERATING STARTING SCREEN
+
+        results_container.append(result_msg, start_new_assessment);
+
+        return results_container;
     }
 
     let results;
@@ -306,8 +319,12 @@ function generateAssessmentResults()
     if (num_yes_responses <= 1) results = generateResultMsg('You might not qualify for hospice, but...maybe you do?');
     else if (num_yes_responses > 1) results = generateResultMsg('You probably qualify for hospice but perhaps not.');
 
-    // Append Result Message to Progress Display Container
-    progress_display_container.appendChild(results);
+    // Select Eligibility Assessment Container and make Progress Display disappear
+    const eligibility_assessment_container = document.querySelector('#eligibility_assessment_container');
+    progress_display_container.style.display = 'none';
+
+    // Append Result Message to Eligibility Assessment Container
+    eligibility_assessment_container.appendChild(results);
 }
 
 function popInText(element, textOffset)
