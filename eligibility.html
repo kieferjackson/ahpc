@@ -31,6 +31,7 @@
     <script type="text/javascript" defer src="./assets/js/question_data.js"></script>
     <script type="text/javascript" defer src="./assets/js/ProgressBar.js"></script>
     <script type="text/javascript" defer src="./assets/js/assessment.js"></script>
+    <script type="text/javascript" src="./assets/js/FormStart.js"></script>
     <!-- Bootstrap v5.2.0 -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" as="style"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" 
@@ -90,44 +91,14 @@
                 </section>
             </noscript>
     
-            <form id="eligibility_assessment_form">
-                <div id="form_start_container">
-                    <div class="privacy_disclosure">
-                        <p class="privacy_disclosure_text">
-                            <strong>Privacy Disclosure:</strong>
-                            None of the information (personal or otherwise) provided for this assessment will be permanently saved to 
-                            an external server or to your local device. However, given that the information required for this assessment 
-                            is personal and protected by <abbr>HIPAA</abbr> (Health Insurance Portability and Accountability Act), all 
-                            responses provided are voluntary and done at one's own risk. If you are not comfortable with sharing your
-                            medical information or have any questions about this assessment, you can contact us:
-                        </p>
-                        <ul class="privacy_disclosure_contacts">
-                            <li>By email: info@advocatehpc.com</li>
-                            <li>By phone number: 602-830-0605</li>
-                        </ul>
-                    </div>
-                    <div class="form_start_block">
-                        <strong class="terms_heading">Terms & Conditions</strong>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="terms_checkbox">
-                            <label class="form-check-label" for="terms_checkbox">
-                                I understand that the results of this assessment <strong>do not override or substitute for the assessment 
-                                of a medical doctor</strong>. As such, the results of this assessment are <strong>not medical advice nor a guarantee 
-                                of hospice eligibility</strong>. Rather, the assessment is used to indicate general indicators for hospice 
-                                eligibility and provide resources for learning more about hospice.
-                            </label>
-                        </div>
-                    </div>
-                    <button 
-                        type="button" 
-                        id="eligibility_start_button" 
-                        class="start_button" 
-                        title="You must agree to the terms and conditions to begin the assessment" 
-                        disabled>
-                        Begin Assessment
-                    </button>
-                </div>
-            </form>
+            <form id="eligibility_assessment_form"></form>
+
+            <script>
+                // Select Eligibility Assessment Form
+                const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
+                // Generate the Form Start and append to form
+                eligibility_assessment_form.appendChild(generateFormStart());
+            </script>
         </section>
 
         <!-- Assessment Progress Display - Rendered Through JavaScript -->
