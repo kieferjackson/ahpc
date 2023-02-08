@@ -73,6 +73,32 @@ function generateFormStart ()
     start_button.setAttribute('title', 'You must agree to the terms and conditions to begin the assessment');
     start_button.innerText = 'Begin Assessment';
     start_button.disabled = true;
+
+    // Listen for Agreement Checkbox to be clicked and determine if start button should be enabled
+    checkbox_input.addEventListener('click', (event) => {
+        const agreementChecked = event.target.checked;
+        
+        if (agreementChecked) {
+            start_button.disabled = false;
+            start_button.setAttribute('title', '');
+        }
+        else {
+            start_button.disabled = true;
+            start_button.setAttribute('title', 'You must agree to the terms and conditions to begin the assessment');
+        }
+    });
+
+    start_button.addEventListener('click', () => {
+        // Select and remove Form Start Container: Privacy disclosure, start button, and Terms and Conditions Checkbox
+        const form_start_container = document.querySelector('#form_start_container');
+        form_start_container.remove();
+        
+        // Generate Eligibility Assessment
+        generateEligibilityAssessment();
+        
+        // TESTING: (debugger) Checks all fields
+        // Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
+    });
     
     // Append Privacy Disclosure, Terms & Conditions Check, and Generate Start Button
     form_start_container.append(

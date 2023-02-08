@@ -15,38 +15,8 @@ const PROGRESS_BAR_IDS =
 // Tracks how many fields have been filled, starting from 0
 var fields_filled = 0;
 
-// Tracks and updates Progress Display as needed; initial values set upon 'DOMContentLoaded'
+// Tracks and updates Progress Display as needed
 const PROGRESS_DISPLAY = {};
-
-document.addEventListener('DOMContentLoaded', () => {
-    const start_button = document.querySelector('#eligibility_start_button');
-    start_button.addEventListener('click', () => {
-        // Select and remove Form Start Container: Privacy disclosure, start button, and Terms and Conditions Checkbox
-        const form_start_container = document.querySelector('#form_start_container');
-        form_start_container.remove();
-
-        // Generate Eligibility Assessment
-        generateEligibilityAssessment();
-
-        // TESTING: (debugger) Checks all fields
-        // Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
-    });
-
-    // Listen for terms checkbox to be checked to enable start button
-    const terms_checkbox = document.querySelector('#terms_checkbox');
-    terms_checkbox.addEventListener('click', (event) => {
-        const agreementChecked = event.target.checked;
-        
-        if (agreementChecked) {
-            start_button.disabled = false;
-            start_button.setAttribute('title', '');
-        }
-        else {
-            start_button.disabled = true;
-            start_button.setAttribute('title', 'You must agree to the terms and conditions to begin the assessment');
-        }
-    });
-});
 
 function generateEligibilityAssessment() {
     const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
@@ -274,6 +244,9 @@ function updateProgressBarFromChange()
 
 function generateAssessmentResults()
 {
+    // Reset `fields_filled` count to 0
+    fields_filled = 0;
+
     // Select all option inputs, and filter to get only the checked responses
     const option_inputs = document.querySelectorAll('.option_input');
     const checked_responses = Array.from(option_inputs).filter(response_input => response_input.checked);
@@ -293,11 +266,15 @@ function generateAssessmentResults()
         return num_yes;
     }, 0);
 
-    const generateResultMsg = (msg) => {
+    const generateResultMsg = (heading, msg) => {
         // Create Results Container to hold result message and button to start a new assessment
         const results_container = document.createElement('section');
         results_container.setAttribute('id', 'eligibility_results_container');
         results_container.setAttribute('class', 'results_container');
+
+        const result_msg_heading = document.createElement('strong');
+        result_msg_heading.setAttribute('class', 'result_msg_heading');
+        result_msg_heading.innerText = heading;
 
         const result_msg = document.createElement('p');
         result_msg.setAttribute('class', 'result_msg');
@@ -307,17 +284,27 @@ function generateAssessmentResults()
         start_new_assessment.setAttribute('type', 'button');
         start_new_assessment.setAttribute('class', 'start_new_assessment')
         start_new_assessment.innerText = 'Start New Assessment';
-        start_new_assessment.addEventListener('click', () => '');   // ADD FUNCTION FOR GENERATING STARTING SCREEN
+        start_new_assessment.addEventListener('click', () => {
+            // Remove the results container, then generate a new form start and append to Eligibility Form
+            results_container.remove();
+            const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
+            // Generate the Form Start and append to form
+            eligibility_assessment_form.appendChild(generateFormStart());
+        });
 
-        results_container.append(result_msg, start_new_assessment);
+        results_container.append(
+            result_msg_heading, 
+            result_msg, 
+            start_new_assessment
+        );
 
         return results_container;
     }
 
     let results;
 
-    if (num_yes_responses <= 1) results = generateResultMsg('You might not qualify for hospice, but...maybe you do?');
-    else if (num_yes_responses > 1) results = generateResultMsg('You probably qualify for hospice but perhaps not.');
+    if (num_yes_responses <= 1) results = generateResultMsg(`You're probably not eligible`, 'You might not qualify for hospice, but...maybe you do?');
+    else if (num_yes_responses > 1) results = generateResultMsg(`Eligible?`, 'You probably qualify for hospice but perhaps not.');
 
     // Select Eligibility Assessment Container and make Progress Display disappear
     const eligibility_assessment_container = document.querySelector('#eligibility_assessment_container');
