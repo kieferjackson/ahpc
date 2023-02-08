@@ -71,6 +71,11 @@ nav.top_navbar a {
     margin-top: auto;
     margin-bottom: auto;
 }
+
+nav.top_navbar a:focus-visible {
+    outline: 2px solid var(--ahpc-solid);
+    outline-offset: -2px;
+}
   
 nav.top_navbar img {
     padding: 0px;
