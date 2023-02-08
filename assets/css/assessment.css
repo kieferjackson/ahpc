@@ -90,8 +90,19 @@
     z-index: 1;
 }
 
-.term_tooltip .tooltip_text:hover { visibility: visible }
-.term_tooltip:hover .tooltip_text { visibility: visible }
+.term_tooltip .tooltip_text:hover, 
+.term_tooltip .tooltip_text:focus { 
+    visibility: visible 
+}
+.term_tooltip:hover .tooltip_text, 
+.term_tooltip:focus .tooltip_text { 
+    visibility: visible 
+}
+
+.term_tooltip:focus-visible { 
+    outline: 2px solid var(--ahpc-solid); 
+    outline-offset: 2px;
+}
 
 /* Progress Display Styling */
 #progress_display_container {
@@ -178,7 +189,8 @@
     border-radius: .2em;
 }
 
-.submit_button:hover {
+.submit_button:hover,
+.submit_button:focus {
     border: 1px solid #e0e0e0;
     /* background-color: #fdfdfd; */
     color: var(--ahpc-dark);
@@ -195,9 +207,67 @@
 }
 
 /* Results Screen */
-.result_msg {
-    background-color: aquamarine;
+.results_container {
+    background: #fff;
+    box-shadow: var(--standard-inset);
+    padding: 0.5em;
+    border-radius: 1em;
+    border: 1px solid #e0e0e0;
+}
+
+.result_msg_heading {
+    display: block;
+    width: fit-content;
+    font-size: 24px;
+    margin: 0 auto;
     text-align: center;
+    color: var(--ahpc-dark);
+    border-bottom: 3px solid var(--ahpc-dark);
+}
+
+.result_msg {
+    background-color: #fafafa;
+    text-align: center;
+    box-shadow: var(--standard-inset);
+
+    margin: 0.5em auto;
+    padding: 1em;
+    border: 1px solid #f1f1f1;
+    border-radius: 0.5em;
+}
+
+button.start_new_assessment {
+    display: block;
+    color: var(--ahpc-solid);
+    font-weight: bold;
+    font-size: xx-large;
+    background-color: #fff;
+    
+    margin: 0 auto;
+    padding: 0.3em 0.75em;
+    outline: none;
+    border: 2px solid var(--ahpc-solid);
+    border-radius: 0.2em;
+}
+
+.start_new_assessment:hover, 
+.start_new_assessment:focus {
+    color: var(--ahpc-dark);
+    box-shadow: var(--small-box-shadow);
+    border-color: var(--ahpc-dark);
+    
+    transition: 300ms ease-in;
+}
+
+.start_new_assessment:active {
+    --sna-color: #333;
+
+    color: var(--sna-color);
+    transform: scale(0.99);
+    box-shadow: var(--standard-inset);
+    border-color: var(--sna-color);
+
+    transition: none;
 }
 
 /* Mobile styling (phones, tablets) */
