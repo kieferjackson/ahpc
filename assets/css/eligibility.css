@@ -91,6 +91,12 @@
     border-color: var(--ahpc-solid);
 }
 
+/* Disable clicking on label to toggle Checkbox */
+label[for="terms_checkbox"] {
+    pointer-events: none;
+    cursor: default;
+}
+
 .start_button {
     --sb-color: var(--ahpc-solid);
 

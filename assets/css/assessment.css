@@ -146,6 +146,13 @@
     margin: 0 0.1em;
 }
 
+kbd {
+    color: var(--ahpc-dark);
+    background-color: transparent;
+    border: 1px solid var(--ahpc-dark);
+    margin: 0 0.1em;
+}
+
 .progress_indicators_container {
     display: flex;
     justify-content: space-between;
@@ -227,7 +234,8 @@
 
 .result_msg {
     background-color: #fafafa;
-    text-align: center;
+    text-align: justify;
+    text-align-last: left;
     box-shadow: var(--standard-inset);
 
     margin: 0.5em auto;
