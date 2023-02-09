@@ -1,14 +1,13 @@
 
+const PRIVACY_PAGE_LINK = `<a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>`;
+
 // Company Contact Info
 const EMAIL_ADDRESS = 'info@advocatehpc.com';
 const PHONE_NUMBER = '602-830-0605';
 
 const PRIVACY_DISCLOSURE_TEXT = `<strong>Privacy Disclosure:</strong>
-    None of the information (personal or otherwise) provided for this assessment will be permanently saved to 
-    an external server or to your local device. However, given that the information required for this assessment 
-    is personal and protected by <abbr>HIPAA</abbr> (Health Insurance Portability and Accountability Act), all 
-    responses provided are voluntary and done at one's own risk. If you are not comfortable with sharing your
-    medical information or have any questions about this assessment, you can contact us:`;
+    No personal, identifying information is required for this assessment. However, if you have questions or concerns about your 
+    privacy or how we collect data, you can read our ${PRIVACY_PAGE_LINK}, or alternatively contact us:`;
 
 const CHECKBOX_LABEL_TEXT = `I understand that the results of this assessment <strong>do not override or substitute for the assessment 
     of a medical doctor</strong>. As such, the results of this assessment are <strong>not medical advice nor a guarantee 

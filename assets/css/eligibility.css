@@ -57,6 +57,7 @@
 .privacy_disclosure_text,
 .privacy_disclosure_text > strong,
 .privacy_disclosure_text > abbr,
+.privacy_disclosure_text > a,
 .privacy_disclosure > ul > li,
 .form-check-label,
 .form-check-label > strong {
