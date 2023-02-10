@@ -6,6 +6,13 @@
     --caution: #fdefef;
 }
 
+h3 {
+    /* font-size: 20px; */
+    font-size: 1.2em;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
 /* Noscript Styling */
 .noscript_error {
     /* font-weight: bold; */
