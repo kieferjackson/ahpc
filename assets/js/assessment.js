@@ -25,8 +25,8 @@ function generateEligibilityAssessment() {
     function generateProgressDisplay(progress_display_container_id)
     {
         const progress_display_container = document.querySelector(`#${progress_display_container_id}`);
-        // Remove Progress Display's style attribute (only contains `display: none` rule)
-        progress_display_container.removeAttribute('style');
+        // Change Progress Display from `display: none` to `display: flex`
+        progress_display_container.style.display = 'flex';
 
         // Generate Progress Heading
         const progress_heading = document.createElement('h4');

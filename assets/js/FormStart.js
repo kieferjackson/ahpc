@@ -14,6 +14,9 @@ const CHECKBOX_LABEL_TEXT = `I understand that the results of this assessment <s
     of hospice eligibility</strong>. Rather, the assessment is used to indicate general indicators for hospice 
     eligibility and provide resources for learning more about hospice.`;
 
+// Generate and append the form to the eligibility form
+document.querySelector('#eligibility_assessment_form').appendChild(generateFormStart());
+
 // Generate Form Start Element
 function generateFormStart ()
 {

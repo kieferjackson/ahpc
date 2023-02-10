@@ -111,7 +111,8 @@
     position: -webkit-sticky; /* Safari */
     position: sticky;
     bottom: 1em;
-    display: flex;
+    /* display: flex; */
+    display: none;
     flex-direction: column;
   
     background-color: var(--white-transparent);
