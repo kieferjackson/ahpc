@@ -280,6 +280,16 @@ function generateAssessmentResults()
         result_msg.setAttribute('class', 'result_msg');
         result_msg.innerText = msg;
 
+        // Generate Contact Info List
+        const contact_list = document.createElement('ul');
+        const email_contact = document.createElement('li');
+        email_contact.innerText = `By email: ${EMAIL_ADDRESS}`;
+        const phone_contact = document.createElement('li');
+        phone_contact.innerText = `By phone: ${PHONE_NUMBER}`;
+        contact_list.append(email_contact, phone_contact);
+        // Append to Result Message
+        result_msg.appendChild(contact_list);
+
         const start_new_assessment = document.createElement('button');
         start_new_assessment.setAttribute('type', 'button');
         start_new_assessment.setAttribute('class', 'start_new_assessment')
