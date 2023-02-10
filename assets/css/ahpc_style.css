@@ -29,6 +29,14 @@
     font-family: 'Montserrat', Verdana, sans-serif; 
     font-size: 20px;
 }
+
+.no_display {
+    display: none;
+}
+
+em {
+    font-weight: bold;
+}
   
 a {
     color: var(--ahpc-dark);
@@ -348,6 +356,15 @@ ul.footer_list {
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
+}
+
+.footer_center > p {
+    color: #fff;
+    margin: 0;
+}
+
+.footer_center .footer_center_homepage {
+    color: #fff;
 }
 
 /* Mobile styling (phones, tablets) */
