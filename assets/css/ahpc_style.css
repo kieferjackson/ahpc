@@ -110,6 +110,8 @@ nav.top_navbar a > img #logo_icon {
 
 header {
     padding: 50px;
+    width: 100%;
+    min-height: auto;
     max-height: 450px;
   
     text-align: center;
@@ -118,9 +120,11 @@ header {
 }
   
 header img {
-    max-height: 350px;
+    display: block;
+    height: auto;
+    max-height: fit-content;
     max-width: 100%;
-    object-fit: scale-down; /*Would like to change this in the future */
+    object-fit: contain;
     border-radius: 10px;
     box-shadow: var(--standard-box-shadow);
 }
