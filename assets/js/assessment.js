@@ -283,9 +283,9 @@ function generateAssessmentResults()
         // Generate Contact Info List
         const contact_list = document.createElement('ul');
         const email_contact = document.createElement('li');
-        email_contact.innerText = `By email: ${EMAIL_ADDRESS}`;
+        email_contact.innerHTML = `By email: <a href="mailto:${EMAIL_ADDRESS}">${EMAIL_ADDRESS}</a>`;
         const phone_contact = document.createElement('li');
-        phone_contact.innerText = `By phone: ${PHONE_NUMBER}`;
+        phone_contact.innerHTML = `By phone: <a class="phone_contact" href="tel:+1-${PHONE_NUMBER}">${PHONE_NUMBER}</a>`;
         contact_list.append(email_contact, phone_contact);
         // Append to Result Message
         result_msg.appendChild(contact_list);
