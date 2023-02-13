@@ -67,12 +67,11 @@ h3 {
 }
 
 .privacy_disclosure_text,
-.privacy_disclosure_text > strong,
-.privacy_disclosure_text > abbr,
-.privacy_disclosure_text > a,
-.privacy_disclosure > ul > li,
+.privacy_disclosure_text > *,
+.privacy_disclosure_contacts li,
+.privacy_disclosure_contacts li > *,
 .form-check-label,
-.form-check-label > strong {
+.form-check-label > * {
     font-size: 16px;
 }
 

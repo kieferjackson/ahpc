@@ -20,25 +20,16 @@ document.querySelector('#eligibility_assessment_form').appendChild(generateFormS
 // Generate Form Start Element
 function generateFormStart ()
 {
-    const generateElement = (tagname, attribute, attribute_value) => {
-        const element = document.createElement(tagname);
-        element.setAttribute(attribute, attribute_value);
-        
-        return element;
-    }
-
     // Generate Form Start Container
-    const form_start_container = generateElement('div', 'id', 'form_start_container');
+    const form_start_container = generate_element('div', { id: 'form_start_container' });
 
     // Generate Privacy Disclosure
-    const privacy_disclosure = generateElement('div', 'class', 'privacy_disclosure');
-    const privacy_disclosure_text = generateElement('p', 'class', 'privacy_disclosure_text');
-    privacy_disclosure_text.innerHTML = PRIVACY_DISCLOSURE_TEXT;
-    const privacy_disclosure_contacts = generateElement('ul', 'class', 'privacy_disclosure_contacts');
-        const email_contact = document.createElement('li');
-        email_contact.innerText = `By email: ${EMAIL_ADDRESS}`;
-        const phone_contact = document.createElement('li');
-        phone_contact.innerText = `By phone number: ${PHONE_NUMBER}`;
+    const privacy_disclosure = generate_element('div', { className: 'privacy_disclosure' });
+    const privacy_disclosure_text = generate_element('p', { className: 'privacy_disclosure_text', innerHTML: PRIVACY_DISCLOSURE_TEXT });
+    
+    const privacy_disclosure_contacts = generate_element('ul', { className: 'privacy_disclosure_contacts' });
+        const email_contact = generate_element('li', { innerHTML: `By email: <a href="mailto:${EMAIL_ADDRESS}">${EMAIL_ADDRESS}</a>` });
+        const phone_contact = generate_element('li', { innerHTML: `By phone: <a class="phone_contact" href="tel:+1-${PHONE_NUMBER}">${PHONE_NUMBER}</a>` });
         privacy_disclosure_contacts.append(email_contact, phone_contact);
     
     privacy_disclosure.append(
@@ -47,19 +38,14 @@ function generateFormStart ()
     );
 
     //  Terms & Conditions Check (Generate Form Start Block)
-    const form_start_block = generateElement('div', 'class', 'form_start_block');
-    const terms_heading = generateElement('strong', 'class', 'terms_heading');
-    terms_heading.innerText = 'Terms & Conditions';
+    const form_start_block = generate_element('div', { className: 'form_start_block' });
+    const terms_heading = generate_element('strong', { className: 'terms_heading', innerText: 'Terms & Conditions' });
     // Generate container for checkbox and its label
-    const checkbox_container = generateElement('div', 'class', 'form-check');
+    const checkbox_container = generate_element('div', { className: 'form-check' });
 
     const CHECKBOX_ID = 'terms_checkbox';
-    const checkbox_input = generateElement('input', 'class', 'form-check-input');
-    checkbox_input.setAttribute('type', 'checkbox');
-    checkbox_input.setAttribute('id', CHECKBOX_ID);
-    const checkbox_label = generateElement('label', 'class', 'form-check-label');
-    checkbox_label.setAttribute('for', CHECKBOX_ID);
-    checkbox_label.innerHTML = CHECKBOX_LABEL_TEXT;
+    const checkbox_input = generate_element('input', { className: 'form-check-input', id: CHECKBOX_ID, type: 'checkbox' });
+    const checkbox_label = generate_element('label', { className: 'form-check-label', htmlFor: CHECKBOX_ID, innerHTML: CHECKBOX_LABEL_TEXT });
     
     checkbox_container.append(checkbox_input, checkbox_label);
 
@@ -69,12 +55,14 @@ function generateFormStart ()
     );
 
     // Generate Start Button
-    const start_button = generateElement('button', 'class', 'start_button');
-    start_button.setAttribute('type', 'button');
-    start_button.setAttribute('id', 'eligibility_start_button');
-    start_button.setAttribute('title', 'You must agree to the terms and conditions to begin the assessment');
-    start_button.innerText = 'Begin Assessment';
-    start_button.disabled = true;
+    const start_button = generate_element('button', {
+        className: 'start_button',
+        id: 'eligibility_start_button',
+        type: 'button',
+        title: 'You must agree to the terms and conditions to begin the assessment',
+        innerText: 'Begin Assessment',
+        disabled: true
+    });
 
     // Listen for Agreement Checkbox to be clicked and determine if start button should be enabled
     checkbox_input.addEventListener('click', (event) => {

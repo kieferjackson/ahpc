@@ -29,27 +29,24 @@ function generateEligibilityAssessment() {
         progress_display_container.style.display = 'flex';
 
         // Generate Progress Heading
-        const progress_heading = document.createElement('h4');
-        progress_heading.setAttribute('id', 'progress_heading');
-        progress_heading.innerText = 'Assessment Progress';
+        const progress_heading = generate_element('h4', { id: 'progress_heading', innerText: 'Assessment Progress' });
 
         // Generate Progress Bar to visually indicate percentage of responses given
         const { container, svg, rect } = PROGRESS_BAR_IDS;
         PROGRESS_DISPLAY.bar = new ProgressBar(container, svg, rect);
 
         // Generate Progress Count to show number completed out of total
-        const PROGRESS_COUNT = createDivClass('progress_count_container');
-        PROGRESS_COUNT.innerText = `0/${assessment_questions.length}`;
-        PROGRESS_DISPLAY.count = PROGRESS_COUNT;
+        PROGRESS_DISPLAY.count = generate_element('div', { className: 'progress_count_container', innerText: `0/${assessment_questions.length}` });
 
         // Generate Progress Indicators Container to hold Progress Bar and Progress Count
-        const progress_indicators_container = createDivClass('progress_indicators_container');
+        const progress_indicators_container = generate_element('div', { className: 'progress_indicators_container' });
         progress_indicators_container.append(PROGRESS_DISPLAY.bar.container, PROGRESS_DISPLAY.count);
 
         // Generate Tooltip Notice
-        const tooltip_notice = document.createElement('small');
-        tooltip_notice.setAttribute('class', 'tooltip_notice');
-        tooltip_notice.innerHTML = `Hover, tap on, or press <kbd>Tab</kbd> to focus <em class="tooltip_notice highlight">blue text</em> for definitions of the word or phrase highlighted.`;
+        const tooltip_notice = generate_element('small', {
+            className: 'tooltip_notice',
+            innerHTML: `Hover, tap on, or press <kbd>Tab</kbd> to focus <em class="tooltip_notice highlight">blue text</em> for definitions of the word or phrase highlighted.`
+        });
 
         progress_display_container.append(
             progress_heading, 
@@ -58,51 +55,10 @@ function generateEligibilityAssessment() {
         );
     }
 
-    function createDivClass(class_name) 
-    {
-        const div = document.createElement('div');
-        div.className = class_name;
-
-        return div;
-    }
-
-    function createParagraphClass(class_name) 
-    {
-        const paragraph = document.createElement('p');
-        paragraph.className = class_name;
-
-        return paragraph;
-    }
-
-    function createResponseInput (question_number, response_number, response)
-    {
-        const input = document.createElement('input');
-        input.className = 'form-check-input option_input';
-        input.type = 'radio';
-        input.name = `question-${question_number}`;
-        input.id = `q${question_number}_option${response_number}`;
-        input.value = response;
-        input.innerText = response;
-        input.required = true;
-
-        return input;
-    }
-
-    function createResponseLabel (question_number, response_number, response)
-    {
-        const label = document.createElement('label');
-        label.className = 'form-check-label option_label';
-        label.htmlFor = `q${question_number}_option${response_number}`;
-        label.innerText = response;
-
-        return label;
-    }
-
     function generateQuestionText(question_data)
     {
         const { prompt, terms } = question_data;
 
-        const base_container = createParagraphClass('question_text');
         // Stores the `innerHTML` fragments so that they can later be combined
         let prompt_fragments = [];
 
@@ -140,25 +96,25 @@ function generateEligibilityAssessment() {
                 return termInnerHTML += prompt_fragment;
             }, '');
 
-            base_container.innerHTML = term_tooltipsInnerHTML;
-            return base_container;
+            const question_text = generate_element('p', { className: 'question_text', innerHTML: term_tooltipsInnerHTML });
+            return question_text;
         }
         else
         {
             // There are no terms to define, therefore the prompt is sufficient
-            base_container.innerText = prompt;
-            return base_container;
+            const question_text = generate_element('p', { className: 'question_text', innerText: prompt });
+            return question_text;
         }
     }
 
     assessment_questions.forEach((question, q_index) => {
         const QUESTION_NUMBER = q_index + 1;
-        const question_container = createDivClass('question_container');
+
+        const question_container = generate_element('div', { className: 'question_container' });
 
         // Create question prompt container, containing its number and prompt text
-        const question_prompt = createDivClass('question_prompt');
-        const question_number = createDivClass('question_number');
-        question_number.innerText = `Question ${QUESTION_NUMBER}`;
+        const question_prompt = generate_element('div', { className: 'question_prompt' });
+        const question_number = generate_element('div', { className: 'question_number', innerText: `Question ${QUESTION_NUMBER}` });
         
         // Generate question text, including term definitions if applicable
         const question_text = generateQuestionText(question);
@@ -167,13 +123,28 @@ function generateEligibilityAssessment() {
         question_prompt.append(question_number, question_text);
 
         // Create and append response inputs to responses container depending on number of options
-        const question_responses = createDivClass('question_responses');
+        const question_responses = generate_element('div', { className: 'question_responses' });
         question.responses.forEach((response, r_index) => {
             const RESPONSE_NUMBER = r_index + 1;
-            const input_block = createDivClass('form-check input_block');
-            const response_input = createResponseInput(QUESTION_NUMBER, RESPONSE_NUMBER, response);
+
+            const input_block = generate_element('div', { className: 'form-check input_block' });
+
+            const response_input = generate_element('input', {
+                className: 'form-check-input option_input',
+                id: `q${QUESTION_NUMBER}_option${RESPONSE_NUMBER}`,
+                name: `question-${QUESTION_NUMBER}`,
+                type: 'radio',
+                value: response,
+                innerText: response,
+                required: true
+            });
             response_input.addEventListener('change', updateProgressBarFromChange);
-            const response_label = createResponseLabel(QUESTION_NUMBER, RESPONSE_NUMBER, response);
+
+            const response_label = generate_element('label', { 
+                className: 'form-check-label option_label',
+                htmlFor: `q${QUESTION_NUMBER}_option${RESPONSE_NUMBER}`,
+                innerText: response
+            });
             
             // Append radio input and its label to the input block container
             input_block.append(response_input, response_label);
@@ -223,13 +194,10 @@ function updateProgressBarFromChange()
         progress_heading.innerText = 'Assessment Complete';
 
         // Create and append submit button to Progress Display Container
-        const submit_button = document.createElement('button')
-        submit_button.setAttribute('type', 'button');
-        submit_button.setAttribute('class', 'submit_button')
-        submit_button.innerText = 'Submit';
+        const submit_button = generate_element('button', { type: 'button', className: 'submit_button', innerText: 'Submit' });
         submit_button.addEventListener('click', generateAssessmentResults);
-        
         progress_indicators_container.appendChild(submit_button);
+
         // Center the submit button within the Progress Indicators Container
         progress_indicators_container.style.justifyContent = 'center';
 
@@ -268,32 +236,21 @@ function generateAssessmentResults()
 
     const generateResultMsg = (heading, msg) => {
         // Create Results Container to hold result message and button to start a new assessment
-        const results_container = document.createElement('section');
-        results_container.setAttribute('id', 'eligibility_results_container');
-        results_container.setAttribute('class', 'results_container');
+        const results_container = generate_element('section', { id: 'eligibility_results_container', className: 'results_container' });
 
-        const result_msg_heading = document.createElement('strong');
-        result_msg_heading.setAttribute('class', 'result_msg_heading');
-        result_msg_heading.innerText = heading;
+        const result_msg_heading = generate_element('strong', { className: 'result_msg_heading', innerText: heading });
 
-        const result_msg = document.createElement('p');
-        result_msg.setAttribute('class', 'result_msg');
-        result_msg.innerText = msg;
+        const result_msg = generate_element('p', { className: 'result_msg', innerText: msg });
 
         // Generate Contact Info List
         const contact_list = document.createElement('ul');
-        const email_contact = document.createElement('li');
-        email_contact.innerHTML = `By email: <a href="mailto:${EMAIL_ADDRESS}">${EMAIL_ADDRESS}</a>`;
-        const phone_contact = document.createElement('li');
-        phone_contact.innerHTML = `By phone: <a class="phone_contact" href="tel:+1-${PHONE_NUMBER}">${PHONE_NUMBER}</a>`;
+        const email_contact = generate_element('li', { innerHTML: `By email: <a href="mailto:${EMAIL_ADDRESS}">${EMAIL_ADDRESS}</a>` });
+        const phone_contact = generate_element('li', { innerHTML: `By phone: <a class="phone_contact" href="tel:+1-${PHONE_NUMBER}">${PHONE_NUMBER}</a>` });
         contact_list.append(email_contact, phone_contact);
         // Append to Result Message
         result_msg.appendChild(contact_list);
 
-        const start_new_assessment = document.createElement('button');
-        start_new_assessment.setAttribute('type', 'button');
-        start_new_assessment.setAttribute('class', 'start_new_assessment')
-        start_new_assessment.innerText = 'Start New Assessment';
+        const start_new_assessment = generate_element('button', { type: 'button', className: 'start_new_assessment', innerText: 'Start New Assessment' });
         start_new_assessment.addEventListener('click', () => {
             // Remove the results container, then generate a new form start and append to Eligibility Form
             results_container.remove();

@@ -9,25 +9,10 @@ class ProgressBar
         checkIDsExist(IDs);
         checkIDsType(IDs);
         
-        // Check if container with given container id exists
-        this.container = document.createElement('div');
-        this.container.setAttribute('id', container_id);
-        
-        const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
-        this.svg = document.createElementNS(SVG_NAMESPACE, 'svg');
-        
-        // Set SVG Attributes
-        this.svg.setAttribute('id', svg_id);
-        this.svg.setAttribute('width', '100%');
-        this.svg.setAttribute('height', '100%');
-        
-        this.progress_bar = document.createElementNS(SVG_NAMESPACE, 'rect');
-        
-        // Set Progress Bar Attributes
-        this.progress_bar.setAttribute('id', rect_id);
-        this.progress_bar.setAttribute('width', '0%');
-        this.progress_bar.setAttribute('height', '100%');
-        this.progress_bar.setAttribute('rx', '1');
+        // Generate container, SVG, and rect elements
+        this.container = generate_element('div', { id: container_id });
+        this.svg = generate_element('svg', { id: svg_id, width: '100%', height: '100%' });
+        this.progress_bar = generate_element('rect', { id: rect_id, width: '0%', height: '100%', rx: '1' });
         
         // Append progress_bar to svg, then append svg to container
         this.svg.appendChild(this.progress_bar);

@@ -28,6 +28,15 @@
     box-sizing: border-box;
     font-family: 'Montserrat', Verdana, sans-serif; 
     font-size: 20px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+}
+
+p {
+    margin-top: 0;
 }
 
 .no_display {
@@ -228,18 +237,45 @@ header img {
 }
 
 .tribute_section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+
+    max-width: 1000px;
+    padding: 2em;
+    margin: 0 auto;
+    
     background: linear-gradient(315deg, #919191 0%, #101b36 100%);
     color: #fff;
     font-weight: bold;
     border-radius: 12px;
+    height: fit-content;
 }
 
 .tribute_section img {
+    display: flex;
+    flex: 2 0 40%;
+    column-gap: 40px;
+
+    object-fit: contain;
+    width: 100%;
+    max-width: fit-content;
+    height: auto;
+    max-height: fit-content;
     padding: 0;
+
     box-shadow: var(--standard-box-shadow);
-    object-fit: cover; 
-    max-width: 300px;
     border-radius: 10px;
+}
+
+.tribute_quote_container {
+    display: flex;
+    flex: 1 0 40%;
+    flex-direction: column; 
+    column-gap: 40px;
 }
 
 .tribute_section p, .tribute_section em { font-size: 24px }
@@ -305,14 +341,17 @@ footer {
 footer h3 {
     color: var(--ahpc-dark);
     font-size: 20px;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
 }
 
 /* Overriding Bootstrap styling for given elements */
-.footer_list > li > a,
-.half_column > address,
-.half_column > address > ul > li,
-.footer_center > p,
-.footer_center > p > a {
+.footer_list li,
+.footer_list li > *,
+.contact_info address,
+.footer_center > *,
+.footer_center a {
     font-size: 15px;
 }
 
@@ -405,31 +444,5 @@ and (-webkit-min-device-pixel-ratio: 2) {
         padding: 0;
         padding-bottom: var(--main-padding);
         box-shadow: unset;
-    }
-
-    .ribbon {
-        flex: 100%;
-        height: 125px;
-        width: 100%;
-    
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    
-        padding: 10px;
-    }
-    
-    /* Links */
-    .link {
-        /* Placement of the element */
-        display: inline;
-        margin-left: 10px;
-        margin-right: 10px;
-    
-        /* Link Dimensions and Constraints */
-        height:50px;
-        width: 150px;
-        max-width: 100%;
-        padding: 10px;
     }
 }
