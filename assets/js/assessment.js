@@ -269,14 +269,16 @@ function generateAssessmentResults()
     }
 
     let results;
+    // `numerals` MUST have a numeral for as many responses are possible
+    const numerals = ['none', 'only one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
 
     if (num_yes_responses <= 1) results = generateResultMsg(
         `You appear to be ineligible for hospice`, 
-        `Based on your responses, you appear to fulfill ${num_yes_responses === 0 ? 'none' : 'only one'} of the criteria required to be eligible for hospice care. \nHowever, that does not mean that you are ineligible for hospice, and if you still have concerns or questions about hospice care and/or hospice eligibility, you can contact our office for more information. \n\nOur office can be reached with the following contact information:`
+        `Based on your responses, you appear to fulfill ${numerals[num_yes_responses]} of the criteria required to be eligible for hospice care. \nHowever, that does not mean that you are ineligible for hospice, and if you still have concerns or questions about hospice care and/or hospice eligibility, you can contact our office for more information. \n\nOur office can be reached with the following contact information:`
     );
     else if (num_yes_responses > 1) results = generateResultMsg(
         `You may qualify for hospice`, 
-        `Based on your responses, you may fulfill up to ${numberToEnglish(num_yes_responses)} (${num_yes_responses}) of the conditions required to be eligible for hospice care. \nYou can contact our office and request a hospice evaluation, and we can send a physician to assess you to determine if you meet the necessary requirements for hospice. \n\nOur office can be reached with the following contact information:`
+        `Based on your responses, you may fulfill up to ${numerals[num_yes_responses]} (${num_yes_responses}) of the conditions required to be eligible for hospice care. \nYou can contact our office and request a hospice evaluation, and we can send a physician to assess you to determine if you meet the necessary requirements for hospice. \n\nOur office can be reached with the following contact information:`
     );
 
     // Select Eligibility Assessment Container and make Progress Display disappear
@@ -285,25 +287,6 @@ function generateAssessmentResults()
 
     // Append Result Message to Eligibility Assessment Container
     eligibility_assessment_container.appendChild(results);
-}
-
-function numberToEnglish(number)
-{
-    switch(number) 
-    {
-        case 1:     return 'one';
-        case 2:     return 'two';
-        case 3:     return 'three';
-        case 4:     return 'four';
-        case 5:     return 'five';
-        case 6:     return 'six';
-        case 7:     return 'seven';
-        case 8:     return 'eight';
-        case 9:     return 'nine';
-        case 10:    return 'ten';
-        case 11:    return 'eleven';
-        default:    return number.toString();
-    }
 }
 
 function popInText(element, textOffset)
