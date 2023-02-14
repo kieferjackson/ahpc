@@ -296,4 +296,11 @@ and (-webkit-min-device-pixel-ratio: 2) {
         width: 100%;
         max-width: fit-content;
     }
+
+    .result_msg,
+    .result_msg ul > li,
+    .result_msg ul > li > a {
+        font-size: 16px;
+        text-align: left;
+    }
 }

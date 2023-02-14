@@ -73,7 +73,7 @@ nav.top_navbar {
     box-shadow: var(--standard-inset);
     border-top: 3px solid var(--ahpc-solid);
     
-    z-index: 1;
+    z-index: 2;
 }
 
 /* Style the navigation bar links */
@@ -409,8 +409,12 @@ footer .homepage_link {
 
 footer .contact_info {
     flex: 1 0 40%;
-    /* flex-direction: row;  */
-    column-gap: 40px;
+    flex-direction: column; 
+    gap: 1em;
+}
+
+.contact_info address {
+    margin: 0;
 }
 
 footer .social_media_links {
