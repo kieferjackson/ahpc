@@ -45,7 +45,7 @@ function generateEligibilityAssessment() {
         // Generate Tooltip Notice
         const tooltip_notice = generate_element('small', {
             className: 'tooltip_notice',
-            innerHTML: `Hover, tap on, or press <kbd>Tab</kbd> to focus <em class="tooltip_notice highlight">blue text</em> for definitions of the word or phrase highlighted.`
+            innerHTML: `Hover, tap on, or press <kbd>Tab</kbd> to focus <em class="tooltip_notice highlight">underlined text</em> for definitions of the word or phrase highlighted.`
         });
 
         progress_display_container.append(

@@ -32,13 +32,18 @@
 /* Term Tooltip Styling */
 .term_tooltip {
     position: relative;
-    color: var(--ahpc-solid);
+    text-decoration: var(--ahpc-solid) dotted underline 3px;
+    text-decoration-skip-ink: none;
 }
 
 .term_tooltip::after,
 .tooltip_notice.highlight::after {
     content: '*';
-    margin-left: -0.1em
+    color: var(--ahpc-solid);
+    margin-left: -0.1em;
+    /* Remove Underline */
+    text-decoration: none;
+    display: inline-block;
 }
 
 .tooltip_text::before {
@@ -140,10 +145,11 @@
 .tooltip_notice {
     font-size: 16px;
     margin-top: 0.3em;
+    font-weight: normal;
 }
 
 .tooltip_notice.highlight {
-    color: var(--ahpc-solid);
+    text-decoration: var(--ahpc-solid) dotted underline 3px;
     margin: 0 0.1em;
 }
 
