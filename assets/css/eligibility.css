@@ -15,7 +15,7 @@ h3 {
 
 .assessment_anchor {
     /* Overrides nav_anchor and allows link to scroll */
-    position: static;
+    position: relative;
 }
 
 /* Noscript Styling */

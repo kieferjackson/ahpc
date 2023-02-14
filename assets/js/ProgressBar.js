@@ -37,7 +37,7 @@ class ProgressBar
         };
         
         this.progress_bar.setAttribute('width', `${PERCENTAGE_COMPLETE}%`);
-        this.progress_bar.animate(progressBarExpanding, progressBarTiming);
+        if (!ANIMATION_DISABLED) this.progress_bar.animate(progressBarExpanding, progressBarTiming);
     }
 }
 

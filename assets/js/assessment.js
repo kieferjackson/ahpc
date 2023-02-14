@@ -1,8 +1,3 @@
-// Make a media query for whether the user prefers reduced motion
-const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-// Set whether animations should be disabled based on media query
-const ANIMATION_DISABLED = !mediaQuery || mediaQuery.matches;
 
 // Progress Bar ID Attributes
 const PROGRESS_BAR_IDS = 
