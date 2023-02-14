@@ -152,6 +152,9 @@ function generateEligibilityAssessment() {
 
         eligibility_assessment_form.appendChild(question_container);
     });
+
+    // Smoothly scroll to the top of the assessment
+    smoothlyScrollTo(eligibility_assessment_form);
 }
 
 // Check for input fields selected, and update Progress Bar if necessary
@@ -252,6 +255,7 @@ function generateAssessmentResults()
             const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
             // Generate the Form Start and append to form
             eligibility_assessment_form.appendChild(generateFormStart());
+            smoothlyScrollTo(eligibility_assessment_form);
         });
 
         results_container.append(
@@ -282,6 +286,15 @@ function generateAssessmentResults()
 
     // Append Result Message to Eligibility Assessment Container
     eligibility_assessment_container.appendChild(results);
+    smoothlyScrollTo(eligibility_assessment_container);
+}
+
+function smoothlyScrollTo(container)
+{
+    const nav_anchor = generate_element('a', { className: 'nav_anchor assessment_anchor' });
+    container.insertBefore(nav_anchor, container.firstChild);
+    nav_anchor.scrollIntoView({ behavior: 'smooth' });
+    nav_anchor.remove();
 }
 
 function popInText(element, textOffset)
