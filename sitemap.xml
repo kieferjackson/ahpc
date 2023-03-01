@@ -8,18 +8,26 @@
 		<image:image>
         	<image:loc>https://www.advocatehpc.com/assets/images/ahpc_logo.png</image:loc>
       	</image:image>
-        <lastmod>2023-01-03</lastmod>
+        <lastmod>2023-02-28</lastmod>
 	</url>
 	<url>
 		<loc>https://www.advocatehpc.com/recruit.html</loc>
-        <lastmod>2023-01-03</lastmod>
+        <lastmod>2023-02-28</lastmod>
 	</url>
     <url>
 		<loc>https://www.advocatehpc.com/resources.html</loc>
-        <lastmod>2023-01-03</lastmod>
+        <lastmod>2023-02-28</lastmod>
 	</url>
 	<url>
 		<loc>https://www.advocatehpc.com/testimonials.html</loc>
-        <lastmod>2023-01-03</lastmod>
+        <lastmod>2023-02-28</lastmod>
+	</url>
+	<url>
+		<loc>https://www.advocatehpc.com/eligibility.html</loc>
+        <lastmod>2023-02-28</lastmod>
+	</url>
+	<url>
+		<loc>https://www.advocatehpc.com/privacy.html</loc>
+        <lastmod>2023-02-28</lastmod>
 	</url>
 </urlset>

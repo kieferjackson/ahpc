@@ -2,12 +2,12 @@
 const PRIVACY_PAGE_LINK = `<a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>`;
 
 const PRIVACY_DISCLOSURE_TEXT = `<strong>Privacy Disclosure:</strong>
-No personal, identifying information is required for this assessment. However, if you have questions or concerns about your 
+No self identifying information is required for this assessment. However, if you have questions or concerns about your 
 privacy or how we collect data, you can read our ${PRIVACY_PAGE_LINK}, or alternatively contact us:`;
 
 const CHECKBOX_LABEL_TEXT = `I understand that the results of this assessment <strong>do not override or substitute for the assessment 
-of a medical doctor</strong>. As such, the results of this assessment are <strong>not medical advice nor a guarantee 
-of hospice eligibility</strong>. Rather, the assessment is used to indicate general indicators for hospice 
+of a medical professional</strong>. As such, the results of this assessment are <strong>not medical advice nor a guarantee 
+of hospice eligibility</strong>. Rather, the assessment is used for educational purposes in order to learn common indicators for hospice 
 eligibility and provide resources for learning more about hospice.`;
 
 // Generate and append the form to the eligibility form
