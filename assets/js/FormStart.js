@@ -40,7 +40,7 @@ function generateFormStart ()
     const checkbox_container = generate_element('div', { className: 'form-check' });
 
     const CHECKBOX_ID = 'terms_checkbox';
-    const checkbox_input = generate_element('input', { className: 'form-check-input', id: CHECKBOX_ID, type: 'checkbox' });
+    const checkbox_input = generate_element('input', { className: 'form-check-input', id: CHECKBOX_ID, type: 'checkbox', title: 'I agree to the Terms & Conditions' });
     const checkbox_label = generate_element('label', { className: 'form-check-label', htmlFor: CHECKBOX_ID, innerHTML: CHECKBOX_LABEL_TEXT });
     
     checkbox_container.append(checkbox_input, checkbox_label);
