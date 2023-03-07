@@ -4,6 +4,7 @@
     --max-form-width: 1024px;
     --start-button-scale: 0.0075;
     --caution: #fdefef;
+    --caution-alt: #ec4c4c;
 }
 
 h3 {
@@ -98,6 +99,10 @@ h3 {
     text-align: center;
 }
 
+#terms_checkbox {
+    border-color: #333;
+}
+
 #terms_checkbox:checked {
     background-color: var(--ahpc-solid);
     border-color: var(--ahpc-solid);
@@ -182,6 +187,13 @@ label[for="terms_checkbox"] {
     border-color: var(--sba-color);
 
     transition: none;
+}
+
+#termsconditions_error_msg {
+    background-color: var(--caution);
+    border: 1px solid var(--caution-alt);
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
 }
 
 /* Mobile styling (phones, tablets) */

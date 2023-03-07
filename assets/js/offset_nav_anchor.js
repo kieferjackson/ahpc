@@ -29,7 +29,7 @@ const get_ahpc_stylesheet = () => {
     {
         const { styleSheets } = document;
 
-        const [ ahpc_style ] = Array.from(styleSheets).filter(styleSheet => styleSheet.href.includes(AHPC_STYLE));
+        const [ ahpc_style ] = Array.from(styleSheets).filter(({ href }) => href.includes(AHPC_STYLE));
         
         if (!ahpc_style)
         {
