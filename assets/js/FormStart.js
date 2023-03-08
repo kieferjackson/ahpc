@@ -67,6 +67,10 @@ function generateFormStart ()
         if (agreementChecked) {
             start_button.ariaDisabled = 'false';
             start_button.setAttribute('title', '');
+
+            // Check if error message was generated, and remove it if so
+            const termsconditions_error_msg = document.querySelector('#termsconditions_error_msg');
+            if (termsconditions_error_msg) termsconditions_error_msg.remove();
         }
         else {
             start_button.ariaDisabled = 'true';
@@ -88,12 +92,12 @@ function generateFormStart ()
         if (target.ariaDisabled === 'true' && !termsconditions_error_exists)
         {
             // Display error message to user and play shaking animation
-            console.error('You cannot click that button yet!!!');
             const error_msg = generate_element('p', { id: TERMSCONDITIONS_ERROR_ID, innerText: 'You must agree to the terms and conditions to begin the assessment' });
             form_start_container.appendChild(error_msg);
 
-            // Play animations for Start Button (target) and Error Message
+            // Play animations for Start Button (target)
             playTargetAnimationsIfEnabled();
+            // Play fade-in animation for Error Message
             fadeIn(error_msg);
         }
         else if (target.ariaDisabled === 'true' && termsconditions_error_exists)
