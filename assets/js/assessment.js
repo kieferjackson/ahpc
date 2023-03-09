@@ -291,7 +291,7 @@ function generateAssessmentResults()
 
 function smoothlyScrollTo(container)
 {
-    const nav_anchor = generate_element('a', { className: 'nav_anchor assessment_anchor' });
+    const nav_anchor = generate_element('a', { className: 'nav_anchor form_anchor' });
     container.insertBefore(nav_anchor, container.firstChild);
     nav_anchor.scrollIntoView({ behavior: 'smooth' });
     nav_anchor.remove();

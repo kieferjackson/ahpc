@@ -16,6 +16,14 @@ h3 {
 
 .assessment_anchor {
     /* Overrides nav_anchor and allows link to scroll */
+    /* ! (debugger) Fix in the future to have only one Nav Anchor type, if possible ! */
+    position: relative;
+    top: 0;
+}
+
+.form_anchor {
+    /* Overrides nav_anchor and allows link to scroll */
+    /* ! (debugger) Fix in the future to have only one Nav Anchor type, if possible ! */
     position: relative;
 }
 

@@ -51,7 +51,8 @@ const get_ahpc_stylesheet = () => {
 
 // Select `nav_anchor` css rule
 const ahpc_style = get_ahpc_stylesheet();
-const nav_anchor_rule = find_css_rule(ahpc_style.cssRules, '.nav_anchor');
+const ahpc_rules = ahpc_style.cssRules || ahpc_style.rules;
+const nav_anchor_rule = find_css_rule(ahpc_rules, '.nav_anchor');
 const { rule, index } = nav_anchor_rule;
 
 // Set the offset for the element's `top` styling property by the determined navbar height
