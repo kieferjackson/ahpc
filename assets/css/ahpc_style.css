@@ -240,8 +240,10 @@ header img {
 .tabcontent {position: relative;}
 
 .nav_anchor {
+    display: block;
     position: absolute;
     top: -90px;
+    visibility: hidden;
 }
 
 /* Contact Section */
