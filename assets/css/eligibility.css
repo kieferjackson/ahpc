@@ -208,7 +208,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     .form_anchor {
         /* Overrides nav_anchor and allows link to scroll */
         /* ! (debugger) Fix in the future to have only one Nav Anchor type, if possible ! */
-        /* top: 180; */
+        top: -180px;
     }
 
     .start_button {
