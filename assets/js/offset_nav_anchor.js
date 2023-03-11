@@ -72,11 +72,7 @@ const ahpc_style = getStylesheet('ahpc_style.css');
 const ahpc_rules = ahpc_style.cssRules || ahpc_style.rules;
 const nav_anchor_rule = find_css_rule(ahpc_rules, '.nav_anchor');
 
-// Select `assessment_anchor` and `form_anchor` (nav_anchor override) css rules from Media rules
-const eligibility_style = getStylesheet('eligibility.css');
-const eligibility_rules = eligibility_style.cssRules || eligibility_style.rules;
-const override_rules = find_media_rule(eligibility_rules, '.assessment_anchor, .form_anchor');
-
+// Get top navbar height, including height from padding and horizontal scroll bar
 const top_navbar_height = determineTopNavbarHeight();
 
 // Set the offset for the element's `top` styling property by the determined navbar height
@@ -84,7 +80,16 @@ nav_anchor_rule.rule.style.top = `-${Math.floor(top_navbar_height * 1.25)}px`;
 // Update the stylesheet with the updated Nav Anchor rule at its associated index
 ahpc_style.cssRules[nav_anchor_rule.index] = nav_anchor_rule.rule;
 
-// Set rules for mobile media rules
-override_rules.rule.style.top = `-${Math.floor(top_navbar_height * 2.5)}px`;
-// Update the stylesheet with the updated Form Anchor and Assessment Anchor at their associated index
-eligibility_style.cssRules[override_rules.media_index].cssRules[override_rules.index] = override_rules.rule;
+// Set Form & Assessment Anchor Rules if on /eligibility
+const eligibility_style = getStylesheet('eligibility.css');
+if (eligibility_style)
+{
+    // Select `assessment_anchor` and `form_anchor` (nav_anchor override) css rules from Media rules
+    const eligibility_rules = eligibility_style.cssRules || eligibility_style.rules;
+    const override_rules = find_media_rule(eligibility_rules, '.assessment_anchor, .form_anchor');
+
+    // Set rules for mobile media rules
+    override_rules.rule.style.top = `-${Math.floor(top_navbar_height * 2.5)}px`;
+    // Update the stylesheet with the updated Form Anchor and Assessment Anchor at their associated index
+    eligibility_style.cssRules[override_rules.media_index].cssRules[override_rules.index] = override_rules.rule;
+}
