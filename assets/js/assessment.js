@@ -1,3 +1,5 @@
+import assessment_questions from "./question_data.js";
+import ProgressBar from "./ProgressBar.js";
 
 // Progress Bar ID Attributes
 const PROGRESS_BAR_IDS = 
@@ -12,6 +14,8 @@ var fields_filled = 0;
 
 // Tracks and updates Progress Display as needed
 const PROGRESS_DISPLAY = {};
+
+window.generateEligibilityAssessment = generateEligibilityAssessment;
 
 function generateEligibilityAssessment() {
     const eligibility_assessment_form = document.querySelector('#eligibility_assessment_form');
