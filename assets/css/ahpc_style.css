@@ -46,6 +46,10 @@ p {
 em {
     font-weight: bold;
 }
+
+abbr[title] {
+    text-decoration: none;
+}
   
 a {
     color: var(--ahpc-dark);
