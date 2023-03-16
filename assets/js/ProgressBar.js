@@ -1,6 +1,6 @@
 
 // Generate Progress Bar Element
-class ProgressBar
+export default class ProgressBar
 {
     constructor(container_id, svg_id, rect_id)
     {

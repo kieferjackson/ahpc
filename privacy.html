@@ -2,13 +2,13 @@
 <html lang="en-US">
 
 <head>
-    <!-- Content Security Policy -->
     <meta 
         http-equiv="Content-Security-Policy" 
         content="
         default-src 'self';
         font-src 'self' https://fonts.gstatic.com;
         script-src 'self' https://analytics.tiiny.site/js/plausible.js;
+        base-uri 'none';
         object-src 'none';
         style-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://fonts.googleapis.com;" 
     />
@@ -31,12 +31,12 @@
     <meta name="ICBM" content="33.548264, -112.049091" />
 
     <!-- Importing Fonts - (Montserrat: 400, 600) -->
-    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" />
-    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Bold.woff2" as="font" />
+    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/fonts/Montserrat/index.css">
 
     <!-- Style Sheets -->
-    <link rel="stylesheet" href="./assets/css/ahpc_style.css">
+    <link rel="stylesheet" href="./assets/css/minified/ahpc_style.css" crossorigin="anonymous">
     <!-- Website Icon -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/icons/favicon-32x32.png">
@@ -58,6 +58,8 @@
         <a href="testimonials.html">Testimonials</a>
         <a href="eligibility.html">Eligibility</a>
     </nav>
+    <!-- Sets offset for Nav Anchors based on Top Navbar Height -->
+    <script type="text/javascript" src="./assets/js/minified/offset_nav_anchor.js"></script>
 
     <main>
         <h1 class="headings">Privacy Policy</h1>

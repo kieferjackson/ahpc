@@ -2,13 +2,13 @@
 <html lang="en-US">
 
 <head>
-    <!-- Content Security Policy -->
     <meta 
         http-equiv="Content-Security-Policy" 
         content="
         default-src 'self';
         font-src 'self' https://fonts.gstatic.com;
         script-src 'self' https://analytics.tiiny.site/js/plausible.js;
+        base-uri 'none';
         object-src 'none';
         style-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://fonts.googleapis.com;" 
     />
@@ -30,15 +30,15 @@
     <meta name="ICBM" content="33.548264, -112.049091" />    
 
     <!-- Importing Fonts - (Montserrat: 400, 600) / (Playfair Display: Italic 900) -->
-    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" />
-    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Bold.woff2" as="font" />
+    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/fonts/Montserrat/index.css">
-    <link rel="preload" href="./assets/fonts/Playfair-Display/Playfair-Display-Black-Italic.woff2" as="font" />
+    <link rel="preload" href="./assets/fonts/Playfair-Display/Playfair-Display-Black-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/fonts/Playfair-Display/index.css">
 
     <!-- Style Sheets -->
-    <link rel="stylesheet" href="./assets/css/ahpc_style.css">
-    <link rel="stylesheet" href="./assets/css/testimonials.css">
+    <link rel="stylesheet" href="./assets/css/minified/ahpc_style.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/minified/testimonials.css">
     <!-- Website Icon -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/icons/favicon-32x32.png">
@@ -60,6 +60,8 @@
         <a href="testimonials.html">Testimonials</a>
         <a href="eligibility.html">Eligibility</a>
     </nav>
+    <!-- Sets offset for Nav Anchors based on Top Navbar Height -->
+    <script type="text/javascript" src="./assets/js/minified/offset_nav_anchor.js"></script>
 
     <main>
         <h1 class="headings">Testimonials</h1>
@@ -91,6 +93,19 @@
             </p>
             <div class="testimonial_citation">
                 <cite>- Anonymous (Medical Doctor)</cite>
+            </div>
+        </div>
+        <div class="testimonial">
+            <h2 class="testimonial_title">Incredible!</h2>
+            <p>
+                "When (the caregiver) went out to get the newspaper in the early hours of this morning, someone had left a box
+                of supplies on (the patient's) doorstep, with pull-ups, chucks, wipes, etc.
+                <br>
+                We're assuming it was from Advocate HPC, and wow. For someone to go out of their way to leave that box for (the 
+                patient), despite the fact we were leaving Advocate HPC within hours, was just... incredible."
+            </p>
+            <div class="testimonial_citation">
+                <cite>- <abbr title="Durable Power of Attorney">DPOA</abbr>/<abbr title="Medical Power of Attorney">MPOA</abbr> for (the patient)</cite>
             </div>
         </div>
     </main>

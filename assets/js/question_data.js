@@ -43,3 +43,5 @@ const assessment_questions =
     new Question(`Do you experience low blood pressure?`),
     new Question(`Are you experiencing other on-going, severe symptoms which do not respond to treatment?`)
 ];
+
+export default assessment_questions;

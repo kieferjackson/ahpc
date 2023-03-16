@@ -32,7 +32,19 @@
 /* Term Tooltip Styling */
 .term_tooltip {
     position: relative;
-    text-decoration: var(--ahpc-solid) dotted underline 3px;
+    
+    /* Safari */
+    -webkit-text-decoration-color: var(--ahpc-solid);
+    -webkit-text-decoration-line: underline; 
+    -webkit-text-decoration-style: dotted;
+    -webkit-text-decoration-thickness: 3px;
+
+    /* Default */
+    text-decoration-color: var(--ahpc-solid);
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 3px;
+
     text-decoration-skip-ink: none;
 }
 

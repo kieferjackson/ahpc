@@ -57,7 +57,7 @@ function generateFormStart ()
         type: 'button',
         title: 'You must agree to the terms and conditions to begin the assessment',
         innerText: 'Begin Assessment',
-        disabled: true
+        ariaDisabled: 'true'
     });
 
     // Listen for Agreement Checkbox to be clicked and determine if start button should be enabled
@@ -65,25 +65,60 @@ function generateFormStart ()
         const agreementChecked = event.target.checked;
         
         if (agreementChecked) {
-            start_button.disabled = false;
+            start_button.ariaDisabled = 'false';
             start_button.setAttribute('title', '');
+
+            // Check if error message was generated, and remove it if so
+            const termsconditions_error_msg = document.querySelector('#termsconditions_error_msg');
+            if (termsconditions_error_msg) termsconditions_error_msg.remove();
         }
         else {
-            start_button.disabled = true;
+            start_button.ariaDisabled = 'true';
             start_button.setAttribute('title', 'You must agree to the terms and conditions to begin the assessment');
         }
     });
 
-    start_button.addEventListener('click', () => {
-        // Select and remove Form Start Container: Privacy disclosure, start button, and Terms and Conditions Checkbox
-        const form_start_container = document.querySelector('#form_start_container');
-        form_start_container.remove();
+    start_button.addEventListener('click', ({ target }) => {
+        const TERMSCONDITIONS_ERROR_ID = 'termsconditions_error_msg';
+        const termsconditions_error_exists = document.querySelector(`#${TERMSCONDITIONS_ERROR_ID}`) !== null;
+        const playTargetAnimationsIfEnabled = () => { 
+            if (!ANIMATION_DISABLED) {
+                shake(target);
+                redOutinePulse(target);
+            } 
+        };
         
-        // Generate Eligibility Assessment
-        generateEligibilityAssessment();
-        
-        // TESTING: (debugger) Checks all fields
-        // Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
+        // Check whether the button is disabled
+        if (target.ariaDisabled === 'true' && !termsconditions_error_exists)
+        {
+            // Display error message to user and play shaking animation
+            const error_msg = generate_element('p', { id: TERMSCONDITIONS_ERROR_ID, innerText: 'You must agree to the terms and conditions to begin the assessment' });
+            form_start_container.appendChild(error_msg);
+
+            // Play animations for Start Button (target)
+            playTargetAnimationsIfEnabled();
+            // Play fade-in animation for Error Message
+            fadeIn(error_msg);
+        }
+        else if (target.ariaDisabled === 'true' && termsconditions_error_exists)
+        {
+            // Replay failure animation to indicate that conditions have still not been fulfilled
+            playTargetAnimationsIfEnabled();
+            const error_msg = document.querySelector(`#${TERMSCONDITIONS_ERROR_ID}`);
+            fadeIn(error_msg);
+        }
+        else
+        {
+            // Select and remove Form Start Container: Privacy disclosure, Terms and Conditions Checkbox, and Start Button
+            const form_start_container = document.querySelector('#form_start_container');
+            form_start_container.remove();
+            
+            // Generate Eligibility Assessment
+            generateEligibilityAssessment();
+            
+            // TESTING: (debugger) Checks all fields
+            // Array.from(document.getElementsByClassName('option_input')).forEach((option) => option.checked = true);
+        }
     });
     
     // Append Privacy Disclosure, Terms & Conditions Check, and Generate Start Button
@@ -95,3 +130,63 @@ function generateFormStart ()
 
     return form_start_container;
 }   
+
+function fadeIn(element)
+{
+    const fadeInEffect =
+    [
+        { opacity: 0 },
+        { opacity: 1 }
+    ];
+
+    const fadeInEffectTiming = 
+    {
+        duration: 1000,
+        iterations: 1
+    }
+
+    element.animate(fadeInEffect, fadeInEffectTiming);
+}
+
+function shake(element)
+{
+    const OFFSET = 0.0625;
+
+    const sideToSide =
+    [
+        { transform: `translateX(0)` },
+        { transform: `translateX(-${OFFSET}em)` },
+        { transform: `translateX(0)` },
+        { transform: `translateX(${OFFSET}em)` },
+        { transform: `translateX(0)` }
+    ];
+
+    const sideToSideTiming = 
+    {
+        duration: 300,
+        iterations: 2
+    }
+
+    element.animate(sideToSide, sideToSideTiming);
+}
+
+function redOutinePulse(element)
+{
+    const redOutinePulseEffect =
+    { 
+        outline:
+        [
+            '2px solid #ec4c4c',
+            '2px solid transparent'
+        ],
+        outlineOffset: ['-2px', '-2px']
+    }
+
+    const redOutinePulseEffectTiming =
+    {
+        duration: 2000,
+        iterations: 1
+    }
+
+    element.animate(redOutinePulseEffect, redOutinePulseEffectTiming);
+}

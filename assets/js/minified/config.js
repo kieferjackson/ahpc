@@ -1,0 +1,1 @@
+const mediaQuery=window.matchMedia("(prefers-reduced-motion: reduce)");const ANIMATION_DISABLED=!mediaQuery||mediaQuery.matches;const EMAIL_ADDRESS='info@advocatehpc.com';const PHONE_NUMBER='602-830-0605';

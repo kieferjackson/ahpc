@@ -2,14 +2,14 @@
 <html lang="en-US">
 
 <head>
-    <!-- Content Security Policy -->
     <meta 
         http-equiv="Content-Security-Policy" 
         content="
         default-src 'self';
         img-src 'self' data: w3.org/svg/2000;
         font-src 'self' https://fonts.gstatic.com;
-        script-src 'self' https://analytics.tiiny.site/js/plausible.js;
+        script-src 'self' 'sha256-X1KhCmXRnC3Ic/tPzHmVskiRi8ZzYcjasaBHk1FSo1k=' https://analytics.tiiny.site/js/plausible.js;
+        base-uri 'none';
         object-src 'none';
         style-src 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css https://fonts.googleapis.com;" 
     />
@@ -32,30 +32,34 @@
     <meta name="ICBM" content="33.548264, -112.049091" />
 
     <!-- Importing Fonts - (Montserrat: 400, 600) -->
-    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" />
-    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Bold.woff2" as="font" />
+    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/fonts/Montserrat/Montserrat-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/fonts/Montserrat/index.css">
 
     <!-- JavaScript Files -->
-    <script type="text/javascript" src="./assets/js/generate_element.js"></script>
-    <script type="text/javascript" src="./assets/js/config.js"></script>
-    <script type="text/javascript" defer src="./assets/js/question_data.js"></script>
-    <script type="text/javascript" defer src="./assets/js/ProgressBar.js"></script>
-    <script type="text/javascript" defer src="./assets/js/assessment.js"></script>
-    <link rel="preload" href="./assets/js/FormStart.js" as="script" />
+    <script type="text/javascript" src="./assets/js/minified/generate_element.js"></script>
+    <script type="text/javascript" src="./assets/js/minified/config.js"></script>
+    <script type="importmap">
+        {
+            "imports": 
+            {
+                "question_data": "./assets/js/minified/question_data.js",
+                "progress_bar": "./assets/js/minified/ProgressBar.js"
+            }
+        }
+    </script>
+    <script type="module" src="./assets/js/minified/assessment.js"></script>
+    <link rel="preload" href="./assets/js/minified/FormStart.js" as="script" />
 
     <!-- Bootstrap v5.2.0 -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" as="style"
+    <link rel="stylesheet preload prefetch" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" as="style"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" 
-        id="bootstrap"
     />
-    <!-- Applies Bootstrap once it has fully loaded -->
-    <script type="text/javascript" src="./assets/js/loaders/bootstrap.js"></script>
 
     <!-- Style Sheets -->
-    <link rel="stylesheet" href="./assets/css/ahpc_style.css">
-    <link rel="stylesheet" href="./assets/css/eligibility.css">
-    <link rel="stylesheet" href="./assets/css/assessment.css" media="print" id="assessment_style">
+    <link rel="stylesheet" href="./assets/css/minified/ahpc_style.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/minified/eligibility.css">
+    <link rel="stylesheet" href="./assets/css/minified/assessment.css" media="print" id="assessment_style">
     <!-- Applies Assessment style once it has fully loaded -->
     <script type="text/javascript" src="./assets/js/loaders/assessment_style.js"></script>
 
@@ -80,6 +84,8 @@
         <a href="testimonials.html">Testimonials</a>
         <a href="eligibility.html">Eligibility</a>
     </nav>
+    <!-- Sets offset for Nav Anchors based on Top Navbar Height -->
+    <script type="text/javascript" src="./assets/js/minified/offset_nav_anchor.js"></script>
 
     <main>
         <h1 class="headings">Hospice Eligibility</h1>
@@ -106,11 +112,12 @@
         <p>
             A cancer patient may have a life expectancy of six (6) months or less if they have distant metastases at presentation 
             <em>or</em> progression from an earlier stage of disease to metastatic disease with either:
-            <ol>
-                <li>a continued decline in spite of therapy</li>
-                <li>the patient declining further disease directed therapy</li>
-            </ol>
-
+        </p>
+        <ol>
+            <li>a continued decline in spite of therapy</li>
+            <li>the patient declining further disease directed therapy</li>
+        </ol>
+        <p>
             What this means is that when cancer spread can no longer be controlled or when a patient no longer desires treatment,
             then hospice may be appropriate. Whether or not the patient comes onto hospice is up to them, or alternatively the <abbr 
             title="Power of Attorney">PoA</abbr> (Power of Attorney) if the patient is unable to consent.
@@ -121,22 +128,22 @@
         <h3>Non-Cancer Diagnoses</h3>
         <p>
             The following section provides a list of common diseases/illnesses that may result in hospice eligibility:
-            <ul>
-                <li>Amyotrophic Lateral Sclerosis</li>
-                <li>Dementia due to Alzheimer's Disease and Related Disorders</li>
-                <li>Heart Disease</li>
-                <li>HIV Disease</li>
-                <li>Liver Disease</li>
-                <li>Pulmonary Disease</li>
-                <li>Renal Disease (Acute renal failure or Chronic renal failure)</li>
-                <li>Stroke & Coma</li>
-                <li>Other
-                    <ul>
-                        <li>the hospice Medical Team must provide information that supports a terminal illness with a prognosis of six (6) months or less</li>
-                    </ul>
-                </li>
-            </ul>
         </p>
+        <ul>
+            <li>Amyotrophic Lateral Sclerosis</li>
+            <li>Dementia due to Alzheimer's Disease and Related Disorders</li>
+            <li>Heart Disease</li>
+            <li>HIV Disease</li>
+            <li>Liver Disease</li>
+            <li>Pulmonary Disease</li>
+            <li>Renal Disease (Acute renal failure or Chronic renal failure)</li>
+            <li>Stroke & Coma</li>
+            <li>Other
+                <ul>
+                    <li>the hospice Medical Team must provide information that supports a terminal illness with a prognosis of six (6) months or less</li>
+                </ul>
+            </li>
+        </ul>
 
         <a class="nav_anchor assessment_anchor" name="assessment" id="assessment"></a>
         <h2 class="headings">Eligibility Assessment</h2>
@@ -159,7 +166,7 @@
             </noscript>
     
             <form id="eligibility_assessment_form"></form>
-            <script type="text/javascript" src="./assets/js/FormStart.js"></script>
+            <script type="text/javascript" src="./assets/js/minified/FormStart.js"></script>
         </section>
 
         <!-- Assessment Progress Display - Rendered Through JavaScript -->
